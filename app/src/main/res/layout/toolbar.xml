@@ -8,6 +8,7 @@
     app:titleTextColor="@android:color/white"
 
     android:theme="@style/ToolbarTheme"
-    app:titleTextAppearance="@style/Toolbar.TitleText">
+    app:titleTextAppearance="@style/Toolbar.TitleText"
+    app:popupTheme="@style/Toolbar.Popup">
 
 </android.support.v7.widget.Toolbar>

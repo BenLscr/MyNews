@@ -31,10 +31,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_activity_main_search:
-                Toast.makeText(this, "Bouton 'rechercher' non assigné", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Bouton 'search' non assigné", Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.menu_activity_main_settings:
-                Toast.makeText(this, "Bouton 'parametre' non assigné", Toast.LENGTH_LONG).show();
+            case R.id.menu_activity_main_notifications:
+                Toast.makeText(this, "Bouton 'notifications' non assigné", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_activity_main_help:
+                Toast.makeText(this, "Bouton 'help' non assigné", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.menu_activity_main_about:
+                Toast.makeText(this, "Bouton 'about' non assigné", Toast.LENGTH_LONG).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
