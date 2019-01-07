@@ -1,19 +1,30 @@
-package com.lescour.ben.mynews;
+package com.lescour.ben.mynews.controller;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.adapter.PageAdapter;
+import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
+import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
+import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
+
+public class MainActivity extends AppCompatActivity implements
+        TopStoriesFragment.OnListFragmentInteractionListener,
+        MostPopularFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.configureToolbar();
+        this.configureViewPager();
     }
 
     private void configureToolbar() {
@@ -45,5 +56,18 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void configureViewPager(){
+        // 1 - Get ViewPager from layout
+        ViewPager pager = (ViewPager)findViewById(R.id.activity_main_viewpager);
+        // 2 - Set Adapter PageAdapter and glue it together
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager()) {
+        });
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

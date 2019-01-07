@@ -5,4 +5,8 @@
     <string name="notifications">Notifications</string>
     <string name="help">Help</string>
     <string name="about">About</string>
+    <string name="article_description">Article Description</string>
+    <string name="date">date</string>
+    <string name="geotag">GeoTag</string>
+
 </resources>
