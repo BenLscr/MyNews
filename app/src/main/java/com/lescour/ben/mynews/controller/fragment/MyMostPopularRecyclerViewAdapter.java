@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lescour.ben.mynews.R;
@@ -31,15 +32,17 @@ public class MyMostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MyMos
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_mostpopular, parent, false);
+                .inflate(R.layout.fragment_article, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
+        holder.articleGeoTag.setText("Disons politique");
+        holder.articleDate.setText("08/01/2019");
+        holder.articleDescription.setText("Une très longue description");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,20 +63,24 @@ public class MyMostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MyMos
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final ImageView articleImg;
+        public final TextView articleGeoTag;
+        public final TextView articleDate;
+        public final TextView articleDescription;
         public DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            articleImg = (ImageView) view.findViewById(R.id.img_article);
+            articleGeoTag = (TextView) view.findViewById(R.id.article_geotag);
+            articleDate = (TextView) view.findViewById(R.id.article_date);
+            articleDescription = (TextView) view.findViewById(R.id.article_description);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + articleDate.getText() + "'";
         }
     }
 }

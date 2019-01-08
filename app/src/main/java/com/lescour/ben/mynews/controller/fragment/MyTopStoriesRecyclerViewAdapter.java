@@ -32,7 +32,7 @@ public class MyTopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<MyTopS
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_topstories, parent, false);
+                .inflate(R.layout.fragment_article, parent, false);
         return new ViewHolder(view);
     }
 
@@ -72,7 +72,6 @@ public class MyTopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<MyTopS
         public ViewHolder(View view) {
             super(view);
             mView = view;
-
             articleImg = (ImageView) view.findViewById(R.id.img_article);
             articleGeoTag = (TextView) view.findViewById(R.id.article_geotag);
             articleDate = (TextView) view.findViewById(R.id.article_date);

@@ -16,8 +16,6 @@ import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -61,7 +59,7 @@ public class TopStoriesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_topstories_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
