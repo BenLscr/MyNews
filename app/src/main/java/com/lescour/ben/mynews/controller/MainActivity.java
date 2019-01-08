@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.adapter.PageAdapter;
 import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.configureToolbar();
-        this.configureViewPager();
+        this.configureViewPagerAndTabs();
     }
 
     private void configureToolbar() {
@@ -58,12 +59,15 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private void configureViewPager(){
+    private void configureViewPagerAndTabs(){
         // 1 - Get ViewPager from layout
         ViewPager pager = (ViewPager)findViewById(R.id.activity_main_viewpager);
         // 2 - Set Adapter PageAdapter and glue it together
         pager.setAdapter(new PageAdapter(getSupportFragmentManager()) {
         });
+        TabLayout tabs = (TabLayout) findViewById(R.id.activity_main_tabs);
+        tabs.setupWithViewPager(pager);
+        tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 
     @Override

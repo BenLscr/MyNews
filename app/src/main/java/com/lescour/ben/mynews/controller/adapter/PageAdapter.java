@@ -4,6 +4,7 @@ import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -34,5 +35,18 @@ public class PageAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return(2); // 3 - Number of page to show
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0 :
+                return "TOP STORIES";
+            case 1 :
+                return "MOST POPULAR";
+            default:
+                return null;
+        }
     }
 }
