@@ -1,6 +1,8 @@
 package com.lescour.ben.mynews.controller.fragment;
 
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,19 +65,16 @@ public class MyMostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MyMos
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final ImageView articleImg;
-        public final TextView articleGeoTag;
-        public final TextView articleDate;
-        public final TextView articleDescription;
+        @BindView(R.id.img_article) ImageView articleImg;
+        @BindView(R.id.article_geotag) TextView articleGeoTag;
+        @BindView(R.id.article_date) TextView articleDate;
+        @BindView(R.id.article_description) TextView articleDescription;
         public DummyItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            articleImg = (ImageView) view.findViewById(R.id.img_article);
-            articleGeoTag = (TextView) view.findViewById(R.id.article_geotag);
-            articleDate = (TextView) view.findViewById(R.id.article_date);
-            articleDescription = (TextView) view.findViewById(R.id.article_description);
+            ButterKnife.bind(this, view);
         }
 
         @Override
