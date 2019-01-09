@@ -18,25 +18,20 @@ import com.google.android.material.tabs.TabLayout;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.adapter.PageAdapter;
 import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
+import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
 
 public class MainActivity extends AppCompatActivity implements
         TopStoriesFragment.OnListFragmentInteractionListener,
         MostPopularFragment.OnListFragmentInteractionListener,
+        ScienceFragment.OnListFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ViewPager viewPager;
-
-    private Fragment fragmentTopStories;
-    private Fragment fragmentMostPopular;
-
-
-    private static final int FRAGMENT_TOP_STORIES = 0;
-    private static final int FRAGMENT_MOST_POPULAR = 1;
 
 
     @Override
@@ -121,12 +116,13 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.activity_main_drawer_most_popular:
                 viewPager.setCurrentItem(1);
                 break;
+            case R.id.activity_main_drawer_science:
+                viewPager.setCurrentItem(2);
+                break;
             default:
                 break;
         }
-
         this.drawerLayout.closeDrawer(GravityCompat.START);
-
         return true;
     }
 

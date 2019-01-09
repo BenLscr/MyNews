@@ -7,11 +7,15 @@
 
         <item
             android:id="@+id/activity_main_drawer_top_stories"
-            android:title="Top Stories" />
+            android:title="@string/top_stories" />
 
         <item
             android:id="@+id/activity_main_drawer_most_popular"
-            android:title="Most Popular" />
+            android:title="@string/most_popular" />
+
+        <item
+            android:id="@+id/activity_main_drawer_science"
+            android:title="@string/science" />
     </group>
 
 </menu>
