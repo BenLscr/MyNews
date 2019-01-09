@@ -12,15 +12,23 @@
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Color of the title text in the Toolbar -->
         <item name="android:textColorPrimary">@color/colorAccent</item>
-        <item name="android:actionOverflowButtonStyle">@style/CustomTheme</item>
+        <item name="android:actionOverflowButtonStyle">@style/CustomDots</item>
+        <item name="drawerArrowStyle">@style/CustomBurger</item>
     </style>
+
     <style name="Toolbar.Popup" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:colorBackground">@android:color/white</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
-    
-    <style name="CustomTheme" parent="@android:style/TextAppearance.Widget.IconMenu.Item">>
+
+    <!-- TOOLBAR 3 DOTS THEME -->
+    <style name="CustomDots" parent="@android:style/TextAppearance.Widget.IconMenu.Item">>
         <item name="android:src">@drawable/more_vert_white_24</item>
+    </style>
+
+    <!-- TOOLBAR BURGER THEME -->
+    <style name="CustomBurger" parent="Base.Widget.AppCompat.DrawerArrowToggle">>
+        <item name="color">@android:color/white</item>
     </style>
 
     <!-- TOOLBAR TITLE THEME -->
