@@ -16,8 +16,6 @@ import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
 
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -72,7 +70,7 @@ public class ScienceFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyScienceRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new ScienceRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }

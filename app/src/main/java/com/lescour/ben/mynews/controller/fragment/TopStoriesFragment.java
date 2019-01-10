@@ -70,7 +70,7 @@ public class TopStoriesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTopStoriesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new TopStoriesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }

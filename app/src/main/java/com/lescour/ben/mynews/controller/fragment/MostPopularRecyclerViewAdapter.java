@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.ScienceFragment.OnListFragmentInteractionListener;
+import com.lescour.ben.mynews.controller.fragment.MostPopularFragment.OnListFragmentInteractionListener;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -21,12 +21,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyScienceRecyclerViewAdapter extends RecyclerView.Adapter<MyScienceRecyclerViewAdapter.ViewHolder> {
+public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPopularRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyScienceRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MostPopularRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
