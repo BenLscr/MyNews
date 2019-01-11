@@ -8,6 +8,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,16 +30,18 @@ public class MainActivity extends AppCompatActivity implements
         ScienceFragment.OnListFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
-    private NavigationView navigationView;
-    private ViewPager viewPager;
+    @BindView(R.id.activity_main_drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
+    @BindView(R.id.activity_main_nav_view) NavigationView navigationView;
+    @BindView(R.id.activity_main_viewpager) ViewPager viewPager;
+    @BindView(R.id.activity_main_tabs) TabLayout tabs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         this.configureToolbar();
         this.configureViewPagerAndTabs();
         this.configureDrawerLayout();
@@ -45,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void configureToolbar() {
-        this.toolbar = findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(toolbar);
     }
 
@@ -76,11 +79,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void configureViewPagerAndTabs(){
-        this.viewPager = (ViewPager)findViewById(R.id.activity_main_viewpager);
         // 2 - Set Adapter PageAdapter and glue it together
         viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()) {
         });
-        TabLayout tabs = (TabLayout) findViewById(R.id.activity_main_tabs);
         tabs.setupWithViewPager(viewPager);
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
@@ -93,13 +94,11 @@ public class MainActivity extends AppCompatActivity implements
 //////////    MENU    //////////
 
     private void configureDrawerLayout(){
-        this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
     private void configureNavigationView(){
-        this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
