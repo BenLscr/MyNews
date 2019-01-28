@@ -23,6 +23,7 @@ import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
+import com.lescour.ben.mynews.model.TopStoriesJson;
 
 public class MainActivity extends AppCompatActivity implements
         TopStoriesFragment.OnListFragmentInteractionListener,
@@ -135,5 +136,10 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onListFragmentInteraction(TopStoriesJson article) {
+
     }
 }

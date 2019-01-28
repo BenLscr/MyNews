@@ -3,10 +3,14 @@ package com.lescour.ben.mynews.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
- * Created by benja on 12/01/2019.
+ * Created by benja on 28/01/2019.
  */
-public class TopStoriesAPI {
+public class Result {
+
+
     @SerializedName("section")
     @Expose
     private String section;
@@ -43,6 +47,9 @@ public class TopStoriesAPI {
     @SerializedName("kicker")
     @Expose
     private String kicker;
+    @SerializedName("des_facet")
+    @Expose
+    private List<String> desFacet = null;
 
     public String getSection() {
         return section;
@@ -138,6 +145,14 @@ public class TopStoriesAPI {
 
     public void setKicker(String kicker) {
         this.kicker = kicker;
+    }
+
+    public List<String> getDesFacet() {
+        return desFacet;
+    }
+
+    public void setDesFacet(List<String> desFacet) {
+        this.desFacet = desFacet;
     }
 
 }

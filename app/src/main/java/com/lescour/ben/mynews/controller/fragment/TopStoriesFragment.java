@@ -2,19 +2,25 @@ package com.lescour.ben.mynews.controller.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
+import com.lescour.ben.mynews.model.Result;
+import com.lescour.ben.mynews.model.TopStoriesJson;
+import com.lescour.ben.mynews.utils.TopStoriesStreams;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * A fragment representing a list of Items.
@@ -29,6 +35,11 @@ public class TopStoriesFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    private Disposable disposable;
+    private TopStoriesJson topStoriesJson;
+    private List<Result> resultList;
+    private TopStoriesRecyclerViewAdapter mTopStoriesRecyclerViewAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,6 +72,8 @@ public class TopStoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
+        this.resultList = new ArrayList<>();
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -70,8 +83,12 @@ public class TopStoriesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new TopStoriesRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            this.mTopStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.resultList, mListener);
+            recyclerView.setAdapter(this.mTopStoriesRecyclerViewAdapter);
         }
+
+        this.executeHttpRequestWithRetrofit();
+
         return view;
     }
 
@@ -105,6 +122,41 @@ public class TopStoriesFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(TopStoriesJson article);
+    }
+
+    private void updateUI(List<TopStoriesJson> results){
+        resultList.addAll(topStoriesJson.getResults());
+        mTopStoriesRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.disposeWhenDestroy();
+    }
+
+    private void disposeWhenDestroy(){
+        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
+    }
+
+    private void executeHttpRequestWithRetrofit(){
+        this.disposable = TopStoriesStreams.streamFetchArticleTitle("home").subscribeWith(new DisposableObserver<List<TopStoriesJson>>() {
+            @Override
+            public void onNext(List<TopStoriesJson> results) {
+                Log.e("TAG","On Next");
+                updateUI(results);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG","On Error"+Log.getStackTraceString(e));
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG","On Complete !!");
+            }
+        });
     }
 }
