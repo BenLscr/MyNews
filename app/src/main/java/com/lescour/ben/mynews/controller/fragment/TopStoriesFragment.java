@@ -125,7 +125,8 @@ public class TopStoriesFragment extends Fragment {
         void onListFragmentInteraction(TopStoriesJson article);
     }
 
-    private void updateUI(List<TopStoriesJson> results){
+    private void updateUI(TopStoriesJson results){
+        topStoriesJson = results;
         resultList.addAll(topStoriesJson.getResults());
         mTopStoriesRecyclerViewAdapter.notifyDataSetChanged();
     }
@@ -141,9 +142,9 @@ public class TopStoriesFragment extends Fragment {
     }
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = TopStoriesStreams.streamFetchArticleTitle("home").subscribeWith(new DisposableObserver<List<TopStoriesJson>>() {
+        this.disposable = TopStoriesStreams.streamFetchArticleTitle("home").subscribeWith(new DisposableObserver<TopStoriesJson>() {
             @Override
-            public void onNext(List<TopStoriesJson> results) {
+            public void onNext(TopStoriesJson results) {
                 Log.e("TAG","On Next");
                 updateUI(results);
             }

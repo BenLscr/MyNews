@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TopStoriesStreams {
 
-    public static Observable<List<TopStoriesJson>> streamFetchArticleTitle(String section){
+    public static Observable<TopStoriesJson> streamFetchArticleTitle(String section){
         TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
         return topStoriesService.getTopStories(section)
                 .subscribeOn(Schedulers.io())

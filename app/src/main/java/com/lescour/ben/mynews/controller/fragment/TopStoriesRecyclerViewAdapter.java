@@ -1,9 +1,5 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +8,14 @@ import android.widget.TextView;
 
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment.OnListFragmentInteractionListener;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
 import com.lescour.ben.mynews.model.Result;
-import com.lescour.ben.mynews.model.TopStoriesJson;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStoriesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Result> results;
@@ -46,8 +39,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         holder.articleGeoTag.setText("Disons politique");
         holder.articleDate.setText("08/01/2019");
-        //holder.articleDescription.setText(holder.mItem.getTitle());
-        holder.updateWithTopStoriesJson(this.results.get(position));
+        holder.articleDescription.setText(holder.mItem.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,10 +70,6 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
             super(view);
             mView = view;
             ButterKnife.bind(this, view);
-        }
-
-        public void updateWithTopStoriesJson(Result result){
-            this.articleDescription.setText(result.getTitle());
         }
 
         @Override

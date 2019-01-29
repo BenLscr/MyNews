@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 public interface TopStoriesService {
 
     @GET("{section}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
-    Observable<List<TopStoriesJson>> getTopStories(@Path("section") String section);
+    Observable<TopStoriesJson> getTopStories(@Path("section") String section);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/topstories/v2/")
