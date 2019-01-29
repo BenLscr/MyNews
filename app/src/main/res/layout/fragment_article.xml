@@ -45,10 +45,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/article_description"
+                android:id="@+id/article_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/article_description"/>
+                android:text="@string/article_title" />
         </LinearLayout>
 
     </LinearLayout>

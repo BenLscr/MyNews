@@ -39,7 +39,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         holder.articleGeoTag.setText("Disons politique");
         holder.articleDate.setText("08/01/2019");
-        holder.articleDescription.setText(holder.mItem.getTitle());
+        holder.articleTitle.setText(holder.mItem.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         @BindView(R.id.img_article) ImageView articleImg;
         @BindView(R.id.article_geotag) TextView articleGeoTag;
         @BindView(R.id.article_date) TextView articleDate;
-        @BindView(R.id.article_description) TextView articleDescription;
+        @BindView(R.id.article_title) TextView articleTitle;
         public Result mItem;
 
         public ViewHolder(View view) {

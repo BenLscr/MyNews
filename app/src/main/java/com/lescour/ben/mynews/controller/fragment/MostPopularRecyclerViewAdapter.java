@@ -68,7 +68,7 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
         @BindView(R.id.img_article) ImageView articleImg;
         @BindView(R.id.article_geotag) TextView articleGeoTag;
         @BindView(R.id.article_date) TextView articleDate;
-        @BindView(R.id.article_description) TextView articleDescription;
+        @BindView(R.id.article_title) TextView articleDescription;
         public DummyItem mItem;
 
         public ViewHolder(View view) {
