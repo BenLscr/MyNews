@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class Result {
 
-
     @SerializedName("section")
     @Expose
     private String section;
@@ -47,9 +46,9 @@ public class Result {
     @SerializedName("kicker")
     @Expose
     private String kicker;
-    @SerializedName("des_facet")
+    @SerializedName("multimedia")
     @Expose
-    private List<String> desFacet = null;
+    private List<Multimedium> multimedia = null;
 
     public String getSection() {
         return section;
@@ -147,12 +146,12 @@ public class Result {
         this.kicker = kicker;
     }
 
-    public List<String> getDesFacet() {
-        return desFacet;
+    public List<Multimedium> getMultimedia() {
+        return multimedia;
     }
 
-    public void setDesFacet(List<String> desFacet) {
-        this.desFacet = desFacet;
+    public void setMultimedia(List<Multimedium> multimedia) {
+        this.multimedia = multimedia;
     }
 
 }

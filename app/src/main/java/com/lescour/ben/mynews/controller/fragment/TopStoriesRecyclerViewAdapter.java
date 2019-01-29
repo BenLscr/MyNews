@@ -1,13 +1,16 @@
 package com.lescour.ben.mynews.controller.fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment.OnListFragmentInteractionListener;
+import com.lescour.ben.mynews.model.Multimedium;
 import com.lescour.ben.mynews.model.Result;
 
 import java.util.List;
@@ -18,12 +21,15 @@ import butterknife.ButterKnife;
 
 public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStoriesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Result> results;
+    private final List<Result> resultsList;
+    private List<Multimedium> multimediumsList;
     private final OnListFragmentInteractionListener mListener;
+    private RequestManager glide;
 
-    public TopStoriesRecyclerViewAdapter(List<Result> results, OnListFragmentInteractionListener listener) {
-        this.results = results;
+    public TopStoriesRecyclerViewAdapter(List<Result> resultsList, OnListFragmentInteractionListener listener, RequestManager glide) {
+        this.resultsList = resultsList;
         mListener = listener;
+        this.glide = glide;
     }
 
     @Override
@@ -35,11 +41,15 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = results.get(position);
+        holder.result = resultsList.get(position);
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
-        holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.mItem));
-        holder.articleDate.setText(getDateWhitNewFormat(holder.mItem));
-        holder.articleTitle.setText(holder.mItem.getTitle());
+        holder.showArticleImg(holder.result, this.glide);
+        if (holder.result.getMultimedia().isEmpty()) {
+            Log.e("TAG","La list est vide");
+        }
+        holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.result));
+        holder.articleDate.setText(getDateWhitNewFormat(holder.result));
+        holder.articleTitle.setText(holder.result.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +57,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    //mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.result);
                 }
             }
         });
@@ -67,7 +77,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
 
     @Override
     public int getItemCount() {
-        return results.size();
+        return resultsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,12 +86,17 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         @BindView(R.id.article_sectionSubsection) TextView articleSectionSubsection;
         @BindView(R.id.article_date) TextView articleDate;
         @BindView(R.id.article_title) TextView articleTitle;
-        public Result mItem;
+        public Result result;
+        public Multimedium multimedium;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             ButterKnife.bind(this, view);
+        }
+
+        public void showArticleImg(Result result, RequestManager glide) {
+            //glide.load(result.getMultimedia()multimedium.getUrl()).into(articleImg);
         }
 
         @Override

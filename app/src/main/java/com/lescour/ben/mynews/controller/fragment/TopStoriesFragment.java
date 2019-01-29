@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.model.Multimedium;
 import com.lescour.ben.mynews.model.Result;
 import com.lescour.ben.mynews.model.TopStoriesJson;
 import com.lescour.ben.mynews.utils.TopStoriesStreams;
@@ -32,13 +34,12 @@ public class TopStoriesFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     private Disposable disposable;
-    private TopStoriesJson topStoriesJson;
-    private List<Result> resultList;
+    private List<Result> resultsList;
     private TopStoriesRecyclerViewAdapter mTopStoriesRecyclerViewAdapter;
 
     /**
@@ -72,7 +73,7 @@ public class TopStoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        this.resultList = new ArrayList<>();
+        this.resultsList = new ArrayList<>();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -83,7 +84,7 @@ public class TopStoriesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            this.mTopStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.resultList, mListener);
+            this.mTopStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.resultsList, mListener, Glide.with(this));
             recyclerView.setAdapter(this.mTopStoriesRecyclerViewAdapter);
         }
 
@@ -121,13 +122,11 @@ public class TopStoriesFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(TopStoriesJson article);
+        void onListFragmentInteraction(Result result);
     }
 
     private void updateUI(TopStoriesJson results){
-        topStoriesJson = results;
-        resultList.addAll(topStoriesJson.getResults());
+        resultsList.addAll(results.getResults());
         mTopStoriesRecyclerViewAdapter.notifyDataSetChanged();
     }
 

@@ -1,16 +1,8 @@
 package com.lescour.ben.mynews.controller;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -23,7 +15,16 @@ import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
-import com.lescour.ben.mynews.model.TopStoriesJson;
+import com.lescour.ben.mynews.model.Result;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements
         TopStoriesFragment.OnListFragmentInteractionListener,
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements
     @BindView(R.id.activity_main_viewpager) ViewPager viewPager;
     @BindView(R.id.activity_main_tabs) TabLayout tabs;
 
+    public static final String BUNDLE_EXTRA_URL = "BUNDLE_EXTRA_URL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +141,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onListFragmentInteraction(TopStoriesJson article) {
-
+    public void onListFragmentInteraction(Result result) {
+        Intent webViewActivity = new Intent(this, WebViewActivity.class);
+        webViewActivity.putExtra(BUNDLE_EXTRA_URL,result.getUrl());
+        this.startActivity(webViewActivity);
     }
 }
