@@ -38,7 +38,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         holder.mItem = results.get(position);
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         holder.articleGeoTag.setText("Disons politique");
-        holder.articleDate.setText("08/01/2019");
+        holder.articleDate.setText(getDateWhitNewFormat(this.results.get(position)));
         holder.articleTitle.setText(holder.mItem.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +51,14 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
                 }
             }
         });
+    }
+
+    public String getDateWhitNewFormat(Result result) {
+        String rawDate = result.getPublishedDate();
+        String year = rawDate.substring(0,4);
+        String month = rawDate.substring(5,7);
+        String day = rawDate.substring(8,10);
+        return day + "/" + month + "/" + year;
     }
 
     @Override
