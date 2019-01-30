@@ -21,4 +21,12 @@ public class TheNewYorkTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
+    public static Observable<TheNewYorkTimesResponse> streamFetchMostPopular(String period){
+        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
+        return theNewYorkTimesService.getMostPopular(period)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(10, TimeUnit.SECONDS);
+    }
+
 }
