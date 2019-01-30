@@ -1,6 +1,6 @@
 package com.lescour.ben.mynews.utils;
 
-import com.lescour.ben.mynews.model.TopStoriesJson;
+import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 public interface TheNewYorkTimesService {
 
     @GET("topstories/v2/{section}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
-    Observable<TopStoriesJson> getTopStories(@Path("section") String section);
+    Observable<TheNewYorkTimesResponse> getTopStories(@Path("section") String section);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")

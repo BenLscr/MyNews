@@ -8,18 +8,18 @@ import java.util.List;
 /**
  * Created by benja on 28/01/2019.
  */
-public class TopStoriesJson {
+public class TheNewYorkTimesResponse {
 
     @SerializedName("results")
     @Expose
-    private List<Result> results = null;
+    private List<Article> articles = null;
 
-    public List<Result> getResults() {
-        return results;
+    public List<Article> getArticles() {
+        return articles;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 
 

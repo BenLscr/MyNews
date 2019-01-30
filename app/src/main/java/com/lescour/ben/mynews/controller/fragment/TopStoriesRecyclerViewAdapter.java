@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment.OnListFragmentInteractionListener;
+import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
-import com.lescour.ben.mynews.model.Result;
 
 import java.util.List;
 
@@ -21,13 +21,13 @@ import butterknife.ButterKnife;
 
 public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStoriesRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Result> resultsList;
+    private final List<Article> articles;
     private List<Multimedium> multimediumsList;
     private final OnListFragmentInteractionListener mListener;
     private RequestManager glide;
 
-    public TopStoriesRecyclerViewAdapter(List<Result> resultsList, OnListFragmentInteractionListener listener, RequestManager glide) {
-        this.resultsList = resultsList;
+    public TopStoriesRecyclerViewAdapter(List<Article> articles, OnListFragmentInteractionListener listener, RequestManager glide) {
+        this.articles = articles;
         mListener = listener;
         this.glide = glide;
     }
@@ -41,15 +41,15 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.result = resultsList.get(position);
+        holder.article = articles.get(position);
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
-        holder.showArticleImg(holder.result, this.glide);
-        if (holder.result.getMultimedia().isEmpty()) {
+        holder.showArticleImg(holder.article, this.glide);
+        if (holder.article.getMultimedia().isEmpty()) {
             Log.e("TAG","La list est vide");
         }
-        holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.result));
-        holder.articleDate.setText(getDateWhitNewFormat(holder.result));
-        holder.articleTitle.setText(holder.result.getTitle());
+        holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
+        holder.articleDate.setText(getDateWhitNewFormat(holder.article));
+        holder.articleTitle.setText(holder.article.getTitle());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,24 +57,24 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.result);
+                    mListener.onListFragmentInteraction(holder.article);
                 }
             }
         });
     }
 
-    private String getSectionAndSubsection(Result result) {
+    private String getSectionAndSubsection(Article article) {
         String str;
-        if (result.getSubsection().isEmpty()) {
-            str = result.getSection();
+        if (article.getSubsection().isEmpty()) {
+            str = article.getSection();
         } else {
-            str = result.getSection() + " > " + result.getSubsection();
+            str = article.getSection() + " > " + article.getSubsection();
         }
         return str;
     }
 
-    private String getDateWhitNewFormat(Result result) {
-        String rawDate = result.getPublishedDate();
+    private String getDateWhitNewFormat(Article article) {
+        String rawDate = article.getPublishedDate();
         String year = rawDate.substring(0,4);
         String month = rawDate.substring(5,7);
         String day = rawDate.substring(8,10);
@@ -83,7 +83,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
 
     @Override
     public int getItemCount() {
-        return resultsList.size();
+        return articles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -92,7 +92,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         @BindView(R.id.article_sectionSubsection) TextView articleSectionSubsection;
         @BindView(R.id.article_date) TextView articleDate;
         @BindView(R.id.article_title) TextView articleTitle;
-        public Result result;
+        public Article article;
         public Multimedium multimedium;
 
         public ViewHolder(View view) {
@@ -101,8 +101,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
             ButterKnife.bind(this, view);
         }
 
-        public void showArticleImg(Result result, RequestManager glide) {
-            //glide.load(result.getMultimedia()multimedium.getUrl()).into(articleImg);
+        public void showArticleImg(Article article, RequestManager glide) {
+            //glide.load(article.getMultimedia()multimedium.getUrl()).into(articleImg);
         }
 
         @Override

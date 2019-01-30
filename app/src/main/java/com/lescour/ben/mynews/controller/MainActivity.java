@@ -2,7 +2,6 @@ package com.lescour.ben.mynews.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -15,7 +14,7 @@ import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
-import com.lescour.ben.mynews.model.Result;
+import com.lescour.ben.mynews.model.Article;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -141,9 +140,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onListFragmentInteraction(Result result) {
+    public void onListFragmentInteraction(Article article) {
         Intent webViewActivity = new Intent(this, WebViewActivity.class);
-        webViewActivity.putExtra(BUNDLE_EXTRA_URL,result.getUrl());
+        webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getUrl());
         this.startActivity(webViewActivity);
     }
 }

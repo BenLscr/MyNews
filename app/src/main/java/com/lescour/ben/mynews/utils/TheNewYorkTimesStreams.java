@@ -1,6 +1,6 @@
 package com.lescour.ben.mynews.utils;
 
-import com.lescour.ben.mynews.model.TopStoriesJson;
+import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TheNewYorkTimesStreams {
 
-    public static Observable<TopStoriesJson> streamFetchTopStories(String section){
+    public static Observable<TheNewYorkTimesResponse> streamFetchTopStories(String section){
         TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
         return theNewYorkTimesService.getTopStories(section)
                 .subscribeOn(Schedulers.io())

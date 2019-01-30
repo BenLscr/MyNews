@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.model.Result;
-import com.lescour.ben.mynews.model.TopStoriesJson;
+import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class TopStoriesFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
 
     private Disposable disposable;
-    private List<Result> resultsList;
+    private List<Article> articles;
     private TopStoriesRecyclerViewAdapter mTopStoriesRecyclerViewAdapter;
 
     /**
@@ -72,7 +72,7 @@ public class TopStoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        this.resultsList = new ArrayList<>();
+        this.articles = new ArrayList<>();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -83,7 +83,7 @@ public class TopStoriesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            this.mTopStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.resultsList, mListener, Glide.with(this));
+            this.mTopStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
             recyclerView.setAdapter(this.mTopStoriesRecyclerViewAdapter);
         }
 
@@ -121,11 +121,11 @@ public class TopStoriesFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Result result);
+        void onListFragmentInteraction(Article article);
     }
 
-    private void updateUI(TopStoriesJson results){
-        resultsList.addAll(results.getResults());
+    private void updateUI(TheNewYorkTimesResponse response){
+        articles.addAll(response.getArticles());
         mTopStoriesRecyclerViewAdapter.notifyDataSetChanged();
     }
 
@@ -140,11 +140,11 @@ public class TopStoriesFragment extends Fragment {
     }
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories("home").subscribeWith(new DisposableObserver<TopStoriesJson>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories("home").subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
-            public void onNext(TopStoriesJson results) {
+            public void onNext(TheNewYorkTimesResponse response) {
                 Log.e("TAG","On Next");
-                updateUI(results);
+                updateUI(response);
             }
 
             @Override
