@@ -64,7 +64,13 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
     }
 
     private String getSectionAndSubsection(Result result) {
-        return result.getSection() + " > " + result.getSubsection();
+        String str;
+        if (result.getSubsection().isEmpty()) {
+            str = result.getSection();
+        } else {
+            str = result.getSection() + " > " + result.getSubsection();
+        }
+        return str;
     }
 
     private String getDateWhitNewFormat(Result result) {
