@@ -28,6 +28,9 @@ public class Article {
     @SerializedName("multimedia")
     @Expose
     private List<Multimedium> multimedia = null;
+    @SerializedName("media")
+    @Expose
+    private List<Medium> media = null;
 
     public String getSection() {
         return section;
@@ -74,6 +77,14 @@ public class Article {
 
     public void setMultimedia(List<Multimedium> multimedia) {
         this.multimedia = multimedia;
+    }
+
+    public List<Medium> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<Medium> media) {
+        this.media = media;
     }
 
 }
