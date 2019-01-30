@@ -17,9 +17,13 @@ public interface TheNewYorkTimesService {
     @GET("topstories/v2/{section}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
     Observable<TheNewYorkTimesResponse> getTopStories(@Path("section") String section);
 
+    @GET("mostpopular/v2/viewed/{period}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
+    Observable<TheNewYorkTimesResponse> getMostPopular(@Path("period") String section);
+
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
+
 }
