@@ -2,7 +2,6 @@ package com.lescour.ben.mynews.utils;
 
 import com.lescour.ben.mynews.model.TopStoriesJson;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -12,11 +11,11 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by benja on 28/01/2019.
  */
-public class TopStoriesStreams {
+public class TheNewYorkTimesStreams {
 
-    public static Observable<TopStoriesJson> streamFetchArticleTitle(String section){
-        TopStoriesService topStoriesService = TopStoriesService.retrofit.create(TopStoriesService.class);
-        return topStoriesService.getTopStories(section)
+    public static Observable<TopStoriesJson> streamFetchTopStories(String section){
+        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
+        return theNewYorkTimesService.getTopStories(section)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

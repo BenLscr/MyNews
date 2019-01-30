@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.model.Multimedium;
 import com.lescour.ben.mynews.model.Result;
 import com.lescour.ben.mynews.model.TopStoriesJson;
-import com.lescour.ben.mynews.utils.TopStoriesStreams;
+import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +140,7 @@ public class TopStoriesFragment extends Fragment {
     }
 
     private void executeHttpRequestWithRetrofit(){
-        this.disposable = TopStoriesStreams.streamFetchArticleTitle("home").subscribeWith(new DisposableObserver<TopStoriesJson>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories("home").subscribeWith(new DisposableObserver<TopStoriesJson>() {
             @Override
             public void onNext(TopStoriesJson results) {
                 Log.e("TAG","On Next");
