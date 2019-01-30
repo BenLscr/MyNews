@@ -7,14 +7,24 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
 import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
+import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
+import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -26,9 +36,12 @@ public class MostPopularFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    private Disposable disposable;
+    private List<Article> articles;
+    private MostPopularRecyclerViewAdapter mMostPopularRecyclerViewAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,6 +74,8 @@ public class MostPopularFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
+        this.articles = new ArrayList<>();
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -70,8 +85,12 @@ public class MostPopularFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MostPopularRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            this.mMostPopularRecyclerViewAdapter = new MostPopularRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+            recyclerView.setAdapter(this.mMostPopularRecyclerViewAdapter);
         }
+
+        this.executeHttpRequestWithRetrofit();
+
         return view;
     }
 
@@ -104,7 +123,41 @@ public class MostPopularFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Article article);
+    }
+
+    private void updateUI(TheNewYorkTimesResponse response){
+        articles.addAll(response.getArticles());
+        mMostPopularRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.disposeWhenDestroy();
+    }
+
+    private void disposeWhenDestroy(){
+        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
+    }
+
+    private void executeHttpRequestWithRetrofit(){
+        this.disposable = TheNewYorkTimesStreams.streamFetchMostPopular("7").subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+            @Override
+            public void onNext(TheNewYorkTimesResponse response) {
+                Log.e("TAG","On Next");
+                updateUI(response);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG","On Error"+Log.getStackTraceString(e));
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG","On Complete !!");
+            }
+        });
     }
 }
