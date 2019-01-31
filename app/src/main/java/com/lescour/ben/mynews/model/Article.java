@@ -10,12 +10,10 @@ import java.util.List;
  */
 public class Article {
 
+    //TOP STORIES & MOST POPULAR\\
     @SerializedName("section")
     @Expose
     private String section;
-    @SerializedName("subsection")
-    @Expose
-    private String subsection;
     @SerializedName("title")
     @Expose
     private String title;
@@ -25,12 +23,38 @@ public class Article {
     @SerializedName("published_date")
     @Expose
     private String publishedDate;
+
+    //TOP STORIES\\
+    @SerializedName("subsection")
+    @Expose
+    private String subsection;
+
+    //TOP STORIES & SEARCH\\
     @SerializedName("multimedia")
     @Expose
     private List<Multimedium> multimedia = null;
+
+    //MOST POPULAR\\
     @SerializedName("media")
     @Expose
     private List<Medium> media = null;
+
+    //SEARCH\\
+    @SerializedName("web_url")
+    @Expose
+    private String webUrl;
+    @SerializedName("headline")
+    @Expose
+    private Headline headline;
+    @SerializedName("pub_date")
+    @Expose
+    private String pubDate;
+    @SerializedName("section_name")
+    @Expose
+    private String sectionName;
+    @SerializedName("subsectoinName")
+    @Expose
+    private String subsectoinName;
 
     public String getSection() {
         return section;
@@ -85,6 +109,46 @@ public class Article {
 
     public void setMedia(List<Medium> media) {
         this.media = media;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public Headline getHeadline() {
+        return headline;
+    }
+
+    public void setHeadline(Headline headline) {
+        this.headline = headline;
+    }
+
+    public String getPubDate() {
+        return pubDate;
+    }
+
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
+    }
+
+    public String getSectionName() {
+        return sectionName;
+    }
+
+    public void setSectionName(String sectionName) {
+        this.sectionName = sectionName;
+    }
+
+    public String getSubsectoinName() {
+        return subsectoinName;
+    }
+
+    public void setSubsectoinName(String subsectoinName) {
+        this.subsectoinName = subsectoinName;
     }
 
 }
