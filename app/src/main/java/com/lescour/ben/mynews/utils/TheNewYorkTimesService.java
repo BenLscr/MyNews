@@ -18,7 +18,10 @@ public interface TheNewYorkTimesService {
     Observable<TheNewYorkTimesResponse> getTopStories(@Path("section") String section);
 
     @GET("mostpopular/v2/viewed/{period}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
-    Observable<TheNewYorkTimesResponse> getMostPopular(@Path("period") String section);
+    Observable<TheNewYorkTimesResponse> getMostPopular(@Path("period") String period);
+
+    @GET("articlesearch.json?q={query}&sort={sort}&api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
+    Observable<TheNewYorkTimesResponse> getArticleSearch(@Path("query") String query, @Path("sort") String sort);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
