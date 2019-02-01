@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment.OnListFragmentInteractionListener;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 
@@ -23,10 +22,10 @@ import butterknife.ButterKnife;
 public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStoriesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Article> articles;
-    private final OnListFragmentInteractionListener mListener;
+    private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
 
-    public TopStoriesRecyclerViewAdapter(List<Article> articles, OnListFragmentInteractionListener listener, RequestManager glide) {
+    public TopStoriesRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
         mListener = listener;
         this.glide = glide;
