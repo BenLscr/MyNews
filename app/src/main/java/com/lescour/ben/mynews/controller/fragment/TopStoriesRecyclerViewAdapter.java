@@ -13,6 +13,7 @@ import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment.OnListFragm
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +23,6 @@ import butterknife.ButterKnife;
 public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStoriesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Article> articles;
-    private List<Multimedium> multimediumsList;
     private final OnListFragmentInteractionListener mListener;
     private RequestManager glide;
 
@@ -43,9 +43,10 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
-        holder.showArticleImg(holder.article, this.glide);
         if (holder.article.getMultimedia().isEmpty()) {
             Log.e("TAG","La list est vide");
+        } else {
+            holder.showArticleImg(holder.article.getMultimedia().get(0), this.glide);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
@@ -93,7 +94,6 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         @BindView(R.id.article_date) TextView articleDate;
         @BindView(R.id.article_title) TextView articleTitle;
         public Article article;
-        public Multimedium multimedium;
 
         public ViewHolder(View view) {
             super(view);
@@ -101,8 +101,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
             ButterKnife.bind(this, view);
         }
 
-        public void showArticleImg(Article article, RequestManager glide) {
-            //glide.load(article.getMultimedia()multimedium.getUrl()).into(articleImg);
+        public void showArticleImg(Multimedium multimedium, RequestManager glide) {
+            glide.load(multimedium.getUrl()).into(articleImg);
         }
 
         @Override
