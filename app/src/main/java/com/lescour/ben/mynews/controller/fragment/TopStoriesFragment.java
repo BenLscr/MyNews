@@ -47,8 +47,6 @@ public class TopStoriesFragment extends Fragment {
     public TopStoriesFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static TopStoriesFragment newInstance(int columnCount) {
         TopStoriesFragment fragment = new TopStoriesFragment();
         Bundle args = new Bundle();

@@ -1,5 +1,6 @@
 package com.lescour.ben.mynews.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,9 +35,10 @@ public class WebViewActivity extends AppCompatActivity {
         configureWebView();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     public void configureWebView() {
         WebView webView = findViewById(R.id.article_webview);
-        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(articleUrl);
     }
 }

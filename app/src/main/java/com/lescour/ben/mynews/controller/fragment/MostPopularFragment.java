@@ -50,8 +50,6 @@ public class MostPopularFragment extends Fragment {
     public MostPopularFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static MostPopularFragment newInstance(int columnCount) {
         MostPopularFragment fragment = new MostPopularFragment();
         Bundle args = new Bundle();
