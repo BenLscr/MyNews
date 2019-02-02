@@ -31,7 +31,7 @@ public class TopStoriesFragment extends BaseFragment {
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
-        return new TopStoriesFragment();
+        return fragment;
     }
 
     @Override

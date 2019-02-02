@@ -10,6 +10,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.adapter.PageAdapter;
+import com.lescour.ben.mynews.controller.fragment.BaseFragment.OnListFragmentInteractionListener;
 import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
@@ -26,8 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements
-        TopStoriesFragment.OnListFragmentInteractionListener,
-        MostPopularFragment.OnListFragmentInteractionListener,
+        OnListFragmentInteractionListener,
         ScienceFragment.OnListFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 

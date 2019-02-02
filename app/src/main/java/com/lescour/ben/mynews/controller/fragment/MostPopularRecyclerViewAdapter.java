@@ -13,26 +13,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.MostPopularFragment.OnListFragmentInteractionListener;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPopularRecyclerViewAdapter.ViewHolder> {
 
     private final List<Article> articles;
     private List<Multimedium> multimediumsList;
-    private final OnListFragmentInteractionListener mListener;
+    private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
 
-    public MostPopularRecyclerViewAdapter(List<Article> articles, OnListFragmentInteractionListener listener, RequestManager glide) {
+    public MostPopularRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
         mListener = listener;
         this.glide = glide;
