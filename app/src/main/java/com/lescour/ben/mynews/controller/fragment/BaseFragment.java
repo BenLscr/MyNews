@@ -32,7 +32,7 @@ public abstract class BaseFragment extends Fragment {
     protected Disposable disposable;
 
     protected abstract void setAppropriateAdapter();
-    protected abstract void executeApiRequest();
+    protected abstract void executeHttpRequestWithRetrofit();
     protected abstract void notifyRecyclerView();
 
     @Override
@@ -63,7 +63,7 @@ public abstract class BaseFragment extends Fragment {
             this.setAppropriateAdapter();
         }
 
-        this.executeApiRequest();
+        this.executeHttpRequestWithRetrofit();
 
         return view;
     }
