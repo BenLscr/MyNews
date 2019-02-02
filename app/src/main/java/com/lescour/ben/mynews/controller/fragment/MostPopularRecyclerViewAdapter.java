@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.model.MediaMetadatum;
 import com.lescour.ben.mynews.model.Multimedium;
 
 import java.util.List;
@@ -41,8 +42,11 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
-        holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
-        holder.showArticleImg(holder.article, this.glide);
+        if (holder.article.getMedia().get(0).getMediaMetadata().isEmpty()) {
+            holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
+        } else {
+            holder.showArticleImg(holder.article.getMedia().get(0).getMediaMetadata().get(0), this.glide);
+        }
         holder.articleSectionSubsection.setText(holder.article.getSection());
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
         holder.articleTitle.setText(holder.article.getTitle());
@@ -87,8 +91,8 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
             ButterKnife.bind(this, view);
         }
 
-        public void showArticleImg(Article article, RequestManager glide) {
-            //glide.load(article.getMultimedia()multimedium.getUrl()).into(articleImg);
+        public void showArticleImg(MediaMetadatum mediaMetadatum, RequestManager glide) {
+            glide.load(mediaMetadatum.getUrl()).into(articleImg);
         }
 
         @Override
