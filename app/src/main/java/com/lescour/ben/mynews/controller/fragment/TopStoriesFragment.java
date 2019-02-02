@@ -41,17 +41,18 @@ public class TopStoriesFragment extends BaseFragment {
     }
 
     @Override
-    protected void notifyRecyclerView() {
+    protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
+        articles.addAll(theNewYorkTimesResponse.getArticles());
         mTopStoriesRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories("home").subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories("home", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
-            public void onNext(TheNewYorkTimesResponse response) {
+            public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
-                updateUI(response);
+                updateUI(theNewYorkTimesResponse);
             }
 
             @Override

@@ -1,30 +1,13 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.observers.DisposableObserver;
-
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
-import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * A fragment representing a list of Items.
@@ -58,17 +41,18 @@ public class MostPopularFragment extends BaseFragment {
     }
 
     @Override
-    protected void notifyRecyclerView() {
+    protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
+        articles.addAll(theNewYorkTimesResponse.getArticles());
         mMostPopularRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchMostPopular("7").subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchMostPopular("7", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
-            public void onNext(TheNewYorkTimesResponse response) {
+            public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG","On Next");
-                updateUI(response);
+                updateUI(theNewYorkTimesResponse);
             }
 
             @Override

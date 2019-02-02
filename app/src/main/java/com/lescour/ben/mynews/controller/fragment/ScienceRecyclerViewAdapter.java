@@ -10,25 +10,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.ScienceFragment.OnListFragmentInteractionListener;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
+import com.lescour.ben.mynews.model.Article;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<Article> articles;
+    private final BaseFragment.OnListFragmentInteractionListener mListener;
+    private RequestManager glide;
 
-    public ScienceRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public ScienceRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
+        this.articles = articles;
         mListener = listener;
+        this.glide = glide;
     }
 
     @Override
@@ -40,7 +37,7 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
+        holder.article = articles.get(position);
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         holder.articleGeoTag.setText("Disons politique");
         holder.articleDate.setText("08/01/2019");
@@ -52,7 +49,7 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.article);
                 }
             }
         });
@@ -60,7 +57,7 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return articles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -69,7 +66,7 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
         @BindView(R.id.article_sectionSubsection) TextView articleGeoTag;
         @BindView(R.id.article_date) TextView articleDate;
         @BindView(R.id.article_title) TextView articleDescription;
-        public DummyItem mItem;
+        public Article article;
 
         public ViewHolder(View view) {
             super(view);

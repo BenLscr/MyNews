@@ -11,10 +11,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.adapter.PageAdapter;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment.OnListFragmentInteractionListener;
-import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
-import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
-import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
 import com.lescour.ben.mynews.model.Article;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -28,7 +24,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements
         OnListFragmentInteractionListener,
-        ScienceFragment.OnListFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.activity_main_drawer_layout) DrawerLayout drawerLayout;
@@ -89,9 +84,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Article article) {
+        Intent webViewActivity = new Intent(this, WebViewActivity.class);
+        webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getUrl());
+        this.startActivity(webViewActivity);
     }
-
 
 //////////    MENU    //////////
 
@@ -139,10 +136,4 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onListFragmentInteraction(Article article) {
-        Intent webViewActivity = new Intent(this, WebViewActivity.class);
-        webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getUrl());
-        this.startActivity(webViewActivity);
-    }
 }

@@ -8,20 +8,21 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by benja on 28/01/2019.
  */
 public interface TheNewYorkTimesService {
 
-    @GET("topstories/v2/{section}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
-    Observable<TheNewYorkTimesResponse> getTopStories(@Path("section") String section);
+    @GET("topstories/v2/{section}.json")
+    Observable<TheNewYorkTimesResponse> getTopStories(@Path("section") String section, @Query("api-key") String apiKey);
 
-    @GET("mostpopular/v2/viewed/{period}.json?api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
-    Observable<TheNewYorkTimesResponse> getMostPopular(@Path("period") String period);
+    @GET("mostpopular/v2/viewed/{period}.json")
+    Observable<TheNewYorkTimesResponse> getMostPopular(@Path("period") String period, @Query("api-key") String apiKey);
 
-    @GET("articlesearch.json?q={query}&sort={sort}&api-key=4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6")
-    Observable<TheNewYorkTimesResponse> getArticleSearch(@Path("query") String query, @Path("sort") String sort);
+    @GET("search/v2/articlesearch.json")
+    Observable<TheNewYorkTimesResponse> getArticleSearch(@Query("q") String query, @Query("sort") String sort, @Query("api-key") String apiKey);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")

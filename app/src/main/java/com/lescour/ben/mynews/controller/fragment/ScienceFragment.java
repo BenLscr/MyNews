@@ -1,20 +1,13 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
+import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent;
-import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * A fragment representing a list of Items.
@@ -22,13 +15,9 @@ import com.lescour.ben.mynews.controller.fragment.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ScienceFragment extends Fragment {
+public class ScienceFragment extends BaseFragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private ScienceRecyclerViewAdapter mScienceRecyclerViewAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -37,8 +26,6 @@ public class ScienceFragment extends Fragment {
     public ScienceFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ScienceFragment newInstance(int columnCount) {
         ScienceFragment fragment = new ScienceFragment();
         Bundle args = new Bundle();
@@ -48,62 +35,36 @@ public class ScienceFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+    protected void setAppropriateAdapter() {
+        this.mScienceRecyclerViewAdapter = new ScienceRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        recyclerView.setAdapter(this.mScienceRecyclerViewAdapter);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+    protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
+        articles.addAll(theNewYorkTimesResponse.getResponse().getArticles());
+        mScienceRecyclerViewAdapter.notifyDataSetChanged();
+    }
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+    @Override
+    protected void executeHttpRequestWithRetrofit(){
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch("science", "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+            @Override
+            public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
+                Log.e("TAG", "On Next");
+                updateUI(theNewYorkTimesResponse);
             }
-            recyclerView.setAdapter(new ScienceRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
-        return view;
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG", "On Error" + Log.getStackTraceString(e));
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG", "On Complete !!");
+            }
+        });
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
-    }
 }

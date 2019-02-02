@@ -13,25 +13,25 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TheNewYorkTimesStreams {
 
-    public static Observable<TheNewYorkTimesResponse> streamFetchTopStories(String section){
+    public static Observable<TheNewYorkTimesResponse> streamFetchTopStories(String section, String apiKey){
         TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
-        return theNewYorkTimesService.getTopStories(section)
+        return theNewYorkTimesService.getTopStories(section, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<TheNewYorkTimesResponse> streamFetchMostPopular(String period){
+    public static Observable<TheNewYorkTimesResponse> streamFetchMostPopular(String period, String apiKey){
         TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
-        return theNewYorkTimesService.getMostPopular(period)
+        return theNewYorkTimesService.getMostPopular(period, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<TheNewYorkTimesResponse> streamFetchArticleSearch(String query, String sort){
+    public static Observable<TheNewYorkTimesResponse> streamFetchArticleSearch(String query, String sort, String apiKey){
         TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
-        return theNewYorkTimesService.getArticleSearch(query, sort)
+        return theNewYorkTimesService.getArticleSearch(query, sort, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
