@@ -40,9 +40,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
-        holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         if (holder.article.getMultimedia().isEmpty()) {
-            Log.e("TAG","La list est vide");
+            holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
             holder.showArticleImg(holder.article.getMultimedia().get(0), this.glide);
         }
