@@ -2,6 +2,7 @@ package com.lescour.ben.mynews.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -86,7 +87,12 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onListFragmentInteraction(Article article) {
         Intent webViewActivity = new Intent(this, WebViewActivity.class);
-        webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getUrl());
+        if (article.getUrl() != null) {
+            webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getUrl());
+        }
+        else {
+            webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getWebUrl());
+        }
         this.startActivity(webViewActivity);
     }
 

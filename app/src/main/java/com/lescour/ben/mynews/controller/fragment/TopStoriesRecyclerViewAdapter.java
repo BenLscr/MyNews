@@ -1,6 +1,5 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 

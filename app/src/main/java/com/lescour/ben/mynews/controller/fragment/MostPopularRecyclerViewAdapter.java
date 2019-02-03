@@ -1,10 +1,5 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +8,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.MediaMetadatum;
-import com.lescour.ben.mynews.model.Multimedium;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPopularRecyclerViewAdapter.ViewHolder> {
 
     private final List<Article> articles;
-    private List<Multimedium> multimediumsList;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
 
@@ -56,7 +54,7 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
             public void onClick(View v) {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
+                    // fragment is attached to one) that an item has been selected
                     mListener.onListFragmentInteraction(holder.article);
                 }
             }
@@ -83,7 +81,6 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
         @BindView(R.id.article_date) TextView articleDate;
         @BindView(R.id.article_title) TextView articleTitle;
         public Article article;
-        public Multimedium multimedium;
 
         public ViewHolder(View view) {
             super(view);

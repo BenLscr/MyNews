@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.model.Multimedium;
 
 import java.util.List;
 
@@ -38,10 +40,14 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
-        holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
-        holder.articleGeoTag.setText("Disons politique");
-        holder.articleDate.setText("08/01/2019");
-        holder.articleDescription.setText("Une très longue description");
+        if (holder.article.getMultimedia().isEmpty()) {
+            holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
+        } else {
+            holder.showArticleImg(holder.article.getMultimedia().get(9), this.glide);
+        }
+        holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
+        holder.articleDate.setText(getDateWhitNewFormat(holder.article));
+        holder.articleDescription.setText(holder.article.getHeadline().getMain());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +61,24 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
         });
     }
 
+    private String getSectionAndSubsection(Article article) {
+        String str;
+        if (article.getSubsectoinName() == null) {
+            str = article.getSectionName();
+        } else {
+            str = article.getSectionName() + " > " + article.getSubsectoinName();
+        }
+        return str;
+    }
+
+    private String getDateWhitNewFormat(Article article) {
+        String rawDate = article.getPubDate();
+        String year = rawDate.substring(0,4);
+        String month = rawDate.substring(5,7);
+        String day = rawDate.substring(8,10);
+        return day + "/" + month + "/" + year;
+    }
+
     @Override
     public int getItemCount() {
         return articles.size();
@@ -63,7 +87,7 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         @BindView(R.id.img_article) ImageView articleImg;
-        @BindView(R.id.article_sectionSubsection) TextView articleGeoTag;
+        @BindView(R.id.article_sectionSubsection) TextView articleSectionSubsection;
         @BindView(R.id.article_date) TextView articleDate;
         @BindView(R.id.article_title) TextView articleDescription;
         public Article article;
@@ -72,6 +96,11 @@ public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecy
             super(view);
             mView = view;
             ButterKnife.bind(this, view);
+        }
+
+        public void showArticleImg(Multimedium multimedium, RequestManager glide) {
+            String img = "https://static01.nyt.com/" + multimedium.getUrl();
+            glide.load(img).into(articleImg);
         }
 
         @Override
