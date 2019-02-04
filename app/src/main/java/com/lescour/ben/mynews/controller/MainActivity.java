@@ -2,7 +2,6 @@ package com.lescour.ben.mynews.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -60,7 +59,8 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_activity_main_search:
-                Toast.makeText(this, "Bouton 'search' non assigné", Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
+                this.startActivity(myIntent);
                 return true;
             case R.id.menu_activity_main_notifications:
                 Toast.makeText(this, "Bouton 'notifications' non assigné", Toast.LENGTH_LONG).show();
