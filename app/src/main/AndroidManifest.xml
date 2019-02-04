@@ -19,7 +19,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.WebViewActivity" />
-        <activity android:name=".controller.SearchActivity" />
+        <activity android:name=".controller.SearchActivity"
+            android:label="Search Articles"
+            android:parentActivityName="controller.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="controller.MainActivity" />
+        </activity>
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

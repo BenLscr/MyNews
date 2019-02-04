@@ -13,7 +13,8 @@
         <!-- Color of the title text in the Toolbar -->
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:actionOverflowButtonStyle">@style/CustomDots</item>
-        <item name="drawerArrowStyle">@style/CustomBurger</item>
+        <item name="drawerArrowStyle">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="Toolbar.Popup" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
