@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -19,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by benja on 04/02/2019.
@@ -27,7 +27,9 @@ public class SearchActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
     @BindView(R.id.select_begin_date) TextView selectBeginDate;
+    @BindView(R.id.select_end_date) TextView selectEndDate;
     private DatePickerDialog.OnDateSetListener beginDateSetListener;
+    private DatePickerDialog.OnDateSetListener endDateSetListener;
     private Calendar calendar;
     private SimpleDateFormat visualFormat;
     private SimpleDateFormat urlFormat;
@@ -36,6 +38,7 @@ public class SearchActivity extends AppCompatActivity {
     private int day;
     private DatePickerDialog datePickerDialog;
     private String beginDateForUrl;
+    private String endDateForUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.search_activity);
         ButterKnife.bind(this);
         this.configureToolbar();
-
-        selectBeginDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initBeginCalendar();
-                initBeginDatePickerDialog();
-            }
-        });
+        this.initCalendar();
 
         beginDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -60,8 +56,28 @@ public class SearchActivity extends AppCompatActivity {
                 saveBeginDateInUrlFormat();
             }
         };
+
+        endDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                calendar.set(year, month, day);
+                selectEndDate.setText(visualFormat.format(calendar.getTime()));
+                saveEndDateInUrlFormat();
+            }
+        };
     }
 
+    private void initCalendar() {
+        calendar = Calendar.getInstance();
+        urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        visualFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        visualFormat.setCalendar(calendar);
+        year = calendar.get(calendar.YEAR);
+        month = calendar.get(calendar.MONTH);
+        day = calendar.get(calendar.DAY_OF_MONTH);
+    }
+
+//////////    Toolbar   //////////
     private void configureToolbar() {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -74,14 +90,12 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initBeginCalendar() {
-        calendar = Calendar.getInstance();
-        urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-        visualFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        visualFormat.setCalendar(calendar);
-        year = calendar.get(calendar.YEAR);
-        month = calendar.get(calendar.MONTH);
-        day = calendar.get(calendar.DAY_OF_MONTH);
+//////////    BeginDate   //////////
+
+    @OnClick(R.id.select_begin_date)
+    public void beginDate() {
+        initCalendar();
+        initBeginDatePickerDialog();
     }
 
     private void initBeginDatePickerDialog() {
@@ -98,5 +112,29 @@ public class SearchActivity extends AppCompatActivity {
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
         beginDateForUrl = urlFormat.format(calendar.getTime());
+    }
+
+//////////    EndDate   //////////
+
+    @OnClick(R.id.select_end_date)
+    public void endDate() {
+        initCalendar();
+        initEndDatePickerDialog();
+    }
+
+    private void initEndDatePickerDialog() {
+        datePickerDialog = new DatePickerDialog(
+                SearchActivity.this,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                endDateSetListener,
+                year, month, day);
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
+    }
+
+    private void saveEndDateInUrlFormat() {
+        urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        urlFormat.setCalendar(calendar);
+        endDateForUrl = urlFormat.format(calendar.getTime());
     }
 }
