@@ -4,8 +4,11 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lescour.ben.mynews.R;
 
@@ -28,17 +31,19 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
     @BindView(R.id.select_begin_date) TextView selectBeginDate;
     @BindView(R.id.select_end_date) TextView selectEndDate;
-    private DatePickerDialog.OnDateSetListener beginDateSetListener;
-    private DatePickerDialog.OnDateSetListener endDateSetListener;
+    @BindView(R.id.checkbox_arts) CheckBox checkBoxArts;
+    @BindView(R.id.checkbox_business) CheckBox checkBoxBusiness;
+    @BindView(R.id.checkbox_entrepreneurs) CheckBox checkBoxEntreprenneurs;
+    @BindView(R.id.checkbox_politics) CheckBox checkBoxPolitics;
+    @BindView(R.id.checkbox_sports) CheckBox checkBoxSports;
+    @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
+    private DatePickerDialog.OnDateSetListener beginDateSetListener, endDateSetListener;
     private Calendar calendar;
-    private SimpleDateFormat visualFormat;
-    private SimpleDateFormat urlFormat;
-    private int year;
-    private int month;
-    private int day;
+    private SimpleDateFormat visualFormat, urlFormat;
+    private int year, month, day;
     private DatePickerDialog datePickerDialog;
-    private String beginDateForUrl;
-    private String endDateForUrl;
+    private String beginDateForUrl, endDateForUrl;
+    private String arts, business, entreprenneurs, politics, sports, travel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,5 +141,55 @@ public class SearchActivity extends AppCompatActivity {
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
         endDateForUrl = urlFormat.format(calendar.getTime());
+    }
+
+//////////    CheckBox   //////////
+
+    public void checkCheckBox(View checkBox) {
+        int id = checkBox.getId();
+        switch (id){
+            case R.id.checkbox_arts :
+                if (checkBoxArts.isChecked()) {
+                    arts = "arts";
+                } else {
+                    arts = null;
+                }
+                break;
+            case R.id.checkbox_business :
+                if (checkBoxBusiness.isChecked()) {
+                    business = "business";
+                } else {
+                    business = null;
+                }
+                break;
+            case R.id.checkbox_entrepreneurs :
+                if (checkBoxEntreprenneurs.isChecked()) {
+                    entreprenneurs = "entreprenneurs";
+                } else {
+                    entreprenneurs = null;
+                }
+                break;
+            case R.id.checkbox_politics :
+                if (checkBoxPolitics.isChecked()) {
+                    politics = "politics";
+                } else {
+                    politics = null;
+                }
+                break;
+            case R.id.checkbox_sports :
+                if (checkBoxSports.isChecked()) {
+                    sports = "sports";
+                } else {
+                    sports = null;
+                }
+                break;
+            case R.id.checkbox_travel :
+                if (checkBoxTravel.isChecked()) {
+                    travel = "travel";
+                } else {
+                    travel = null;
+                }
+                break;
+        }
     }
 }
