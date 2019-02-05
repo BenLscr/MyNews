@@ -21,41 +21,97 @@
         android:textSize="22sp"/>
     
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp">
+            android:layout_marginEnd="40dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Begin date"/>
+                android:text="@string/begin_date"/>
             <TextView
                 android:id="@+id/select_begin_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select a date"
+                android:layout_marginBottom="10dp"
+                android:text="@string/select_a_date"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"/>
             <CheckBox
+                android:id="@+id/checkbox_arts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
+                android:text="@string/arts"
+                android:padding="15dp" />
             <CheckBox
+                android:id="@+id/checkbox_business"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
+                android:text="@string/business"
+                android:padding="15dp"/>
             <CheckBox
+                android:id="@+id/checkbox_entrepreneurs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"/>
+                android:text="@string/entrepreneurs"
+                android:padding="15dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end_date"/>
+            <TextView
+                android:id="@+id/select_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/select_a_date"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
+            <CheckBox
+                android:id="@+id/checkbox_politics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/politics"
+                android:padding="15dp" />
+            <CheckBox
+                android:id="@+id/checkbox_sports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sports"
+                android:padding="15dp"/>
+            <CheckBox
+                android:id="@+id/checkbox_travel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/travel"
+                android:padding="15dp"/>
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/launch_search_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="@string/search"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:background="@color/myColorAccent"
+        />
 
 </LinearLayout>

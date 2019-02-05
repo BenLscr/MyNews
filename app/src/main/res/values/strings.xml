@@ -16,4 +16,13 @@
     <string name="most_popular">Most Popular</string>
     <string name="science">Science</string>
     <string name="search_query_term">Search query term</string>
+    <string name="begin_date">Begin date</string>
+    <string name="select_a_date">Select a date</string>
+    <string name="arts">Arts</string>
+    <string name="business">Business</string>
+    <string name="entrepreneurs">Entrepreneurs</string>
+    <string name="end_date">End date</string>
+    <string name="politics">politics</string>
+    <string name="sports">sports</string>
+    <string name="travel">travel</string>
 </resources>
