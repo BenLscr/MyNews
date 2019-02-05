@@ -15,4 +15,5 @@
     <string name="top_stories">Top Stories</string>
     <string name="most_popular">Most Popular</string>
     <string name="science">Science</string>
+    <string name="search_query_term">Search query term</string>
 </resources>
