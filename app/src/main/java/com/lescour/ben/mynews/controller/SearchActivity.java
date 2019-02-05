@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import butterknife.OnClick;
 public class SearchActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
+    @BindView(R.id.search_query_term) EditText editText;
     @BindView(R.id.select_begin_date) TextView selectBeginDate;
     @BindView(R.id.select_end_date) TextView selectEndDate;
     @BindView(R.id.checkbox_arts) CheckBox checkBoxArts;
@@ -37,6 +40,7 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.checkbox_politics) CheckBox checkBoxPolitics;
     @BindView(R.id.checkbox_sports) CheckBox checkBoxSports;
     @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
+    @BindView(R.id.launch_search_button) Button launchSearchButton;
     private DatePickerDialog.OnDateSetListener beginDateSetListener, endDateSetListener;
     private Calendar calendar;
     private SimpleDateFormat visualFormat, urlFormat;
@@ -44,6 +48,7 @@ public class SearchActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private String beginDateForUrl, endDateForUrl;
     private String arts, business, entreprenneurs, politics, sports, travel;
+    private String query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,5 +196,12 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+//////////    Search   //////////
+
+    @OnClick(R.id.launch_search_button)
+    public void launchPersonnaliSearch() {
+        query = editText.getText().toString();
     }
 }
