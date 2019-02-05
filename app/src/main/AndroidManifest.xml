@@ -26,6 +26,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="controller.MainActivity" />
         </activity>
+        <activity android:name=".controller.CustomActivity"
+            android:label="Articles found"
+            android:parentActivityName="controller.WebViewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="controller.WebViewActivity" />
+        </activity>
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

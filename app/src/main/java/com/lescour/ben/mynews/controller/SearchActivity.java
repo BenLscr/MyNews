@@ -1,6 +1,7 @@
 package com.lescour.ben.mynews.controller;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -201,7 +203,9 @@ public class SearchActivity extends AppCompatActivity {
 //////////    Search   //////////
 
     @OnClick(R.id.launch_search_button)
-    public void launchPersonnaliSearch() {
+    public void launchPersonnaliseSearch() {
         query = editText.getText().toString();
+        Intent customActivity = new Intent(this, CustomActivity.class);
+        this.startActivity(customActivity);
     }
 }
