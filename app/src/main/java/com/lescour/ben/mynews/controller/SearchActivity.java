@@ -52,8 +52,10 @@ public class SearchActivity extends AppCompatActivity {
     private String beginDateToShow, endDateToShow;
     private String beginDateForUrl, endDateForUrl;
     private String arts, business, entreprenneurs, politics, sports, travel;
-    private String query;
     public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
+    public static final String BUNDLE_EXTRA_BEGIN_DATE ="BUNDLE_EXTRA_BEGIN_DATE";
+    public static final String BUNDLE_EXTRA_END_DATE ="BUNDLE_EXTRA_END_DATE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,9 +247,11 @@ public class SearchActivity extends AppCompatActivity {
 
     @OnClick(R.id.launch_search_button)
     public void launchPersonaliseSearch() {
-        query = editText.getText().toString();
+        String query = editText.getText().toString();
         if (!query.equals("")) {
             Intent customActivity = new Intent(this, CustomActivity.class);
+            customActivity.putExtra(BUNDLE_EXTRA_BEGIN_DATE, beginDateForUrl);
+            customActivity.putExtra(BUNDLE_EXTRA_END_DATE, endDateForUrl);
             customActivity.putExtra(BUNDLE_EXTRA_QUERY, query);
             this.startActivity(customActivity);
         } else {

@@ -18,6 +18,8 @@ import io.reactivex.observers.DisposableObserver;
 public class ArticleSearchFragment extends BaseFragment {
 
     private ArticleSearchRecyclerViewAdapter articleSearchRecyclerViewAdapter;
+    private String begin_date;
+    private String end_date;
     private String query = "science";
 
     /**
@@ -49,7 +51,7 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(begin_date, end_date, query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
@@ -66,6 +68,14 @@ public class ArticleSearchFragment extends BaseFragment {
                 Log.e("TAG", "On Complete !!");
             }
         });
+    }
+
+    public void setBegin_date(String begin_date) {
+        this.begin_date = begin_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 
     public void setQuery(String query) {

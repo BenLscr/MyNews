@@ -18,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.lescour.ben.mynews.controller.MainActivity.BUNDLE_EXTRA_URL;
+import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_BEGIN_DATE;
+import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_END_DATE;
 import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_QUERY;
 
 /**
@@ -26,7 +28,6 @@ import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_QUER
 public class CustomActivity extends AppCompatActivity implements BaseFragment.OnListFragmentInteractionListener {
 
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
-    private String query;
     private ArticleSearchFragment articleSearchFragment;
 
     @Override
@@ -57,9 +58,12 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
 
     private void setTheCustomRequest(){
         Intent customActivity = getIntent();
-        if (customActivity.hasExtra(BUNDLE_EXTRA_QUERY)) {
-            query = customActivity.getStringExtra(BUNDLE_EXTRA_QUERY);
-            articleSearchFragment.setQuery(query);
+        articleSearchFragment.setQuery(customActivity.getStringExtra(BUNDLE_EXTRA_QUERY));
+        if (customActivity.hasExtra(BUNDLE_EXTRA_BEGIN_DATE)) {
+            articleSearchFragment.setBegin_date(customActivity.getStringExtra(BUNDLE_EXTRA_BEGIN_DATE));
+        }
+        if (customActivity.hasExtra(BUNDLE_EXTRA_END_DATE)) {
+            articleSearchFragment.setEnd_date(customActivity.getStringExtra(BUNDLE_EXTRA_END_DATE));
         }
     }
 

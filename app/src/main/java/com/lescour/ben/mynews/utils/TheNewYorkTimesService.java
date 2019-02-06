@@ -22,7 +22,7 @@ public interface TheNewYorkTimesService {
     Observable<TheNewYorkTimesResponse> getMostPopular(@Path("period") String period, @Query("api-key") String apiKey);
 
     @GET("search/v2/articlesearch.json")
-    Observable<TheNewYorkTimesResponse> getArticleSearch(@Query("q") String query, @Query("sort") String sort, @Query("api-key") String apiKey);
+    Observable<TheNewYorkTimesResponse> getArticleSearch(@Query("begin_date")String begin_date, @Query("end_date")String end_date, @Query("q") String query, @Query("sort") String sort, @Query("api-key") String apiKey);
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
