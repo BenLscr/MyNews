@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.lescour.ben.mynews.controller.MainActivity.BUNDLE_EXTRA_URL;
 import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_QUERY;
 
 /**
@@ -64,6 +65,8 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
 
     @Override
     public void onListFragmentInteraction(Article article) {
-
+        Intent webViewActivity = new Intent(this, WebViewActivity.class);
+        webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getWebUrl());
+        this.startActivity(webViewActivity);
     }
 }
