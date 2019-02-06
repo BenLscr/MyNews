@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.lescour.ben.mynews.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import androidx.appcompat.app.ActionBar;
@@ -47,6 +49,7 @@ public class SearchActivity extends AppCompatActivity {
     private SimpleDateFormat visualFormat, urlFormat;
     private int year, month, day;
     private DatePickerDialog datePickerDialog;
+    private String beginDateToShow, endDateToShow;
     private String beginDateForUrl, endDateForUrl;
     private String arts, business, entreprenneurs, politics, sports, travel;
     private String query;
@@ -64,8 +67,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 calendar.set(year, month, day);
-                selectBeginDate.setText(visualFormat.format(calendar.getTime()));
-                saveBeginDateInUrlFormat();
+                beginDateToShow = visualFormat.format(calendar.getTime());
+                checkIfBeginDateIsCorrect(beginDateToShow);
             }
         };
 
@@ -73,8 +76,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 calendar.set(year, month, day);
-                selectEndDate.setText(visualFormat.format(calendar.getTime()));
-                saveEndDateInUrlFormat();
+                endDateToShow = visualFormat.format(calendar.getTime());
+                checkIfEndDateIsCorrect(endDateToShow);
             }
         };
     }
@@ -120,7 +123,26 @@ public class SearchActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void saveBeginDateInUrlFormat() {
+    private void checkIfBeginDateIsCorrect(String beginDateToShow){
+        if (endDateToShow != null) {
+            try {
+                Date beginDate = visualFormat.parse(beginDateToShow);
+                Date endDate = visualFormat.parse(endDateToShow);
+                if (beginDate.before(endDate) || beginDate.equals(endDate)) {
+                    showAndSaveBeginDateInUrlFormat(beginDateToShow);
+                } else {
+                    Toast.makeText(this, "Begin date can't be after end date.", Toast.LENGTH_LONG).show();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showAndSaveBeginDateInUrlFormat(beginDateToShow);
+        }
+    }
+
+    private void showAndSaveBeginDateInUrlFormat(String beginDateToShow) {
+        selectBeginDate.setText(beginDateToShow);
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
         beginDateForUrl = urlFormat.format(calendar.getTime());
@@ -144,7 +166,26 @@ public class SearchActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void saveEndDateInUrlFormat() {
+    private void checkIfEndDateIsCorrect(String endDateToShow) {
+        if (beginDateToShow != null) {
+            try {
+                Date beginDate = visualFormat.parse(beginDateToShow);
+                Date endDate = visualFormat.parse(endDateToShow);
+                if (beginDate.before(endDate) || beginDate.equals(endDate)) {
+                    showAndSaveEndDateInUrlFormat(endDateToShow);
+                } else {
+                    Toast.makeText(this, "End date can't be before begin date.", Toast.LENGTH_LONG).show();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showAndSaveEndDateInUrlFormat(endDateToShow);
+        }
+    }
+
+    private void showAndSaveEndDateInUrlFormat(String endDateToShow) {
+        selectEndDate.setText(endDateToShow);
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
         endDateForUrl = urlFormat.format(calendar.getTime());
