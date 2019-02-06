@@ -15,20 +15,20 @@ import io.reactivex.observers.DisposableObserver;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ScienceFragment extends BaseFragment {
+public class ArticleSearchFragment extends BaseFragment {
 
-    private ScienceRecyclerViewAdapter mScienceRecyclerViewAdapter;
+    private ArticleSearchRecyclerViewAdapter articleSearchRecyclerViewAdapter;
     private String query = "science";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ScienceFragment() {
+    public ArticleSearchFragment() {
     }
 
-    public static ScienceFragment newInstance(int columnCount) {
-        ScienceFragment fragment = new ScienceFragment();
+    public static ArticleSearchFragment newInstance(int columnCount) {
+        ArticleSearchFragment fragment = new ArticleSearchFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -37,14 +37,14 @@ public class ScienceFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.mScienceRecyclerViewAdapter = new ScienceRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
-        recyclerView.setAdapter(this.mScienceRecyclerViewAdapter);
+        this.articleSearchRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        recyclerView.setAdapter(this.articleSearchRecyclerViewAdapter);
     }
 
     @Override
     protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
         articles.addAll(theNewYorkTimesResponse.getResponse().getArticles());
-        mScienceRecyclerViewAdapter.notifyDataSetChanged();
+        articleSearchRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override

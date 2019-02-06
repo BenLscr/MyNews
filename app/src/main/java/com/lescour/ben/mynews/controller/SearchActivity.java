@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -12,19 +12,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 
 import java.util.List;
 
-public class ScienceRecyclerViewAdapter extends RecyclerView.Adapter<ScienceRecyclerViewAdapter.ViewHolder> {
+public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ArticleSearchRecyclerViewAdapter.ViewHolder> {
 
     private final List<Article> articles;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
 
-    public ScienceRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
+    public ArticleSearchRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
         mListener = listener;
         this.glide = glide;

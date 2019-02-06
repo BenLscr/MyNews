@@ -1,7 +1,7 @@
 package com.lescour.ben.mynews.controller.adapter;
 
 import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
-import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
+import com.lescour.ben.mynews.controller.fragment.ArticleSearchFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 
 import androidx.annotation.NonNull;
@@ -29,7 +29,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1: //Page number 2
                 return MostPopularFragment.newInstance(1);
             case 2: //Page number 2
-                return ScienceFragment.newInstance(1);
+                return ArticleSearchFragment.newInstance(1);
             default:
                 return null;
         }

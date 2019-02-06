@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment;
-import com.lescour.ben.mynews.controller.fragment.ScienceFragment;
+import com.lescour.ben.mynews.controller.fragment.ArticleSearchFragment;
 import com.lescour.ben.mynews.model.Article;
 
 import androidx.annotation.Nullable;
@@ -26,7 +26,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
 
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
     private String query;
-    private ScienceFragment scienceFragment;
+    private ArticleSearchFragment articleSearchFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
     private void addFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        scienceFragment = ScienceFragment.newInstance(1);
-        fragmentTransaction.add(R.id.custom_list_container, scienceFragment);
+        articleSearchFragment = ArticleSearchFragment.newInstance(1);
+        fragmentTransaction.add(R.id.custom_list_container, articleSearchFragment);
         fragmentTransaction.commit();
 
         this.setTheCustomRequest();
@@ -58,7 +58,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         Intent customActivity = getIntent();
         if (customActivity.hasExtra(BUNDLE_EXTRA_QUERY)) {
             query = customActivity.getStringExtra(BUNDLE_EXTRA_QUERY);
-            scienceFragment.setQuery(query);
+            articleSearchFragment.setQuery(query);
         }
     }
 
