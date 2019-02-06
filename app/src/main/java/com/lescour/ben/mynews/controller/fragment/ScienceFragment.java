@@ -18,6 +18,7 @@ import io.reactivex.observers.DisposableObserver;
 public class ScienceFragment extends BaseFragment {
 
     private ScienceRecyclerViewAdapter mScienceRecyclerViewAdapter;
+    private String query = "science";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -48,7 +49,7 @@ public class ScienceFragment extends BaseFragment {
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch("science", "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
@@ -67,4 +68,7 @@ public class ScienceFragment extends BaseFragment {
         });
     }
 
+    public void setQuery(String query) {
+        this.query = query;
+    }
 }

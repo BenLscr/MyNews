@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
     private String beginDateForUrl, endDateForUrl;
     private String arts, business, entreprenneurs, politics, sports, travel;
     private String query;
+    public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,9 +204,14 @@ public class SearchActivity extends AppCompatActivity {
 //////////    Search   //////////
 
     @OnClick(R.id.launch_search_button)
-    public void launchPersonnaliseSearch() {
+    public void launchPersonaliseSearch() {
         query = editText.getText().toString();
-        Intent customActivity = new Intent(this, CustomActivity.class);
-        this.startActivity(customActivity);
+        if (!query.equals("")) {
+            Intent customActivity = new Intent(this, CustomActivity.class);
+            customActivity.putExtra(BUNDLE_EXTRA_QUERY, query);
+            this.startActivity(customActivity);
+        } else {
+            Toast.makeText(this, "Need a query", Toast.LENGTH_LONG).show();
+        }
     }
 }
