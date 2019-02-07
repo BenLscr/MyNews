@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.controller.fragment.ArticleSearchFragment;
+import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 
 import androidx.annotation.Nullable;
@@ -57,13 +57,12 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
     }
 
     private void setTheCustomRequest(){
-        Intent customActivity = getIntent();
-        articleSearchFragment.setQuery(customActivity.getStringExtra(BUNDLE_EXTRA_QUERY));
-        if (customActivity.hasExtra(BUNDLE_EXTRA_BEGIN_DATE)) {
-            articleSearchFragment.setBegin_date(customActivity.getStringExtra(BUNDLE_EXTRA_BEGIN_DATE));
+        articleSearchFragment.setQuery(getIntent().getStringExtra(BUNDLE_EXTRA_QUERY));
+        if (getIntent().hasExtra(BUNDLE_EXTRA_BEGIN_DATE)) {
+            articleSearchFragment.setBegin_date(getIntent().getStringExtra(BUNDLE_EXTRA_BEGIN_DATE));
         }
-        if (customActivity.hasExtra(BUNDLE_EXTRA_END_DATE)) {
-            articleSearchFragment.setEnd_date(customActivity.getStringExtra(BUNDLE_EXTRA_END_DATE));
+        if (getIntent().hasExtra(BUNDLE_EXTRA_END_DATE)) {
+            articleSearchFragment.setEnd_date(getIntent().getStringExtra(BUNDLE_EXTRA_END_DATE));
         }
     }
 
