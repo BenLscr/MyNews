@@ -39,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.select_end_date) TextView selectEndDate;
     @BindView(R.id.checkbox_arts) CheckBox checkBoxArts;
     @BindView(R.id.checkbox_business) CheckBox checkBoxBusiness;
-    @BindView(R.id.checkbox_entrepreneurs) CheckBox checkBoxEntreprenneurs;
+    @BindView(R.id.checkbox_entrepreneurs) CheckBox checkBoxEntrepreneurs;
     @BindView(R.id.checkbox_politics) CheckBox checkBoxPolitics;
     @BindView(R.id.checkbox_sports) CheckBox checkBoxSports;
     @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
@@ -51,10 +51,16 @@ public class SearchActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private String beginDateToShow, endDateToShow;
     private String beginDateForUrl, endDateForUrl;
-    private String arts, business, entreprenneurs, politics, sports, travel;
+    private String arts, business, entrepreneurs, politics, sports, travel;
     public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
-    public static final String BUNDLE_EXTRA_BEGIN_DATE ="BUNDLE_EXTRA_BEGIN_DATE";
-    public static final String BUNDLE_EXTRA_END_DATE ="BUNDLE_EXTRA_END_DATE";
+    public static final String BUNDLE_EXTRA_BEGIN_DATE = "BUNDLE_EXTRA_BEGIN_DATE";
+    public static final String BUNDLE_EXTRA_END_DATE = "BUNDLE_EXTRA_END_DATE";
+    public static final String BUNDLE_EXTRA_ARTS = "BUNDLE_EXTRA_ARTS";
+    public static final String BUNDLE_EXTRA_BUSINESS = "BUNDLE_EXTRA_BUSINESS";
+    public static final String BUNDLE_EXTRA_ENTREPRENEURS = "BUNDLE_EXTRA_ENTREPRENEURS";
+    public static final String BUNDLE_EXTRA_POLITICS = "BUNDLE_EXTRA_POLITICS";
+    public static final String BUNDLE_EXTRA_SPORTS = "BUNDLE_EXTRA_SPORTS";
+    public static final String BUNDLE_EXTRA_TRAVEL = "BUNDLE_EXTRA_TRAVEL";
 
 
     @Override
@@ -213,10 +219,10 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.checkbox_entrepreneurs :
-                if (checkBoxEntreprenneurs.isChecked()) {
-                    entreprenneurs = "entreprenneurs";
+                if (checkBoxEntrepreneurs.isChecked()) {
+                    entrepreneurs = "entrepreneurs";
                 } else {
-                    entreprenneurs = null;
+                    entrepreneurs = null;
                 }
                 break;
             case R.id.checkbox_politics :
@@ -248,14 +254,26 @@ public class SearchActivity extends AppCompatActivity {
     @OnClick(R.id.launch_search_button)
     public void launchPersonaliseSearch() {
         String query = editText.getText().toString();
-        if (!query.equals("")) {
+        if (!query.equals("") && (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null)) {
             Intent customActivity = new Intent(this, CustomActivity.class);
             customActivity.putExtra(BUNDLE_EXTRA_BEGIN_DATE, beginDateForUrl);
             customActivity.putExtra(BUNDLE_EXTRA_END_DATE, endDateForUrl);
             customActivity.putExtra(BUNDLE_EXTRA_QUERY, query);
+            customActivity.putExtra(BUNDLE_EXTRA_ARTS, arts);
+            customActivity.putExtra(BUNDLE_EXTRA_BUSINESS, business);
+            customActivity.putExtra(BUNDLE_EXTRA_ENTREPRENEURS, entrepreneurs);
+            customActivity.putExtra(BUNDLE_EXTRA_POLITICS, politics);
+            customActivity.putExtra(BUNDLE_EXTRA_SPORTS, sports);
+            customActivity.putExtra(BUNDLE_EXTRA_TRAVEL, travel);
             this.startActivity(customActivity);
+        }
+        if (query.equals("") && (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null)) {
+            Toast.makeText(this, "Please enter a query.", Toast.LENGTH_LONG).show();
+        }
+        if (!query.equals("") && (arts == null || business == null || entrepreneurs == null || politics == null || sports == null || travel == null)) {
+            Toast.makeText(this, "Please choose a categories.", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Need a query", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter a query and choose a categories.", Toast.LENGTH_LONG).show();
         }
     }
 }
