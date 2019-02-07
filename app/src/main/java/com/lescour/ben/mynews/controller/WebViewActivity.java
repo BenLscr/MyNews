@@ -27,9 +27,8 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_webview);
 
-        Intent webViewActivity = getIntent();
-        if (webViewActivity.hasExtra(BUNDLE_EXTRA_URL)) {
-            articleUrl = webViewActivity.getStringExtra(BUNDLE_EXTRA_URL);
+        if (getIntent().hasExtra(BUNDLE_EXTRA_URL)) {
+            articleUrl = getIntent().getStringExtra(BUNDLE_EXTRA_URL);
         }
 
         configureWebView();
