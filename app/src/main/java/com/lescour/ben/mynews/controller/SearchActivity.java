@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -67,6 +69,17 @@ public class SearchActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         this.configureToolbar();
         this.initCalendar();
+
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    launchPersonaliseSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         beginDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
