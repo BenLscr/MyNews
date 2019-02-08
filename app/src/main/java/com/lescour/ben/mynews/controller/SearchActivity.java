@@ -52,15 +52,12 @@ public class SearchActivity extends AppCompatActivity {
     private String beginDateToShow, endDateToShow;
     private String beginDateForUrl, endDateForUrl;
     private String arts, business, entrepreneurs, politics, sports, travel;
+    private StringBuilder compactCategoriesBuilder;
+    private String filter_query;
     public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
     public static final String BUNDLE_EXTRA_BEGIN_DATE = "BUNDLE_EXTRA_BEGIN_DATE";
     public static final String BUNDLE_EXTRA_END_DATE = "BUNDLE_EXTRA_END_DATE";
-    public static final String BUNDLE_EXTRA_ARTS = "BUNDLE_EXTRA_ARTS";
-    public static final String BUNDLE_EXTRA_BUSINESS = "BUNDLE_EXTRA_BUSINESS";
-    public static final String BUNDLE_EXTRA_ENTREPRENEURS = "BUNDLE_EXTRA_ENTREPRENEURS";
-    public static final String BUNDLE_EXTRA_POLITICS = "BUNDLE_EXTRA_POLITICS";
-    public static final String BUNDLE_EXTRA_SPORTS = "BUNDLE_EXTRA_SPORTS";
-    public static final String BUNDLE_EXTRA_TRAVEL = "BUNDLE_EXTRA_TRAVEL";
+    public static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
 
 
     @Override
@@ -202,46 +199,45 @@ public class SearchActivity extends AppCompatActivity {
 //////////    CheckBox   //////////
 
     public void checkCheckBox(View checkBox) {
-        int id = checkBox.getId();
-        switch (id){
+        switch (checkBox.getId()){
             case R.id.checkbox_arts :
                 if (checkBoxArts.isChecked()) {
-                    arts = "arts";
+                    arts = "\"arts\"";
                 } else {
                     arts = null;
                 }
                 break;
             case R.id.checkbox_business :
                 if (checkBoxBusiness.isChecked()) {
-                    business = "business";
+                    business = "\"business\"";
                 } else {
                     business = null;
                 }
                 break;
             case R.id.checkbox_entrepreneurs :
                 if (checkBoxEntrepreneurs.isChecked()) {
-                    entrepreneurs = "entrepreneurs";
+                    entrepreneurs = "\"entrepreneurs\"";
                 } else {
                     entrepreneurs = null;
                 }
                 break;
             case R.id.checkbox_politics :
                 if (checkBoxPolitics.isChecked()) {
-                    politics = "politics";
+                    politics = "\"politics\"";
                 } else {
                     politics = null;
                 }
                 break;
             case R.id.checkbox_sports :
                 if (checkBoxSports.isChecked()) {
-                    sports = "sports";
+                    sports = "\"sports\"";
                 } else {
                     sports = null;
                 }
                 break;
             case R.id.checkbox_travel :
                 if (checkBoxTravel.isChecked()) {
-                    travel = "travel";
+                    travel = "\"travel\"";
                 } else {
                     travel = null;
                 }
@@ -254,26 +250,47 @@ public class SearchActivity extends AppCompatActivity {
     @OnClick(R.id.launch_search_button)
     public void launchPersonaliseSearch() {
         String query = editText.getText().toString();
-        if (!query.equals("") && (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null)) {
+        this.buildCompactCategoriesBuilder();
+        if (!query.equals("") && compactCategoriesBuilder.length() > 0) {
+            filter_query = "news_desk:(" + compactCategoriesBuilder + ")";
             Intent customActivity = new Intent(this, CustomActivity.class);
             customActivity.putExtra(BUNDLE_EXTRA_BEGIN_DATE, beginDateForUrl);
             customActivity.putExtra(BUNDLE_EXTRA_END_DATE, endDateForUrl);
             customActivity.putExtra(BUNDLE_EXTRA_QUERY, query);
-            customActivity.putExtra(BUNDLE_EXTRA_ARTS, arts);
-            customActivity.putExtra(BUNDLE_EXTRA_BUSINESS, business);
-            customActivity.putExtra(BUNDLE_EXTRA_ENTREPRENEURS, entrepreneurs);
-            customActivity.putExtra(BUNDLE_EXTRA_POLITICS, politics);
-            customActivity.putExtra(BUNDLE_EXTRA_SPORTS, sports);
-            customActivity.putExtra(BUNDLE_EXTRA_TRAVEL, travel);
+            customActivity.putExtra(BUNDLE_EXTRA_FILTER_QUERY, filter_query);
             this.startActivity(customActivity);
         }
-        if (query.equals("") && (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null)) {
+        else if (query.equals("") &&  compactCategoriesBuilder.length() > 0) {
             Toast.makeText(this, "Please enter a query.", Toast.LENGTH_LONG).show();
         }
-        if (!query.equals("") && (arts == null || business == null || entrepreneurs == null || politics == null || sports == null || travel == null)) {
+        else if (!query.equals("") && compactCategoriesBuilder.length() == 0) {
             Toast.makeText(this, "Please choose a categories.", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Please enter a query and choose a categories.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void buildCompactCategoriesBuilder() {
+        compactCategoriesBuilder = new StringBuilder();
+        if (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null) {
+            if (arts != null) {
+                compactCategoriesBuilder.append(arts);
+            }
+            if (business != null) {
+                compactCategoriesBuilder.append(business);
+            }
+            if (entrepreneurs != null) {
+                compactCategoriesBuilder.append(entrepreneurs);
+            }
+            if (politics != null) {
+                compactCategoriesBuilder.append(politics);
+            }
+            if (sports != null) {
+                compactCategoriesBuilder.append(sports);
+            }
+            if (travel != null) {
+                compactCategoriesBuilder.append(travel);
+            }
         }
     }
 }

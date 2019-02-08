@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import static com.lescour.ben.mynews.controller.MainActivity.BUNDLE_EXTRA_URL;
 import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_BEGIN_DATE;
 import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_END_DATE;
+import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_FILTER_QUERY;
 import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_QUERY;
 
 /**
@@ -58,12 +59,9 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
 
     private void setTheCustomRequest(){
         articleSearchFragment.setQuery(getIntent().getStringExtra(BUNDLE_EXTRA_QUERY));
-        if (getIntent().hasExtra(BUNDLE_EXTRA_BEGIN_DATE)) {
-            articleSearchFragment.setBegin_date(getIntent().getStringExtra(BUNDLE_EXTRA_BEGIN_DATE));
-        }
-        if (getIntent().hasExtra(BUNDLE_EXTRA_END_DATE)) {
-            articleSearchFragment.setEnd_date(getIntent().getStringExtra(BUNDLE_EXTRA_END_DATE));
-        }
+        articleSearchFragment.setBegin_date(getIntent().getStringExtra(BUNDLE_EXTRA_BEGIN_DATE));
+        articleSearchFragment.setEnd_date(getIntent().getStringExtra(BUNDLE_EXTRA_END_DATE));
+        articleSearchFragment.setFilter_query(getIntent().getStringExtra(BUNDLE_EXTRA_FILTER_QUERY));
     }
 
     @Override

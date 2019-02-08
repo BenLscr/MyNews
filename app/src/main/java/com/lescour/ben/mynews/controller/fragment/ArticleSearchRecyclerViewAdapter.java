@@ -39,12 +39,13 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
-        if (holder.article.getMultimedia().isEmpty()) {
+        holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
+        /**if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
             String imgUrl = "https://static01.nyt.com/" + holder.article.getMultimedia().get(9).getUrl();
             holder.showArticleImg(imgUrl, this.glide);
-        }
+        }*/
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
         holder.articleDescription.setText(holder.article.getHeadline().getMain());

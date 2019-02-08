@@ -29,9 +29,9 @@ public class TheNewYorkTimesStreams {
                 .timeout(10, TimeUnit.SECONDS);
     }
 
-    public static Observable<TheNewYorkTimesResponse> streamFetchArticleSearch(String begin_date,String end_date,String query, String sort, String apiKey){
+    public static Observable<TheNewYorkTimesResponse> streamFetchArticleSearch(String begin_date, String end_date, String filter_query, String query, String sort, String apiKey){
         TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
-        return theNewYorkTimesService.getArticleSearch(begin_date, end_date, query, sort, apiKey)
+        return theNewYorkTimesService.getArticleSearch(begin_date, end_date, filter_query, query, sort, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
