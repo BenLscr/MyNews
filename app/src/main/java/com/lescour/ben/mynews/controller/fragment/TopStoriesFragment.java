@@ -17,8 +17,6 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class TopStoriesFragment extends BaseFragment {
 
-    private TopStoriesRecyclerViewAdapter mTopStoriesRecyclerViewAdapter;
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -36,14 +34,8 @@ public class TopStoriesFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.mTopStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
-        recyclerView.setAdapter(this.mTopStoriesRecyclerViewAdapter);
-    }
-
-    @Override
-    protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
-        articles.addAll(theNewYorkTimesResponse.getArticles());
-        mTopStoriesRecyclerViewAdapter.notifyDataSetChanged();
+        this.mRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 
     @Override

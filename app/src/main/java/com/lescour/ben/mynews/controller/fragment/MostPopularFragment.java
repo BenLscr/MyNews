@@ -17,8 +17,6 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class MostPopularFragment extends BaseFragment {
 
-    private MostPopularRecyclerViewAdapter mMostPopularRecyclerViewAdapter;
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -36,14 +34,8 @@ public class MostPopularFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.mMostPopularRecyclerViewAdapter = new MostPopularRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
-        recyclerView.setAdapter(this.mMostPopularRecyclerViewAdapter);
-    }
-
-    @Override
-    protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
-        articles.addAll(theNewYorkTimesResponse.getArticles());
-        mMostPopularRecyclerViewAdapter.notifyDataSetChanged();
+        this.mRecyclerViewAdapter = new MostPopularRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 
     @Override

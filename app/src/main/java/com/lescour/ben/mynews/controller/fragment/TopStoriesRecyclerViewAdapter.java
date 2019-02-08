@@ -43,7 +43,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
-            holder.showArticleImg(holder.article.getMultimedia().get(0), this.glide);
+            String imgUrl = holder.article.getMultimedia().get(0).getUrl();
+            holder.showArticleImg(imgUrl, this.glide);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
@@ -98,8 +99,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
             ButterKnife.bind(this, view);
         }
 
-        public void showArticleImg(Multimedium multimedium, RequestManager glide) {
-            glide.load(multimedium.getUrl()).into(articleImg);
+        public void showArticleImg(String imgUrl, RequestManager glide) {
+            glide.load(imgUrl).into(articleImg);
         }
 
         @Override

@@ -43,7 +43,8 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
         if (holder.article.getMedia().get(0).getMediaMetadata().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
-            holder.showArticleImg(holder.article.getMedia().get(0).getMediaMetadata().get(0), this.glide);
+            String imgUrl = holder.article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
+            holder.showArticleImg(imgUrl, this.glide);
         }
         holder.articleSectionSubsection.setText(holder.article.getSection());
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
@@ -88,8 +89,8 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
             ButterKnife.bind(this, view);
         }
 
-        public void showArticleImg(MediaMetadatum mediaMetadatum, RequestManager glide) {
-            glide.load(mediaMetadatum.getUrl()).into(articleImg);
+        public void showArticleImg(String imgUrl, RequestManager glide) {
+            glide.load(imgUrl).into(articleImg);
         }
 
         @Override

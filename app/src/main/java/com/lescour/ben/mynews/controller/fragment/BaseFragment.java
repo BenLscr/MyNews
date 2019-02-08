@@ -31,10 +31,11 @@ public abstract class BaseFragment extends Fragment {
     protected RecyclerView recyclerView;
     protected Disposable disposable;
     protected String apiKey = "4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6";
+    protected RecyclerView.Adapter mRecyclerViewAdapter;
 
     protected abstract void setAppropriateAdapter();
     protected abstract void executeHttpRequestWithRetrofit();
-    protected abstract void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse);
+    /**protected abstract void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse);*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,5 +110,11 @@ public abstract class BaseFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
      void onListFragmentInteraction(Article article);
      }
+
+
+    protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
+        articles.addAll(theNewYorkTimesResponse.getArticles());
+        mRecyclerViewAdapter.notifyDataSetChanged();
+    }
 
 }

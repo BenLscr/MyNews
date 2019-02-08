@@ -42,7 +42,8 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
         if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
-            holder.showArticleImg(holder.article.getMultimedia().get(9), this.glide);
+            String imgUrl = "https://static01.nyt.com/" + holder.article.getMultimedia().get(9).getUrl();
+            holder.showArticleImg(imgUrl, this.glide);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
@@ -97,9 +98,8 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
             ButterKnife.bind(this, view);
         }
 
-        public void showArticleImg(Multimedium multimedium, RequestManager glide) {
-            String img = "https://static01.nyt.com/" + multimedium.getUrl();
-            glide.load(img).into(articleImg);
+        public void showArticleImg(String imgUrl, RequestManager glide) {
+            glide.load(imgUrl).into(articleImg);
         }
 
         @Override

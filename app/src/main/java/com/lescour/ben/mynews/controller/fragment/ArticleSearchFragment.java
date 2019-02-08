@@ -17,10 +17,12 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class ArticleSearchFragment extends BaseFragment {
 
-    private ArticleSearchRecyclerViewAdapter articleSearchRecyclerViewAdapter;
     private String begin_date;
     private String end_date;
     private String query = "science";
+    private String filter_query;
+    private String sports;
+    private String politics;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -39,19 +41,19 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.articleSearchRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
-        recyclerView.setAdapter(this.articleSearchRecyclerViewAdapter);
+        this.mRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 
     @Override
     protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
         articles.addAll(theNewYorkTimesResponse.getResponse().getArticles());
-        articleSearchRecyclerViewAdapter.notifyDataSetChanged();
+        mRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(begin_date, end_date, query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(begin_date, end_date, sports, politics, query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
@@ -80,5 +82,17 @@ public class ArticleSearchFragment extends BaseFragment {
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public void setFilter_query(String filter_query) {
+        this.filter_query = filter_query;
+    }
+
+    public void setSports(String sports) {
+        this.sports = sports;
+    }
+
+    public void setPolitics(String politics) {
+        this.politics = politics;
     }
 }
