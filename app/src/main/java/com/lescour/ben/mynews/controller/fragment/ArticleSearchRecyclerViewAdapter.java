@@ -66,8 +66,8 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
         boolean imgFound = false;
         int i = 0;
         do {
-            Multimedium temporyMultimedium = article.getMultimedia().get(i);
-            if (temporyMultimedium.getSubType().equals("thumbnail")) {
+            Multimedium temporaryMultimedium = article.getMultimedia().get(i);
+            if (temporaryMultimedium.getSubType().equals("thumbnail")) {
                 imgUrl = "https://static01.nyt.com/" + article.getMultimedia().get(i).getUrl();
                 imgFound = true;
             }

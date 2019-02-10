@@ -66,8 +66,8 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
         boolean imgFound = false;
         int i = 0;
         do {
-            MediaMetadatum temporyMediaMetadatum = article.getMedia().get(0).getMediaMetadata().get(i);
-            if (temporyMediaMetadatum.getFormat().equals("Standard Thumbnail")) {
+            MediaMetadatum temporaryMediaMetadatum = article.getMedia().get(0).getMediaMetadata().get(i);
+            if (temporaryMediaMetadatum.getFormat().equals("Standard Thumbnail")) {
                 imgUrl = article.getMedia().get(0).getMediaMetadata().get(i).getUrl();
                 imgFound = true;
             }

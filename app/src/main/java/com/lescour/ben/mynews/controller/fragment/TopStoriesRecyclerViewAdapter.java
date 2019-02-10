@@ -66,8 +66,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         boolean imgFound = false;
         int i = 0;
         do {
-            Multimedium temporyMultimedium = article.getMultimedia().get(i);
-            if (temporyMultimedium.getFormat().equals("Standard Thumbnail")) {
+            Multimedium temporaryMultimedium = article.getMultimedia().get(i);
+            if (temporaryMultimedium.getFormat().equals("Standard Thumbnail")) {
                 imgUrl = article.getMultimedia().get(i).getUrl();
                 imgFound = true;
             }
