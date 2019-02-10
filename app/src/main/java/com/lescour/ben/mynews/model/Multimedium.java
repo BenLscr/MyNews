@@ -12,6 +12,9 @@ public class Multimedium {
     @SerializedName("url")
     @Expose
     private String url;
+    @SerializedName("subtype")
+    @Expose
+    private String subType;
 
     public String getUrl() {
         return url;
@@ -21,4 +24,11 @@ public class Multimedium {
         this.url = url;
     }
 
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
 }

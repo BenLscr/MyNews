@@ -1,9 +1,5 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +13,16 @@ import com.lescour.ben.mynews.model.Multimedium;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ArticleSearchRecyclerViewAdapter.ViewHolder> {
 
     private final List<Article> articles;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
+    private String imgUrl;
 
     public ArticleSearchRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
@@ -40,12 +41,12 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
         holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
-        /**if (holder.article.getMultimedia().isEmpty()) {
+        if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
-            String imgUrl = "https://static01.nyt.com/" + holder.article.getMultimedia().get(9).getUrl();
+            findUrlOfImgArticle(holder.article);
             holder.showArticleImg(imgUrl, this.glide);
-        }*/
+        }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
         holder.articleDescription.setText(holder.article.getHeadline().getMain());
@@ -60,6 +61,19 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
                 }
             }
         });
+    }
+
+    private void findUrlOfImgArticle(Article article) {
+        boolean imgFound = false;
+        int i = 0;
+        do {
+            Multimedium temporyMultimedium = article.getMultimedia().get(i);
+            if (temporyMultimedium.getSubType().equals("thumbnail")) {
+                imgUrl = "https://static01.nyt.com/" + article.getMultimedia().get(i).getUrl();
+                imgFound = true;
+            }
+            i++;
+        } while (!imgFound);
     }
 
     private String getSectionAndSubsection(Article article) {
