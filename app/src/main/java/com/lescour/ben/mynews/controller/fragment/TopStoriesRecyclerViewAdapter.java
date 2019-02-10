@@ -44,7 +44,6 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
             findUrlOfImgArticle(holder.article);
-            imgUrl = holder.article.getMultimedia().get(0).getUrl();
             holder.showArticleImg(imgUrl, this.glide);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
@@ -69,7 +68,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         do {
             Multimedium temporyMultimedium = article.getMultimedia().get(i);
             if (temporyMultimedium.getFormat().equals("Standard Thumbnail")) {
-                imgUrl = "https://static01.nyt.com/" + article.getMultimedia().get(i).getUrl();
+                imgUrl = article.getMultimedia().get(i).getUrl();
                 imgFound = true;
             }
             i++;
