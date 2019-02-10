@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.MediaMetadatum;
 
@@ -23,6 +22,7 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
     private final List<Article> articles;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
+    private String imgUrl;
 
     public MostPopularRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
@@ -43,7 +43,7 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
         if (holder.article.getMedia().get(0).getMediaMetadata().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
-            String imgUrl = holder.article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
+            findUrlOfImgArticle(holder.article);
             holder.showArticleImg(imgUrl, this.glide);
         }
         holder.articleSectionSubsection.setText(holder.article.getSection());
@@ -60,6 +60,19 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
                 }
             }
         });
+    }
+
+    private void findUrlOfImgArticle(Article article) {
+        boolean imgFound = false;
+        int i = 0;
+        do {
+            MediaMetadatum temporyMediaMetadatum = article.getMedia().get(0).getMediaMetadata().get(i);
+            if (temporyMediaMetadatum.getFormat().equals("Standard Thumbnail")) {
+                imgUrl = article.getMedia().get(0).getMediaMetadata().get(i).getUrl();
+                imgFound = true;
+            }
+            i++;
+        } while (!imgFound);
     }
 
     private String getDateWhitNewFormat(Article article) {

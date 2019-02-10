@@ -12,6 +12,9 @@ public class MediaMetadatum {
     @SerializedName("url")
     @Expose
     private String url;
+    @SerializedName("format")
+    @Expose
+    private String format;
 
     public String getUrl() {
         return url;
@@ -19,5 +22,13 @@ public class MediaMetadatum {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
     }
 }
