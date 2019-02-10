@@ -40,7 +40,6 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.article = articles.get(position);
-        holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 
@@ -23,6 +22,7 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
     private final List<Article> articles;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
     private RequestManager glide;
+    private String imgUrl;
 
     public TopStoriesRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
@@ -43,7 +43,8 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
         if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
-            String imgUrl = holder.article.getMultimedia().get(0).getUrl();
+            findUrlOfImgArticle(holder.article);
+            imgUrl = holder.article.getMultimedia().get(0).getUrl();
             holder.showArticleImg(imgUrl, this.glide);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
@@ -60,6 +61,19 @@ public class TopStoriesRecyclerViewAdapter extends RecyclerView.Adapter<TopStori
                 }
             }
         });
+    }
+
+    private void findUrlOfImgArticle(Article article) {
+        boolean imgFound = false;
+        int i = 0;
+        do {
+            Multimedium temporyMultimedium = article.getMultimedia().get(i);
+            if (temporyMultimedium.getFormat().equals("Standard Thumbnail")) {
+                imgUrl = "https://static01.nyt.com/" + article.getMultimedia().get(i).getUrl();
+                imgFound = true;
+            }
+            i++;
+        } while (!imgFound);
     }
 
     private String getSectionAndSubsection(Article article) {
