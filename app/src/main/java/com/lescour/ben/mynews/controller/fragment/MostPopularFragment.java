@@ -6,6 +6,7 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
+import com.lescour.ben.mynews.view.MostPopularRecyclerViewAdapter;
 
 import io.reactivex.observers.DisposableObserver;
 

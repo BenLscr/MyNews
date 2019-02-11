@@ -1,10 +1,10 @@
-package com.lescour.ben.mynews.controller.fragment;
+package com.lescour.ben.mynews.view;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.MediaMetadatum;
-import com.lescour.ben.mynews.view.ViewHolder;
 
 import java.util.List;
 

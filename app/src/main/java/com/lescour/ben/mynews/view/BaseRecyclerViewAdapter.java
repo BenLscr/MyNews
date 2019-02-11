@@ -1,4 +1,4 @@
-package com.lescour.ben.mynews.controller.fragment;
+package com.lescour.ben.mynews.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.view.ViewHolder;
 
