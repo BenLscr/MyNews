@@ -3,21 +3,18 @@ package com.lescour.ben.mynews.controller.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.MediaMetadatum;
+import com.lescour.ben.mynews.view.ViewHolder;
 
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPopularRecyclerViewAdapter.ViewHolder> {
+public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private final List<Article> articles;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
@@ -44,7 +41,7 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
             findUrlOfImgArticle(holder.article);
-            holder.showArticleImg(imgUrl, this.glide);
+            glide.load(imgUrl).into(holder.articleImg);
         }
         holder.articleSectionSubsection.setText(holder.article.getSection());
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
@@ -88,27 +85,4 @@ public class MostPopularRecyclerViewAdapter extends RecyclerView.Adapter<MostPop
         return articles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        @BindView(R.id.img_article) ImageView articleImg;
-        @BindView(R.id.article_sectionSubsection) TextView articleSectionSubsection;
-        @BindView(R.id.article_date) TextView articleDate;
-        @BindView(R.id.article_title) TextView articleTitle;
-        public Article article;
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            ButterKnife.bind(this, view);
-        }
-
-        public void showArticleImg(String imgUrl, RequestManager glide) {
-            glide.load(imgUrl).into(articleImg);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + articleDate.getText() + "'";
-        }
-    }
 }

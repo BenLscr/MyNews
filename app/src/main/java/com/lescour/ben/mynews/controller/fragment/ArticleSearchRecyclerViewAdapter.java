@@ -3,21 +3,18 @@ package com.lescour.ben.mynews.controller.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
+import com.lescour.ben.mynews.view.ViewHolder;
 
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ArticleSearchRecyclerViewAdapter.ViewHolder> {
+public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private final List<Article> articles;
     private final BaseFragment.OnListFragmentInteractionListener mListener;
@@ -44,11 +41,11 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
             findUrlOfImgArticle(holder.article);
-            holder.showArticleImg(imgUrl, this.glide);
+            glide.load(imgUrl).into(holder.articleImg);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
         holder.articleDate.setText(getDateWhitNewFormat(holder.article));
-        holder.articleDescription.setText(holder.article.getHeadline().getMain());
+        holder.articleTitle.setText(holder.article.getHeadline().getMain());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,29 +93,5 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<Artic
     @Override
     public int getItemCount() {
         return articles.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        @BindView(R.id.img_article) ImageView articleImg;
-        @BindView(R.id.article_sectionSubsection) TextView articleSectionSubsection;
-        @BindView(R.id.article_date) TextView articleDate;
-        @BindView(R.id.article_title) TextView articleDescription;
-        public Article article;
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            ButterKnife.bind(this, view);
-        }
-
-        public void showArticleImg(String imgUrl, RequestManager glide) {
-            glide.load(imgUrl).into(articleImg);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + articleDate.getText() + "'";
-        }
     }
 }
