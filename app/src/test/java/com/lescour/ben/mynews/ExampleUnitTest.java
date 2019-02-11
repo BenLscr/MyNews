@@ -20,6 +20,14 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
+    /**
+     * rawDate is different for every API
+     * example :
+     * Search Article : 2019-02-11T11:26:01+0000
+     * Most Popular : 2019-02-05
+     * Top Stories : 2019-02-10T12:00:43-05:00
+     * but always starts with a same format "yyyy-MM-dd"
+     */
     @Test
     public void rawDateOfArticle_IsCorrectlyTransform() {
         BaseRecyclerViewAdapter recyclerViewAdapter = new BaseRecyclerViewAdapter() {
