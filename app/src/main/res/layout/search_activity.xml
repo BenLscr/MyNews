@@ -5,108 +5,63 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/toolbar"
+        layout="@layout/fragment_custom_search_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </include>
-    
-    <EditText
-        android:id="@+id/search_query_term"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:hint="@string/search_query_term"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:textSize="22sp"/>
-    
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:orientation="vertical"
         android:layout_marginTop="20dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginEnd="40dp">
-            <TextView
+            android:layout_marginBottom="10dp">
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/begin_date"/>
-            <TextView
-                android:id="@+id/select_begin_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/select_a_date"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"/>
-            <CheckBox
-                android:id="@+id/checkbox_arts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/arts"
-                android:onClick="checkCheckBox"
-                android:padding="15dp" />
-            <CheckBox
-                android:id="@+id/checkbox_business"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/business"
-                android:onClick="checkCheckBox"
-                android:padding="15dp"/>
-            <CheckBox
-                android:id="@+id/checkbox_entrepreneurs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/entrepreneurs"
-                android:onClick="checkCheckBox"
-                android:padding="15dp"/>
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/begin_date"/>
+                <TextView
+                    android:id="@+id/select_begin_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_a_date"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/end_date"/>
+                <TextView
+                    android:id="@+id/select_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_a_date"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
+        <include
+            layout="@layout/fragment_custom_search_categories"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end_date"/>
-            <TextView
-                android:id="@+id/select_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/select_a_date"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"/>
-            <CheckBox
-                android:id="@+id/checkbox_politics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/politics"
-                android:onClick="checkCheckBox"
-                android:padding="15dp" />
-            <CheckBox
-                android:id="@+id/checkbox_sports"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sports"
-                android:onClick="checkCheckBox"
-                android:padding="15dp"/>
-            <CheckBox
-                android:id="@+id/checkbox_travel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/travel"
-                android:onClick="checkCheckBox"
-                android:padding="15dp"/>
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            </include>
     </LinearLayout>
 
     <Button
