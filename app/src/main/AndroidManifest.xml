@@ -35,6 +35,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controller.SearchActivity" />
         </activity>
+        <activity android:name=".controller.NotificationsActivity"
+            android:label="Notifications"
+            android:parentActivityName="controller.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="controller.MainActivity" />
+        </activity>
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

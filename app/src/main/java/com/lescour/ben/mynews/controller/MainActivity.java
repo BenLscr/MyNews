@@ -59,11 +59,12 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_activity_main_search:
-                Intent myIntent = new Intent(MainActivity.this, SearchActivity.class);
-                this.startActivity(myIntent);
+                Intent searchActivityIntent = new Intent(MainActivity.this, SearchActivity.class);
+                this.startActivity(searchActivityIntent);
                 return true;
             case R.id.menu_activity_main_notifications:
-                Toast.makeText(this, "Bouton 'notifications' non assigné", Toast.LENGTH_LONG).show();
+                Intent notificationsActivityIntent = new Intent(MainActivity.this, NotificationsActivity.class);
+                this.startActivity(notificationsActivityIntent);
                 return true;
             case R.id.menu_activity_main_help:
                 Toast.makeText(this, "Bouton 'help' non assigné", Toast.LENGTH_LONG).show();
