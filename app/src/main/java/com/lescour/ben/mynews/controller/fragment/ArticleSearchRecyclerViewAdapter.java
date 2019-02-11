@@ -1,9 +1,5 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.Article;
@@ -12,13 +8,8 @@ import com.lescour.ben.mynews.view.ViewHolder;
 
 import java.util.List;
 
-import androidx.recyclerview.widget.RecyclerView;
+public class ArticleSearchRecyclerViewAdapter extends BaseRecyclerViewAdapter {
 
-public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
-
-    private final List<Article> articles;
-    private final BaseFragment.OnListFragmentInteractionListener mListener;
-    private RequestManager glide;
     private String imgUrl;
 
     public ArticleSearchRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
@@ -28,15 +19,7 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_article, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.article = articles.get(position);
+    protected void updateWithArticle(Article article, RequestManager glide, ViewHolder holder) {
         if (holder.article.getMultimedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
         } else {
@@ -44,19 +27,7 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
             glide.load(imgUrl).into(holder.articleImg);
         }
         holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
-        holder.articleDate.setText(getDateWhitNewFormat(holder.article));
         holder.articleTitle.setText(holder.article.getHeadline().getMain());
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.article);
-                }
-            }
-        });
     }
 
     private void findUrlOfImgArticle(Article article) {
@@ -82,16 +53,8 @@ public class ArticleSearchRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
         return str;
     }
 
-    private String getDateWhitNewFormat(Article article) {
-        String rawDate = article.getPubDate();
-        String year = rawDate.substring(0,4);
-        String month = rawDate.substring(5,7);
-        String day = rawDate.substring(8,10);
-        return day + "/" + month + "/" + year;
-    }
-
     @Override
-    public int getItemCount() {
-        return articles.size();
+    protected String getRawDate(Article article) {
+        return article.getPubDate();
     }
 }
