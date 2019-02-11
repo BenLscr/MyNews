@@ -7,6 +7,9 @@
     android:background="@color/myColorPrimary"
     app:titleTextColor="@android:color/white"
 
+    android:paddingEnd="10dp"
+    android:paddingStart="0dp"
+
     android:theme="@style/ToolbarTheme"
     app:titleTextAppearance="@style/Toolbar.TitleText"
     app:popupTheme="@style/Toolbar.Popup">
