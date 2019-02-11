@@ -8,7 +8,6 @@ import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
-import com.lescour.ben.mynews.view.ViewHolder;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
         });
     }
 
-    private String getDateWhitNewFormat(String rawDate) {
+    public String getDateWhitNewFormat(String rawDate) {
         String year = rawDate.substring(0,4);
         String month = rawDate.substring(5,7);
         String day = rawDate.substring(8,10);
