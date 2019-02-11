@@ -9,7 +9,11 @@ import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,10 +56,16 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
     }
 
     public String getDateWhitNewFormat(String rawDate) {
-        String year = rawDate.substring(0,4);
-        String month = rawDate.substring(5,7);
-        String day = rawDate.substring(8,10);
-        return day + "/" + month + "/" + year;
+        SimpleDateFormat rawFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String dateWithNewFormat = null;
+        try {
+            Date date = rawFormat.parse(rawDate);
+            dateWithNewFormat = newFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateWithNewFormat;
     }
 
     @Override
