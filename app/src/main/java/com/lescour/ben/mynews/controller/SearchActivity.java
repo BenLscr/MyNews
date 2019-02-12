@@ -33,9 +33,8 @@ import butterknife.OnClick;
 /**
  * Created by benja on 04/02/2019.
  */
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseCustomSearchAndCategories {
 
-    @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
     @BindView(R.id.search_query_term) EditText editText;
     @BindView(R.id.select_begin_date) TextView selectBeginDate;
     @BindView(R.id.select_end_date) TextView selectEndDate;
@@ -108,19 +107,6 @@ public class SearchActivity extends AppCompatActivity {
         year = calendar.get(calendar.YEAR);
         month = calendar.get(calendar.MONTH);
         day = calendar.get(calendar.DAY_OF_MONTH);
-    }
-
-//////////    Toolbar   //////////
-    private void configureToolbar() {
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
 //////////    BeginDate   //////////
