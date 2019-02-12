@@ -43,6 +43,10 @@
                 android:value="controller.MainActivity" />
         </activity>
 
+        <receiver
+            android:name=".utils.AlarmReceiver"
+            android:exported="true"/>
+
         <uses-library android:name="android.test.runner"
             android:required="false" />
     </application>
