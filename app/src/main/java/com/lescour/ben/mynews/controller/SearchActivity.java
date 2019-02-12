@@ -6,10 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,9 +21,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,12 +33,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     @BindView(R.id.search_query_term) EditText editText;
     @BindView(R.id.select_begin_date) TextView selectBeginDate;
     @BindView(R.id.select_end_date) TextView selectEndDate;
-    @BindView(R.id.checkbox_arts) CheckBox checkBoxArts;
-    @BindView(R.id.checkbox_business) CheckBox checkBoxBusiness;
-    @BindView(R.id.checkbox_entrepreneurs) CheckBox checkBoxEntrepreneurs;
-    @BindView(R.id.checkbox_politics) CheckBox checkBoxPolitics;
-    @BindView(R.id.checkbox_sports) CheckBox checkBoxSports;
-    @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
     @BindView(R.id.launch_search_button) Button launchSearchButton;
     private DatePickerDialog.OnDateSetListener beginDateSetListener, endDateSetListener;
     private Calendar calendar;
@@ -52,8 +41,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     private DatePickerDialog datePickerDialog;
     private String beginDateToShow, endDateToShow;
     private String beginDateForUrl, endDateForUrl;
-    private String arts, business, entrepreneurs, politics, sports, travel;
-    private StringBuilder compactCategoriesBuilder;
     private String filter_query;
     public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
     public static final String BUNDLE_EXTRA_BEGIN_DATE = "BUNDLE_EXTRA_BEGIN_DATE";
@@ -195,55 +182,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         endDateForUrl = urlFormat.format(calendar.getTime());
     }
 
-//////////    CheckBox   //////////
-
-    public void checkCheckBox(View checkBox) {
-        switch (checkBox.getId()){
-            case R.id.checkbox_arts :
-                if (checkBoxArts.isChecked()) {
-                    arts = "\"arts\"";
-                } else {
-                    arts = null;
-                }
-                break;
-            case R.id.checkbox_business :
-                if (checkBoxBusiness.isChecked()) {
-                    business = "\"business\"";
-                } else {
-                    business = null;
-                }
-                break;
-            case R.id.checkbox_entrepreneurs :
-                if (checkBoxEntrepreneurs.isChecked()) {
-                    entrepreneurs = "\"entrepreneurs\"";
-                } else {
-                    entrepreneurs = null;
-                }
-                break;
-            case R.id.checkbox_politics :
-                if (checkBoxPolitics.isChecked()) {
-                    politics = "\"politics\"";
-                } else {
-                    politics = null;
-                }
-                break;
-            case R.id.checkbox_sports :
-                if (checkBoxSports.isChecked()) {
-                    sports = "\"sports\"";
-                } else {
-                    sports = null;
-                }
-                break;
-            case R.id.checkbox_travel :
-                if (checkBoxTravel.isChecked()) {
-                    travel = "\"travel\"";
-                } else {
-                    travel = null;
-                }
-                break;
-        }
-    }
-
 //////////    Search   //////////
 
     @OnClick(R.id.launch_search_button)
@@ -266,30 +204,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
             Toast.makeText(this, "Please choose a categories.", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Please enter a query and choose a categories.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void buildCompactCategoriesBuilder() {
-        compactCategoriesBuilder = new StringBuilder();
-        if (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null) {
-            if (arts != null) {
-                compactCategoriesBuilder.append(arts);
-            }
-            if (business != null) {
-                compactCategoriesBuilder.append(business);
-            }
-            if (entrepreneurs != null) {
-                compactCategoriesBuilder.append(entrepreneurs);
-            }
-            if (politics != null) {
-                compactCategoriesBuilder.append(politics);
-            }
-            if (sports != null) {
-                compactCategoriesBuilder.append(sports);
-            }
-            if (travel != null) {
-                compactCategoriesBuilder.append(travel);
-            }
         }
     }
 }
