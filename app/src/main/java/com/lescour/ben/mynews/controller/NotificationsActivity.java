@@ -57,14 +57,15 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         });
     }
 
-    private void configureAlarmManager(){
+    private void configureAlarmManager() {
         String query = editText.getText().toString();
         this.buildCompactCategoriesBuilder();
         if (!query.equals("") && compactCategoriesBuilder.length() > 0) {
             Intent alarmIntent = new Intent(NotificationsActivity.this, AlarmReceiver.class);
-            filter_query = "news_desk:(" + compactCategoriesBuilder + ")";
             alarmIntent.putExtra(BUNDLE_EXTRA_QUERY, query);
+            filter_query = "news_desk:(" + compactCategoriesBuilder + ")";
             alarmIntent.putExtra(BUNDLE_EXTRA_FILTER_QUERY, filter_query);
+            sendBroadcast(alarmIntent);
             pendingIntent = PendingIntent.getBroadcast(NotificationsActivity.this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             startAlarm();
         }

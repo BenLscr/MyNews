@@ -27,8 +27,8 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     protected String arts, business, entrepreneurs, politics, sports, travel;
     protected StringBuilder compactCategoriesBuilder;
     protected String filter_query;
-    protected static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
-    protected static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
+    public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
+    public static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
 
 //////////    Toolbar   //////////
 
