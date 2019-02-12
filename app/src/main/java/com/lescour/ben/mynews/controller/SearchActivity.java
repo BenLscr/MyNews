@@ -197,9 +197,9 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
             Toast.makeText(this, "Please enter a query.", Toast.LENGTH_LONG).show();
         }
         else if (!query.equals("") && compactCategoriesBuilder.length() == 0) {
-            Toast.makeText(this, "Please choose a categories.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please choose at least one category.", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Please enter a query and choose a categories.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter a query and choose at least one category.", Toast.LENGTH_LONG).show();
         }
     }
 }
