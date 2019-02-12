@@ -2,6 +2,7 @@ package com.lescour.ben.mynews.controller;
 
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.lescour.ben.mynews.R;
 
@@ -16,6 +17,7 @@ import butterknife.BindView;
 public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
 
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
+    @BindView(R.id.search_query_term) EditText editText;
     @BindView(R.id.checkbox_arts) CheckBox checkBoxArts;
     @BindView(R.id.checkbox_business) CheckBox checkBoxBusiness;
     @BindView(R.id.checkbox_entrepreneurs) CheckBox checkBoxEntrepreneurs;
@@ -24,6 +26,9 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
     protected String arts, business, entrepreneurs, politics, sports, travel;
     protected StringBuilder compactCategoriesBuilder;
+    protected String filter_query;
+    protected static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
+    protected static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
 
 //////////    Toolbar   //////////
 

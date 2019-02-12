@@ -30,7 +30,6 @@ import butterknife.OnClick;
  */
 public class SearchActivity extends BaseCustomSearchAndCategories {
 
-    @BindView(R.id.search_query_term) EditText editText;
     @BindView(R.id.select_begin_date) TextView selectBeginDate;
     @BindView(R.id.select_end_date) TextView selectEndDate;
     @BindView(R.id.launch_search_button) Button launchSearchButton;
@@ -41,11 +40,8 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     private DatePickerDialog datePickerDialog;
     private String beginDateToShow, endDateToShow;
     private String beginDateForUrl, endDateForUrl;
-    private String filter_query;
-    public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
     public static final String BUNDLE_EXTRA_BEGIN_DATE = "BUNDLE_EXTRA_BEGIN_DATE";
     public static final String BUNDLE_EXTRA_END_DATE = "BUNDLE_EXTRA_END_DATE";
-    public static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
 
 
     @Override
