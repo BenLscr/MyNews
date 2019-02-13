@@ -1,16 +1,23 @@
 package com.lescour.ben.mynews.utils;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.MainActivity;
+import com.lescour.ben.mynews.controller.NotificationsActivity;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import androidx.core.app.NotificationCompat;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
@@ -29,11 +36,15 @@ public class AlarmReceiver extends BroadcastReceiver {
     private String query;
     private String filter_query;
     private String apiKey = "4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6";
+    private boolean articles = false;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         this.setParams(intent);
         this.executeHttpRequestWithRetrofit();
+        if (!articles) {
+            this.showNotification(context);
+        }
     }
 
     private void setParams(Intent intent) {
@@ -51,9 +62,10 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
                 if (theNewYorkTimesResponse.getResponse().getArticles() != null) {
-                    Log.e("BroadcastReceiver", "Des articles ont été trouvés");
+                    Log.e("BroadcastReceiver", "Articles found");
+                    articles = true;
                 } else {
-                    Log.e("BroadcastReceiver", "Rien n'a été trouvés");
+                    Log.e("BroadcastReceiver", "No articles found");
                 }
             }
 
@@ -67,5 +79,22 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Log.e("TAG", "On Complete !!");
             }
         });
+    }
+
+    private void showNotification(Context context) {
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                new Intent(context, MainActivity.class), 0);
+
+        Notification notification = new Notification.Builder(context)
+                .setContentText("New articles of interest to you have been found.")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentIntent(contentIntent)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(1, notification);
     }
 }
