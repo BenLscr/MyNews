@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements
                 this.startActivity(helpActivityIntent);
                 return true;
             case R.id.menu_activity_main_about:
-                Toast.makeText(this, "Bouton 'about' non assigné", Toast.LENGTH_LONG).show();
+                Intent aboutActivityIntent = new Intent(MainActivity.this, AboutActivity.class);
+                this.startActivity(aboutActivityIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
