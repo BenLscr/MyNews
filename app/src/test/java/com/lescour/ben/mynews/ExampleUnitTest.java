@@ -69,7 +69,7 @@ public class ExampleUnitTest {
         String politics = null;
         String sports = null;
         String travel = "\"travel\"";
-        assertEquals(arts + travel, baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
+        assertEquals("news_desk:(" + arts + travel + ")", baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
     }
 }
 
