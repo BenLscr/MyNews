@@ -2,10 +2,13 @@ package com.lescour.ben.mynews;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.utils.AlarmReceiver;
 import com.lescour.ben.mynews.view.BaseRecyclerViewAdapter;
 import com.lescour.ben.mynews.view.ViewHolder;
 
 import org.junit.Test;
+
+import java.util.Calendar;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -43,6 +46,15 @@ public class ExampleUnitTest {
         };
 
         assertEquals("10/02/2019", recyclerViewAdapter.getDateWhitNewFormat("2019-02-10T12:00:43-05:00"));
+    }
+
+    @Test
+    public void beginDateNeedYesterday() {
+        AlarmReceiver alarmReceiver = new AlarmReceiver();
+
+        Calendar calendar = Calendar.getInstance();
+
+        assertEquals("20190212", alarmReceiver.setYesterdayToBeginDate(calendar));
     }
 }
 
