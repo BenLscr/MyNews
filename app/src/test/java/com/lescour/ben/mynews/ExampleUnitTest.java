@@ -59,7 +59,7 @@ public class ExampleUnitTest {
         assertEquals("20190212", alarmReceiver.setYesterdayToBeginDate(calendar));
     }
 
-    @Test
+    /**@Test
     public void checkCategoriesBuilder() {
         BaseCustomSearchAndCategories baseCustomSearchAndCategories = new BaseCustomSearchAndCategories() {
         };
@@ -69,8 +69,11 @@ public class ExampleUnitTest {
         String politics = null;
         String sports = null;
         String travel = "\"travel\"";
-        assertEquals("news_desk:(" + arts + travel + ")", baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
-    }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(arts).append(travel);
+        assertEquals(stringBuilder, baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
+    }*/
 }
 
 
