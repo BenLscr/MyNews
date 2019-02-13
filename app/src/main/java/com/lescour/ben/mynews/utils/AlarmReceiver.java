@@ -51,9 +51,13 @@ public class AlarmReceiver extends BroadcastReceiver {
         query = intent.getStringExtra(BUNDLE_EXTRA_QUERY);
         filter_query = intent.getStringExtra(BUNDLE_EXTRA_FILTER_QUERY);
         Calendar calendar = Calendar.getInstance();
+        begin_date = setYesterdayToBeginDate(calendar);
+    }
+
+    public String setYesterdayToBeginDate(Calendar calendar) {
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-        begin_date = format.format(calendar.getTime());
+        return format.format(calendar.getTime());
     }
 
     private void executeHttpRequestWithRetrofit() {
