@@ -1,6 +1,7 @@
 package com.lescour.ben.mynews;
 
 import com.bumptech.glide.RequestManager;
+import com.lescour.ben.mynews.controller.BaseCustomSearchAndCategories;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.utils.AlarmReceiver;
 import com.lescour.ben.mynews.view.BaseRecyclerViewAdapter;
@@ -8,6 +9,7 @@ import com.lescour.ben.mynews.view.ViewHolder;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static junit.framework.Assert.assertEquals;
@@ -55,6 +57,19 @@ public class ExampleUnitTest {
         Calendar calendar = Calendar.getInstance();
 
         assertEquals("20190212", alarmReceiver.setYesterdayToBeginDate(calendar));
+    }
+
+    @Test
+    public void checkCategoriesBuilder() {
+        BaseCustomSearchAndCategories baseCustomSearchAndCategories = new BaseCustomSearchAndCategories() {
+        };
+        String arts = "\"arts\"";
+        String business = null;
+        String entrepreneurs = null;
+        String politics = null;
+        String sports = null;
+        String travel = "\"travel\"";
+        assertEquals(arts + travel, baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
     }
 }
 
