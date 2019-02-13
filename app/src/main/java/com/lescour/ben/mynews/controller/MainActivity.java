@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements
                 this.startActivity(notificationsActivityIntent);
                 return true;
             case R.id.menu_activity_main_help:
-                Toast.makeText(this, "Bouton 'help' non assigné", Toast.LENGTH_LONG).show();
+                Intent helpActivityIntent = new Intent(MainActivity.this, HelpActivity.class);
+                this.startActivity(helpActivityIntent);
                 return true;
             case R.id.menu_activity_main_about:
                 Toast.makeText(this, "Bouton 'about' non assigné", Toast.LENGTH_LONG).show();

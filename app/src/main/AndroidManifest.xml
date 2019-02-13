@@ -42,6 +42,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="controller.MainActivity" />
         </activity>
+        <activity android:name=".controller.HelpActivity"
+            android:label="Help"
+            android:parentActivityName="controller.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="controller.MainActivity" />
+        </activity>
 
         <receiver
             android:name=".utils.AlarmReceiver"
