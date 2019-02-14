@@ -24,8 +24,9 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     @BindView(R.id.checkbox_politics) CheckBox checkBoxPolitics;
     @BindView(R.id.checkbox_sports) CheckBox checkBoxSports;
     @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
+    protected String query;
     protected String arts, business, entrepreneurs, politics, sports, travel;
-    protected StringBuilder compactCategoriesBuilder;
+    protected String compactCategoriesBuilder;
     protected String filter_query;
     public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
     public static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
@@ -93,27 +94,28 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
         }
     }
 
-    protected void buildCompactCategoriesBuilder() {
-        compactCategoriesBuilder = new StringBuilder();
+    public StringBuilder  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
+        StringBuilder stringBuilder = new StringBuilder();
         if (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null) {
             if (arts != null) {
-                compactCategoriesBuilder.append(arts);
+                stringBuilder.append(arts);
             }
             if (business != null) {
-                compactCategoriesBuilder.append(business);
+                stringBuilder.append(business);
             }
             if (entrepreneurs != null) {
-                compactCategoriesBuilder.append(entrepreneurs);
+                stringBuilder.append(entrepreneurs);
             }
             if (politics != null) {
-                compactCategoriesBuilder.append(politics);
+                stringBuilder.append(politics);
             }
             if (sports != null) {
-                compactCategoriesBuilder.append(sports);
+                stringBuilder.append(sports);
             }
             if (travel != null) {
-                compactCategoriesBuilder.append(travel);
+                stringBuilder.append(travel);
             }
         }
+        return stringBuilder;
     }
 }

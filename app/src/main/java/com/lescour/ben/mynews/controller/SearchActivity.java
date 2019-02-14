@@ -9,11 +9,11 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.model.UrlSplit;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,6 +42,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     private String beginDateForUrl, endDateForUrl;
     public static final String BUNDLE_EXTRA_BEGIN_DATE = "BUNDLE_EXTRA_BEGIN_DATE";
     public static final String BUNDLE_EXTRA_END_DATE = "BUNDLE_EXTRA_END_DATE";
+    private UrlSplit mUrlSplit;
 
 
     @Override
@@ -50,6 +51,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         setContentView(R.layout.search_activity);
         ButterKnife.bind(this);
         this.configureToolbar();
+        mUrlSplit = new UrlSplit();
         this.initCalendar();
 
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -132,7 +134,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         selectBeginDate.setText(beginDateToShow);
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
-        beginDateForUrl = urlFormat.format(calendar.getTime());
+        mUrlSplit.setBeginDateForUrl(urlFormat.format(calendar.getTime()));
     }
 
 //////////    EndDate   //////////
@@ -175,28 +177,25 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         selectEndDate.setText(endDateToShow);
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
-        endDateForUrl = urlFormat.format(calendar.getTime());
+        mUrlSplit.setEndDateForUrl(urlFormat.format(calendar.getTime()));
     }
 
 //////////    Search   //////////
 
     @OnClick(R.id.launch_search_button)
     public void launchPersonaliseSearch() {
-        String query = editText.getText().toString();
-        this.buildCompactCategoriesBuilder();
-        if (!query.equals("") && compactCategoriesBuilder.length() > 0) {
-            filter_query = "news_desk:(" + compactCategoriesBuilder + ")";
+        mUrlSplit.setQuery(editText.getText().toString());
+        compactCategoriesBuilder = "" + buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+        if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
+            mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
             Intent customActivity = new Intent(this, CustomActivity.class);
-            customActivity.putExtra(BUNDLE_EXTRA_BEGIN_DATE, beginDateForUrl);
-            customActivity.putExtra(BUNDLE_EXTRA_END_DATE, endDateForUrl);
-            customActivity.putExtra(BUNDLE_EXTRA_QUERY, query);
-            customActivity.putExtra(BUNDLE_EXTRA_FILTER_QUERY, filter_query);
+            customActivity.putExtra("SearchToCustom", mUrlSplit);
             this.startActivity(customActivity);
         }
-        else if (query.equals("") &&  compactCategoriesBuilder.length() > 0) {
+        else if (mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             Toast.makeText(this, "Please enter a query.", Toast.LENGTH_LONG).show();
         }
-        else if (!query.equals("") && compactCategoriesBuilder.length() == 0) {
+        else if (!mUrlSplit.getQuery().equals("") && compactCategoriesBuilder.equals("")) {
             Toast.makeText(this, "Please choose at least one category.", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Please enter a query and choose at least one category.", Toast.LENGTH_LONG).show();

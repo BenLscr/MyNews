@@ -1,13 +1,24 @@
 package com.lescour.ben.mynews.controller.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.model.UrlSplit;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 import com.lescour.ben.mynews.view.ArticleSearchRecyclerViewAdapter;
 
+import java.util.ArrayList;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -18,10 +29,7 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class ArticleSearchFragment extends BaseFragment {
 
-    private String begin_date;
-    private String end_date;
-    private String query = "science";
-    private String filter_query;
+    private UrlSplit mUrlSplit;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -38,6 +46,41 @@ public class ArticleSearchFragment extends BaseFragment {
         return fragment;
     }
 
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
+
+        this.articles = new ArrayList<>();
+
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+            recyclerView = (RecyclerView) view;
+            if (mColumnCount <= 1) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            this.setAppropriateAdapter();
+        }
+
+        Bundle bundle = getArguments();
+        if (bundle.containsKey("CustomToArticleSearchFragment")) {
+            mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
+            Log.e("bundle", "il y a un bundle" + mUrlSplit.getQuery());
+        } else {
+            mUrlSplit = new UrlSplit();
+            Log.e("bundle", "il n'y a pas de bundle");
+        }
+
+        this.executeHttpRequestWithRetrofit();
+
+        return view;
+    }
+
     @Override
     protected void setAppropriateAdapter() {
         this.mRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
@@ -52,7 +95,9 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(begin_date, end_date, filter_query, query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDateForUrl(),
+                mUrlSplit.getEndDateForUrl(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
+                mUrlSplit.getSort(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
@@ -70,21 +115,4 @@ public class ArticleSearchFragment extends BaseFragment {
             }
         });
     }
-
-    public void setBegin_date(String begin_date) {
-        this.begin_date = begin_date;
-    }
-
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
-    }
-
-    public void setQuery(String query) {
-        this.query = query;
-    }
-
-    public void setFilter_query(String filter_query) {
-        this.filter_query = filter_query;
-    }
-
 }

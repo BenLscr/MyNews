@@ -7,8 +7,8 @@ import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.ArticleSearchFragment;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.model.UrlSplit;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,10 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.lescour.ben.mynews.controller.MainActivity.BUNDLE_EXTRA_URL;
-import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_BEGIN_DATE;
-import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_END_DATE;
-import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_FILTER_QUERY;
-import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_QUERY;
 
 /**
  * Created by benja on 05/02/2019.
@@ -29,16 +25,16 @@ import static com.lescour.ben.mynews.controller.SearchActivity.BUNDLE_EXTRA_QUER
 public class CustomActivity extends AppCompatActivity implements BaseFragment.OnListFragmentInteractionListener {
 
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
-    private ArticleSearchFragment articleSearchFragment;
+    private UrlSplit mUrlSplit;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_activity);
         ButterKnife.bind(this);
         this.configureToolbar();
+        this.checkIfIntentAnIntentIsAvailable();
         this.addFragment();
-
     }
 
     private void configureToolbar() {
@@ -47,21 +43,25 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
+    private void checkIfIntentAnIntentIsAvailable(){
+        Intent intent = getIntent();
+        if (intent != null) {
+            mUrlSplit = intent.getParcelableExtra("SearchToCustom");
+        } else {
+            mUrlSplit = new UrlSplit();
+        }
+    }
+
     private void addFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        articleSearchFragment = ArticleSearchFragment.newInstance(1);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("CustomToArticleSearchFragment", mUrlSplit);
+        ArticleSearchFragment articleSearchFragment = ArticleSearchFragment.newInstance(1);
         fragmentTransaction.add(R.id.custom_list_container, articleSearchFragment);
         fragmentTransaction.commit();
+        articleSearchFragment.setArguments(bundle);
 
-        this.setTheCustomRequest();
-    }
-
-    private void setTheCustomRequest(){
-        articleSearchFragment.setQuery(getIntent().getStringExtra(BUNDLE_EXTRA_QUERY));
-        articleSearchFragment.setBegin_date(getIntent().getStringExtra(BUNDLE_EXTRA_BEGIN_DATE));
-        articleSearchFragment.setEnd_date(getIntent().getStringExtra(BUNDLE_EXTRA_END_DATE));
-        articleSearchFragment.setFilter_query(getIntent().getStringExtra(BUNDLE_EXTRA_FILTER_QUERY));
     }
 
     @Override
