@@ -10,19 +10,15 @@ import android.util.Log;
 
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.MainActivity;
-import com.lescour.ben.mynews.controller.NotificationsActivity;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
+import com.lescour.ben.mynews.model.UrlSplit;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import androidx.core.app.NotificationCompat;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
-
-import static com.lescour.ben.mynews.controller.BaseCustomSearchAndCategories.BUNDLE_EXTRA_FILTER_QUERY;
-import static com.lescour.ben.mynews.controller.BaseCustomSearchAndCategories.BUNDLE_EXTRA_QUERY;
 
 
 /**
@@ -31,11 +27,7 @@ import static com.lescour.ben.mynews.controller.BaseCustomSearchAndCategories.BU
 public class AlarmReceiver extends BroadcastReceiver {
 
     protected Disposable disposable;
-    private String begin_date;
-    private String end_date;
-    private String query;
-    private String filter_query;
-    private String apiKey = "4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6";
+    private UrlSplit mUrlSplit;
     private boolean articles = false;
 
     @Override
@@ -48,10 +40,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void setParams(Intent intent) {
-        query = intent.getStringExtra(BUNDLE_EXTRA_QUERY);
-        filter_query = intent.getStringExtra(BUNDLE_EXTRA_FILTER_QUERY);
+        mUrlSplit = new UrlSplit();
+        if (intent != null) {
+            mUrlSplit = intent.getParcelableExtra("NotificationsToAlarm");
+        }
         Calendar calendar = Calendar.getInstance();
-        begin_date = setYesterdayToBeginDate(calendar);
+        mUrlSplit.setBeginDate(setYesterdayToBeginDate(calendar));
     }
 
     public String setYesterdayToBeginDate(Calendar calendar) {
@@ -61,7 +55,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void executeHttpRequestWithRetrofit() {
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(begin_date, end_date, filter_query, query, "newest", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDate(),
+                mUrlSplit.getEndDate(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
+                mUrlSplit.getSort(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");

@@ -8,10 +8,10 @@ import android.os.Parcelable;
  */
 public class UrlSplit implements Parcelable {
 
-    private String query = "science";
+    private String query;
     private String filter_query;
-    private String beginDateForUrl, endDateForUrl;
-    private String sort = "newest";
+    private String beginDate, endDate;
+    private String sort;
     private String apiKey = "4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6";
 
     public UrlSplit() {
@@ -20,8 +20,8 @@ public class UrlSplit implements Parcelable {
     protected UrlSplit(Parcel in) {
         query = in.readString();
         filter_query = in.readString();
-        beginDateForUrl = in.readString();
-        endDateForUrl = in.readString();
+        beginDate = in.readString();
+        endDate = in.readString();
         sort = in.readString();
         apiKey = in.readString();
     }
@@ -46,12 +46,12 @@ public class UrlSplit implements Parcelable {
         this.filter_query = filter_query;
     }
 
-    public void setBeginDateForUrl(String beginDateForUrl) {
-        this.beginDateForUrl = beginDateForUrl;
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public void setEndDateForUrl(String endDateForUrl) {
-        this.endDateForUrl = endDateForUrl;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public void setSort(String sort) {
@@ -70,12 +70,12 @@ public class UrlSplit implements Parcelable {
         return filter_query;
     }
 
-    public String getBeginDateForUrl() {
-        return beginDateForUrl;
+    public String getBeginDate() {
+        return beginDate;
     }
 
-    public String getEndDateForUrl() {
-        return endDateForUrl;
+    public String getEndDate() {
+        return endDate;
     }
 
     public String getSort() {
@@ -95,8 +95,8 @@ public class UrlSplit implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(query);
         dest.writeString(filter_query);
-        dest.writeString(beginDateForUrl);
-        dest.writeString(endDateForUrl);
+        dest.writeString(beginDate);
+        dest.writeString(endDate);
         dest.writeString(sort);
         dest.writeString(apiKey);
     }

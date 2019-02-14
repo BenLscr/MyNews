@@ -39,11 +39,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     private int year, month, day;
     private DatePickerDialog datePickerDialog;
     private String beginDateToShow, endDateToShow;
-    private String beginDateForUrl, endDateForUrl;
-    public static final String BUNDLE_EXTRA_BEGIN_DATE = "BUNDLE_EXTRA_BEGIN_DATE";
-    public static final String BUNDLE_EXTRA_END_DATE = "BUNDLE_EXTRA_END_DATE";
-    private UrlSplit mUrlSplit;
-
+    private String sort = "newest";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +130,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         selectBeginDate.setText(beginDateToShow);
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
-        mUrlSplit.setBeginDateForUrl(urlFormat.format(calendar.getTime()));
+        mUrlSplit.setBeginDate(urlFormat.format(calendar.getTime()));
     }
 
 //////////    EndDate   //////////
@@ -177,7 +173,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         selectEndDate.setText(endDateToShow);
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
-        mUrlSplit.setEndDateForUrl(urlFormat.format(calendar.getTime()));
+        mUrlSplit.setEndDate(urlFormat.format(calendar.getTime()));
     }
 
 //////////    Search   //////////
@@ -188,6 +184,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         compactCategoriesBuilder = "" + buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
+            mUrlSplit.setSort(sort);
             Intent customActivity = new Intent(this, CustomActivity.class);
             customActivity.putExtra("SearchToCustom", mUrlSplit);
             this.startActivity(customActivity);

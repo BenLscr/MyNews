@@ -5,6 +5,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.model.UrlSplit;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,12 +25,9 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     @BindView(R.id.checkbox_politics) CheckBox checkBoxPolitics;
     @BindView(R.id.checkbox_sports) CheckBox checkBoxSports;
     @BindView(R.id.checkbox_travel) CheckBox checkBoxTravel;
-    protected String query;
+    protected UrlSplit mUrlSplit;
     protected String arts, business, entrepreneurs, politics, sports, travel;
     protected String compactCategoriesBuilder;
-    protected String filter_query;
-    public static final String BUNDLE_EXTRA_QUERY = "BUNDLE_EXTRA_QUERY";
-    public static final String BUNDLE_EXTRA_FILTER_QUERY = "BUNDLE_EXTRA_FILTER_QUERY";
 
 //////////    Toolbar   //////////
 

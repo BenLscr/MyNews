@@ -30,6 +30,8 @@ import io.reactivex.observers.DisposableObserver;
 public class ArticleSearchFragment extends BaseFragment {
 
     private UrlSplit mUrlSplit;
+    private String query = "science";
+    private String sort = "newest";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -73,6 +75,8 @@ public class ArticleSearchFragment extends BaseFragment {
             Log.e("bundle", "il y a un bundle" + mUrlSplit.getQuery());
         } else {
             mUrlSplit = new UrlSplit();
+            mUrlSplit.setQuery(query);
+            mUrlSplit.setSort(sort);
             Log.e("bundle", "il n'y a pas de bundle");
         }
 
@@ -95,8 +99,8 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDateForUrl(),
-                mUrlSplit.getEndDateForUrl(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
+        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDate(),
+                mUrlSplit.getEndDate(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
                 mUrlSplit.getSort(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
