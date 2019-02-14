@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
+import com.lescour.ben.mynews.model.UrlSplit;
 import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 import com.lescour.ben.mynews.view.TopStoriesRecyclerViewAdapter;
 
@@ -17,6 +18,8 @@ import io.reactivex.observers.DisposableObserver;
  * interface.
  */
 public class TopStoriesFragment extends BaseFragment {
+
+    private String section = "home";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -34,14 +37,14 @@ public class TopStoriesFragment extends BaseFragment {
     }
 
     @Override
-    protected void setAppropriateAdapter() {
-        this.mRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
-        recyclerView.setAdapter(this.mRecyclerViewAdapter);
+    protected void setUrlSplit() {
+        mUrlSplit = new UrlSplit();
+        mUrlSplit.setSection(section);
     }
 
     @Override
     protected void executeHttpRequestWithRetrofit(){
-        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories("home", apiKey).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+        this.disposable = TheNewYorkTimesStreams.streamFetchTopStories(mUrlSplit.getSection(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
@@ -58,6 +61,12 @@ public class TopStoriesFragment extends BaseFragment {
                 Log.e("TAG", "On Complete !!");
             }
         });
+    }
+
+    @Override
+    protected void setAppropriateAdapter() {
+        this.mRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 
 }

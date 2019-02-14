@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
+import com.lescour.ben.mynews.model.UrlSplit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,12 @@ public abstract class BaseFragment extends Fragment {
     protected List<Article> articles;
     protected RecyclerView recyclerView;
     protected Disposable disposable;
-    protected String apiKey = "4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6";
     protected RecyclerView.Adapter mRecyclerViewAdapter;
+    protected UrlSplit mUrlSplit;
 
-    protected abstract void setAppropriateAdapter();
+    protected abstract void setUrlSplit();
     protected abstract void executeHttpRequestWithRetrofit();
-    /**protected abstract void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse);*/
+    protected abstract void setAppropriateAdapter();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public abstract class BaseFragment extends Fragment {
             this.setAppropriateAdapter();
         }
 
+        this.setUrlSplit();
         this.executeHttpRequestWithRetrofit();
 
         return view;

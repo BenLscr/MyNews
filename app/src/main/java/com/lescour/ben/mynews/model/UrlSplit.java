@@ -8,6 +8,8 @@ import android.os.Parcelable;
  */
 public class UrlSplit implements Parcelable {
 
+    private String period;
+    private String section;
     private String query;
     private String filter_query;
     private String beginDate, endDate;
@@ -38,6 +40,14 @@ public class UrlSplit implements Parcelable {
         }
     };
 
+    public void setPeriod(String period) {
+        this.period = period;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
     public void setQuery(String query) {
         this.query = query;
     }
@@ -60,6 +70,14 @@ public class UrlSplit implements Parcelable {
 
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public String getSection() {
+        return section;
     }
 
     public String getQuery() {

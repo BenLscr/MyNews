@@ -29,7 +29,6 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class ArticleSearchFragment extends BaseFragment {
 
-    private UrlSplit mUrlSplit;
     private String query = "science";
     private String sort = "newest";
 
@@ -50,7 +49,7 @@ public class ArticleSearchFragment extends BaseFragment {
 
 
 
-    @Override
+    /**@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
@@ -83,6 +82,20 @@ public class ArticleSearchFragment extends BaseFragment {
         this.executeHttpRequestWithRetrofit();
 
         return view;
+    }*/
+
+    @Override
+    protected void setUrlSplit() {
+        Bundle bundle = getArguments();
+        if (bundle.containsKey("CustomToArticleSearchFragment")) {
+            mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
+            Log.e("bundle", "il y a un bundle" + mUrlSplit.getQuery());
+        } else {
+            mUrlSplit = new UrlSplit();
+            mUrlSplit.setQuery(query);
+            mUrlSplit.setSort(sort);
+            Log.e("bundle", "il n'y a pas de bundle");
+        }
     }
 
     @Override
