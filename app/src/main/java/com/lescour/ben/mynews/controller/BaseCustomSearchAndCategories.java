@@ -92,7 +92,7 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
         }
     }
 
-    public StringBuilder  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
+    public String  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
         StringBuilder stringBuilder = new StringBuilder();
         if (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null) {
             if (arts != null) {
@@ -114,6 +114,6 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
                 stringBuilder.append(travel);
             }
         }
-        return stringBuilder;
+        return stringBuilder.toString();
     }
 }
