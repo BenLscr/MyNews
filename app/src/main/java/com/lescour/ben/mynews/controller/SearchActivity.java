@@ -181,7 +181,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     @OnClick(R.id.launch_search_button)
     public void launchPersonaliseSearch() {
         mUrlSplit.setQuery(editText.getText().toString());
-        compactCategoriesBuilder = "" + buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+        compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
             mUrlSplit.setSort(sort);

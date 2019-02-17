@@ -108,7 +108,7 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
 
     private void configureAlarmManager() {
         mUrlSplit.setQuery(editText.getText().toString());
-        compactCategoriesBuilder = "" + buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+        compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             Intent alarmIntent = new Intent(NotificationsActivity.this, AlarmReceiver.class);
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
@@ -145,7 +145,8 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         calendar.set(Calendar.HOUR_OF_DAY, 10);
         calendar.set(Calendar.MINUTE, 30);
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        //manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, 10000, pendingIntent);
         Toast.makeText(this, "Alarm set !", Toast.LENGTH_SHORT).show();
     }
 

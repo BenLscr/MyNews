@@ -40,9 +40,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void setParams(Intent intent) {
-        mUrlSplit = new UrlSplit();
         if (intent != null) {
             mUrlSplit = intent.getParcelableExtra("NotificationsToAlarm");
+            Log.e("Alarm", "il y a un intent");
+        } else {
+            mUrlSplit = new UrlSplit();
+            Log.e("Alarm", "il n'y a pas d'intent");
         }
         Calendar calendar = Calendar.getInstance();
         mUrlSplit.setBeginDate(setYesterdayToBeginDate(calendar));
