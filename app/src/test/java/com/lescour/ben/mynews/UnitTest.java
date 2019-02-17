@@ -61,7 +61,7 @@ public class UnitTest {
         assertEquals(beginDate, alarmReceiver.setYesterdayToBeginDate(calendar));
     }
 
-    /**@Test
+    @Test
     public void checkCategoriesBuilder() {
         BaseCustomSearchAndCategories baseCustomSearchAndCategories = new BaseCustomSearchAndCategories() {
         };
@@ -72,11 +72,8 @@ public class UnitTest {
         String sports = null;
         String travel = "\"travel\"";
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(arts).append(travel);
-
         assertEquals("\"arts\"\"travel\"", baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
-    }*/
+    }
 }
 
 
