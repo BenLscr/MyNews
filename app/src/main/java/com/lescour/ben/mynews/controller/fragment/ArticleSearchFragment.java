@@ -47,43 +47,6 @@ public class ArticleSearchFragment extends BaseFragment {
         return fragment;
     }
 
-
-
-    /**@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
-
-        this.articles = new ArrayList<>();
-
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            this.setAppropriateAdapter();
-        }
-
-        Bundle bundle = getArguments();
-        if (bundle.containsKey("CustomToArticleSearchFragment")) {
-            mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
-            Log.e("bundle", "il y a un bundle" + mUrlSplit.getQuery());
-        } else {
-            mUrlSplit = new UrlSplit();
-            mUrlSplit.setQuery(query);
-            mUrlSplit.setSort(sort);
-            Log.e("bundle", "il n'y a pas de bundle");
-        }
-
-        this.executeHttpRequestWithRetrofit();
-
-        return view;
-    }*/
-
     @Override
     protected void setUrlSplit() {
         Bundle bundle = getArguments();
