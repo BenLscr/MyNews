@@ -21,7 +21,7 @@ public class MostPopularRecyclerViewAdapter extends BaseRecyclerViewAdapter{
     @Override
     protected void updateWithArticle(Article article, RequestManager glide, ViewHolder holder) {
         if (holder.article.getMedia().get(0).getMediaMetadata().isEmpty()) {
-            holder.articleImg.setImageResource(R.drawable.ic_launcher_background);
+            holder.articleImg.setImageResource(R.drawable.icone_75x75);
         } else {
             findUrlOfImgArticle(holder.article);
             glide.load(imgUrl).into(holder.articleImg);
