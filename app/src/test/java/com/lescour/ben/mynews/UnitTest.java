@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -19,11 +20,7 @@ import static junit.framework.Assert.assertEquals;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
+public class UnitTest {
 
     /**
      * rawDate is different for every API
@@ -56,7 +53,12 @@ public class ExampleUnitTest {
 
         Calendar calendar = Calendar.getInstance();
 
-        assertEquals("20190212", alarmReceiver.setYesterdayToBeginDate(calendar));
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.add(Calendar.DAY_OF_MONTH, -1);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+        String beginDate = format.format(calendar2.getTime());
+
+        assertEquals(beginDate, alarmReceiver.setYesterdayToBeginDate(calendar));
     }
 
     /**@Test
@@ -72,7 +74,8 @@ public class ExampleUnitTest {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(arts).append(travel);
-        assertEquals(stringBuilder, baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
+
+        assertEquals("\"arts\"\"travel\"", baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
     }*/
 }
 
