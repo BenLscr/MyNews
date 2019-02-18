@@ -3,11 +3,12 @@ package com.lescour.ben.mynews.utils;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
@@ -17,36 +18,44 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
+import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Created by benja on 12/02/2019.
+ * Created by benja on 18/02/2019.
  */
-public class AlarmReceiver extends BroadcastReceiver {
+public class NotificationsWorker extends Worker {
 
-    protected Disposable disposable;
+    private Disposable disposable;
     private UrlSplit mUrlSplit;
     private boolean articles = false;
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        this.setParams(intent);
-        this.executeHttpRequestWithRetrofit();
-        if (!articles) {
-            this.showNotification(context);
-        }
+    public NotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
     }
 
-    private void setParams(Intent intent) {
-        if (intent != null) {
-            mUrlSplit = intent.getParcelableExtra("NotificationsToAlarm");
-            Log.e("Alarm", "il y a un intent");
-        } else {
-            mUrlSplit = new UrlSplit();
-            Log.e("Alarm", "il n'y a pas d'intent");
+    @NonNull
+    @Override
+    public Result doWork() {
+        this.setParams();
+        this.executeHttpRequestWithRetrofit();
+        /**if (!articles) {
+            this.showNotification(getApplicationContext());
+            Log.e("Check Worker", "Articles est true");
         }
+        Log.e("Check Worker", "Articles est false");*/
+        return Result.success();
+    }
+
+    private void setParams() {
+        String myPersonalisedNotification = getInputData().getString("workUrlSplit");
+        Gson gson = new Gson();
+        mUrlSplit = gson.fromJson(myPersonalisedNotification, UrlSplit.class);
         Calendar calendar = Calendar.getInstance();
         mUrlSplit.setBeginDate(setYesterdayToBeginDate(calendar));
     }
@@ -65,10 +74,11 @@ public class AlarmReceiver extends BroadcastReceiver {
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
                 if (theNewYorkTimesResponse.getResponse().getArticles() != null) {
-                    Log.e("BroadcastReceiver", "Articles found");
-                    articles = true;
+                    //articles = true;
+                    showNotification(getApplicationContext());
+                    Log.e("Check Worker", "Articles found");
                 } else {
-                    Log.e("BroadcastReceiver", "No articles found");
+                    Log.e("Check Worker", "No articles found");
                 }
             }
 
@@ -85,13 +95,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void showNotification(Context context) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                new Intent(context, MainActivity.class), 0);
-
         Notification notification = new Notification.Builder(context)
                 .setContentText("New articles of interest to you have been found.")
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentIntent(contentIntent)
+                .setSmallIcon(R.drawable.icone_75x75)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setAutoCancel(true)
                 .build();

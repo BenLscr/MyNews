@@ -1,9 +1,5 @@
 package com.lescour.ben.mynews.controller;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,10 +13,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.UrlSplit;
-import com.lescour.ben.mynews.utils.AlarmReceiver;
+import com.lescour.ben.mynews.utils.NotificationsWorker;
 
-import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
+import androidx.work.Data;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -30,7 +29,6 @@ import butterknife.ButterKnife;
 public class NotificationsActivity extends BaseCustomSearchAndCategories {
 
     @BindView(R.id.notifications_switch) Switch notificationsSwitch;
-    private PendingIntent pendingIntent;
     private SharedPreferences mSharedPreferences;
     private String myPersonalisedNotification;
 
@@ -110,11 +108,7 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         mUrlSplit.setQuery(editText.getText().toString());
         compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
-            Intent alarmIntent = new Intent(NotificationsActivity.this, AlarmReceiver.class);
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
-            alarmIntent.putExtra("NotificationsToAlarm", mUrlSplit);
-            sendBroadcast(alarmIntent);
-            pendingIntent = PendingIntent.getBroadcast(NotificationsActivity.this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             this.saveMyPersonalisedNotification();
             startAlarm();
         }
@@ -140,23 +134,18 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
     }
 
     private void startAlarm() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 10);
-        calendar.set(Calendar.MINUTE, 30);
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        //manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, 10000, pendingIntent);
+        Data source = new Data.Builder()
+                .putString("workUrlSplit", myPersonalisedNotification)
+                .build();
+        PeriodicWorkRequest.Builder notificationsBuilder = new PeriodicWorkRequest.Builder(NotificationsWorker.class, 15, TimeUnit.MINUTES);
+        notificationsBuilder.setInputData(source);
+        PeriodicWorkRequest notificationsWork = notificationsBuilder.build();
+        WorkManager.getInstance().enqueue(notificationsWork);
         Toast.makeText(this, "Alarm set !", Toast.LENGTH_SHORT).show();
     }
 
     private void stopAlarm() {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        if (pendingIntent == null) {
-            Intent alarmIntent = new Intent(NotificationsActivity.this, AlarmReceiver.class);
-            pendingIntent = PendingIntent.getBroadcast(NotificationsActivity.this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
-        manager.cancel(pendingIntent);
+        WorkManager.getInstance().cancelAllWork();
         Toast.makeText(this, "Alarm Canceled !", Toast.LENGTH_SHORT).show();
     }
 
