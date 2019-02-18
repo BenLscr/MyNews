@@ -1,24 +1,15 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.model.UrlSplit;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
+import com.lescour.ben.mynews.model.UrlSplit;
 import com.lescour.ben.mynews.utils.TheNewYorkTimesStreams;
 import com.lescour.ben.mynews.view.ArticleSearchRecyclerViewAdapter;
 
-import java.util.ArrayList;
-
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.observers.DisposableObserver;
 
 /**
@@ -52,12 +43,10 @@ public class ArticleSearchFragment extends BaseFragment {
         Bundle bundle = getArguments();
         if (bundle.containsKey("CustomToArticleSearchFragment")) {
             mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
-            Log.e("bundle", "il y a un bundle" + mUrlSplit.getQuery());
         } else {
             mUrlSplit = new UrlSplit();
             mUrlSplit.setQuery(query);
             mUrlSplit.setSort(sort);
-            Log.e("bundle", "il n'y a pas de bundle");
         }
     }
 
@@ -69,8 +58,12 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void updateUI(TheNewYorkTimesResponse theNewYorkTimesResponse) {
-        articles.addAll(theNewYorkTimesResponse.getResponse().getArticles());
-        mRecyclerViewAdapter.notifyDataSetChanged();
+        if (theNewYorkTimesResponse.getResponse().getArticles().size() > 0) {
+            articles.addAll(theNewYorkTimesResponse.getResponse().getArticles());
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(getContext(), "No articles found.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
