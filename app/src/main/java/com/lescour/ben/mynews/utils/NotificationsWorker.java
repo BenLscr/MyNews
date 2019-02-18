@@ -2,15 +2,11 @@ package com.lescour.ben.mynews.utils;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.MainActivity;
 import com.lescour.ben.mynews.model.TheNewYorkTimesResponse;
 import com.lescour.ben.mynews.model.UrlSplit;
 
@@ -24,8 +20,6 @@ import androidx.work.WorkerParameters;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-import static android.content.Context.MODE_PRIVATE;
-
 /**
  * Created by benja on 18/02/2019.
  */
@@ -33,7 +27,6 @@ public class NotificationsWorker extends Worker {
 
     private Disposable disposable;
     private UrlSplit mUrlSplit;
-    private boolean articles = false;
 
     public NotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -44,11 +37,6 @@ public class NotificationsWorker extends Worker {
     public Result doWork() {
         this.setParams();
         this.executeHttpRequestWithRetrofit();
-        /**if (!articles) {
-            this.showNotification(getApplicationContext());
-            Log.e("Check Worker", "Articles est true");
-        }
-        Log.e("Check Worker", "Articles est false");*/
         return Result.success();
     }
 
@@ -73,8 +61,7 @@ public class NotificationsWorker extends Worker {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
-                if (theNewYorkTimesResponse.getResponse().getArticles() != null) {
-                    //articles = true;
+                if (theNewYorkTimesResponse.getResponse().getArticles().size() > 0) {
                     showNotification(getApplicationContext());
                     Log.e("Check Worker", "Articles found");
                 } else {
@@ -102,8 +89,7 @@ public class NotificationsWorker extends Worker {
                 .setAutoCancel(true)
                 .build();
 
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1, notification);
     }
 }

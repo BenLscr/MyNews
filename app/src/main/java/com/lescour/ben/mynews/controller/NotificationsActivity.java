@@ -13,12 +13,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.model.UrlSplit;
-import com.lescour.ben.mynews.utils.NotificationsWorker;
+import com.lescour.ben.mynews.utils.FirstNotificationsWorker;
 
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Data;
-import androidx.work.PeriodicWorkRequest;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -137,10 +137,11 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         Data source = new Data.Builder()
                 .putString("workUrlSplit", myPersonalisedNotification)
                 .build();
-        PeriodicWorkRequest.Builder notificationsBuilder = new PeriodicWorkRequest.Builder(NotificationsWorker.class, 15, TimeUnit.MINUTES);
-        notificationsBuilder.setInputData(source);
-        PeriodicWorkRequest notificationsWork = notificationsBuilder.build();
-        WorkManager.getInstance().enqueue(notificationsWork);
+        OneTimeWorkRequest firstNotificationsBuilder = new OneTimeWorkRequest.Builder(FirstNotificationsWorker.class)
+                .setInitialDelay(1, TimeUnit.DAYS)
+                .setInputData(source)
+                .build();
+        WorkManager.getInstance().enqueue(firstNotificationsBuilder);
         Toast.makeText(this, "Alarm set !", Toast.LENGTH_SHORT).show();
     }
 
