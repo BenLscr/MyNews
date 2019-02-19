@@ -34,6 +34,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         ButterKnife.bind(this);
         this.configureToolbar();
         this.checkIfIntentAnIntentIsAvailable();
+        setTitle(getCorrectLabel());
         this.addFragment();
     }
 
@@ -49,6 +50,37 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
             mUrlSplit = intent.getParcelableExtra("SearchToCustom");
         } else {
             mUrlSplit = new UrlSplit();
+        }
+    }
+
+    public String getCorrectLabel() {
+        if (mUrlSplit.getQuery() != null) {
+            return mUrlSplit.getQuery();
+        } else {
+            switch (mUrlSplit.getFilter_query()) {
+                case "news_desk:(\"arts\")":
+                    return "Arts";
+                case "news_desk:(\"business\")":
+                    return "Business";
+                case "news_desk:(\"environment\")":
+                    return "Environment";
+                case "news_desk:(\"food\")":
+                    return "Food";
+                case "news_desk:(\"health\")":
+                    return "Health";
+                case "news_desk:(\"movies\")":
+                    return "Movies";
+                case "news_desk:(\"politics\")":
+                    return "Politics";
+                case "news_desk:(\"sports\")":
+                    return "Sports";
+                case "news_desk:(\"technology\")":
+                    return "Technology";
+                case "news_desk:(\"weather\")":
+                    return "Weather";
+                default:
+                    return "Custom Activity";
+            }
         }
     }
 
