@@ -18,4 +18,46 @@
             android:title="@string/science" />
     </group>
 
+    <item android:title="@string/other_categories">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item android:id="@+id/activity_main_drawer_arts"
+                    android:title="@string/arts"/>
+
+                <item android:id="@+id/activity_main_drawer_business"
+                    android:title="@string/business"/>
+
+                <item android:id="@+id/activity_main_drawer_environment"
+                    android:title="@string/environment"/>
+
+                <item android:id="@+id/activity_main_drawer_food"
+                    android:title="@string/food"/>
+
+                <item android:id="@+id/activity_main_drawer_health"
+                    android:title="@string/health"/>
+
+                <item android:id="@+id/activity_main_drawer_movies"
+                    android:title="@string/movies"/>
+
+                <item android:id="@+id/activity_main_drawer_politics"
+                    android:title="@string/politics"/>
+
+                <item android:id="@+id/activity_main_drawer_sports"
+                    android:title="@string/sports"/>
+
+                <item android:id="@+id/activity_main_drawer_technology"
+                    android:title="@string/technology"/>
+
+                <item android:id="@+id/activity_main_drawer_weather"
+                    android:title="@string/weather"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
 </menu>
