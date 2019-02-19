@@ -12,6 +12,7 @@ import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.adapter.PageAdapter;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment.OnListFragmentInteractionListener;
 import com.lescour.ben.mynews.model.Article;
+import com.lescour.ben.mynews.model.UrlSplit;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        UrlSplit mUrlSplit = new UrlSplit();
         int id = item.getItemId();
         switch (id){
             case R.id.activity_main_drawer_top_stories :
@@ -125,6 +127,46 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.activity_main_drawer_science:
                 viewPager.setCurrentItem(2);
+                break;
+            case R.id.activity_main_drawer_arts:
+                mUrlSplit.setFilter_query("news_desk:(\"arts\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_business:
+                mUrlSplit.setFilter_query("news_desk:(\"business\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_environment:
+                mUrlSplit.setFilter_query("news_desk:(\"environment\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_food:
+                mUrlSplit.setFilter_query("news_desk:(\"food\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_health:
+                mUrlSplit.setFilter_query("news_desk:(\"health\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_movies:
+                mUrlSplit.setFilter_query("news_desk:(\"movies\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_politics:
+                mUrlSplit.setFilter_query("news_desk:(\"politics\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_sports:
+                mUrlSplit.setFilter_query("news_desk:(\"sports\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_technology:
+                mUrlSplit.setFilter_query("news_desk:(\"technology\")");
+                this.launchCustomActivity(mUrlSplit);
+                break;
+            case R.id.activity_main_drawer_weather:
+                mUrlSplit.setFilter_query("news_desk:(\"weather\")");
+                this.launchCustomActivity(mUrlSplit);
                 break;
             default:
                 break;
@@ -143,6 +185,13 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void launchCustomActivity(UrlSplit mUrlSplit) {
+        mUrlSplit.setSort("newest");
+        Intent customActivity = new Intent(this, CustomActivity.class);
+        customActivity.putExtra("SearchToCustom", mUrlSplit);
+        this.startActivity(customActivity);
     }
 
 }
