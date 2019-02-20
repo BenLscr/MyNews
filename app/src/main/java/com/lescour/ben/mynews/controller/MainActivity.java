@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -14,6 +13,7 @@ import com.lescour.ben.mynews.controller.fragment.BaseFragment.OnListFragmentInt
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.UrlSplit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -81,9 +81,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void configureViewPagerAndTabs(){
-        // 2 - Set Adapter PageAdapter and glue it together
-        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()) {
-        });
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()) {});
         tabs.setupWithViewPager(viewPager);
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
@@ -107,15 +105,16 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
+
     private void configureNavigationView(){
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     /**
-     * When a item is selected. Display the associate fragment in the ViewPager.
+     * When an item is selected. Display the associate fragment in the ViewPager.
      */
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         UrlSplit mUrlSplit = new UrlSplit();
         int id = item.getItemId();
         switch (id){
@@ -175,6 +174,13 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
+    private void launchCustomActivity(UrlSplit mUrlSplit) {
+        mUrlSplit.setSort("newest");
+        Intent customActivity = new Intent(this, CustomActivity.class)
+                .putExtra("SearchToCustom", mUrlSplit);
+        this.startActivity(customActivity);
+    }
+
     /**
      * Close the NavigationDrawer with the button back
      */
@@ -185,13 +191,6 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             super.onBackPressed();
         }
-    }
-
-    private void launchCustomActivity(UrlSplit mUrlSplit) {
-        mUrlSplit.setSort("newest");
-        Intent customActivity = new Intent(this, CustomActivity.class);
-        customActivity.putExtra("SearchToCustom", mUrlSplit);
-        this.startActivity(customActivity);
     }
 
 }
