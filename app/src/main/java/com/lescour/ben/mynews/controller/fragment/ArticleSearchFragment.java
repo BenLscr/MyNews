@@ -41,12 +41,14 @@ public class ArticleSearchFragment extends BaseFragment {
     @Override
     protected void setUrlSplit() {
         Bundle bundle = getArguments();
-        if (bundle.containsKey("CustomToArticleSearchFragment")) {
-            mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
-        } else {
-            mUrlSplit = new UrlSplit();
-            mUrlSplit.setQuery(query);
-            mUrlSplit.setSort(sort);
+        if (bundle != null) {
+            if (bundle.containsKey("CustomToArticleSearchFragment")) {
+                mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
+            } else {
+                mUrlSplit = new UrlSplit();
+                mUrlSplit.setQuery(query);
+                mUrlSplit.setSort(sort);
+            }
         }
     }
 

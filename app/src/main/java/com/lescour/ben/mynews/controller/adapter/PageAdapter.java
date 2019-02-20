@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
  */
 public class PageAdapter extends FragmentPagerAdapter {
 
-    private PageAdapter(FragmentManager mgr) {
+    public PageAdapter(FragmentManager mgr) {
         super(mgr);
     }
 
