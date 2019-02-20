@@ -14,6 +14,7 @@ import com.lescour.ben.mynews.model.UrlSplit;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +27,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseFragment extends Fragment {
 
     protected static final String ARG_COLUMN_COUNT = "column-count";
-    protected int mColumnCount = 1;
+    private int mColumnCount = 1;
     protected OnListFragmentInteractionListener mListener;
     protected List<Article> articles;
     protected RecyclerView recyclerView;
@@ -48,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
@@ -73,7 +74,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
