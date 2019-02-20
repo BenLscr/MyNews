@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +38,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     private int year, month, day;
     private DatePickerDialog datePickerDialog;
     private String beginDateToShow, endDateToShow;
-    private String sort = "newest";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,33 +48,24 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         mUrlSplit = new UrlSplit();
         this.initCalendar();
 
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    launchPersonaliseSearch();
-                    return true;
-                }
-                return false;
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                launchPersonaliseSearch();
+                return true;
             }
+            return false;
         });
 
-        beginDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                calendar.set(year, month, day);
-                beginDateToShow = visualFormat.format(calendar.getTime());
-                checkIfBeginDateIsCorrect(beginDateToShow);
-            }
+        beginDateSetListener = (view, year, month, day) -> {
+            calendar.set(year, month, day);
+            beginDateToShow = visualFormat.format(calendar.getTime());
+            checkIfBeginDateIsCorrect(beginDateToShow);
         };
 
-        endDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                calendar.set(year, month, day);
-                endDateToShow = visualFormat.format(calendar.getTime());
-                checkIfEndDateIsCorrect(endDateToShow);
-            }
+        endDateSetListener = (view, year, month, day) -> {
+            calendar.set(year, month, day);
+            endDateToShow = visualFormat.format(calendar.getTime());
+            checkIfEndDateIsCorrect(endDateToShow);
         };
     }
 
@@ -85,16 +74,15 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         visualFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         visualFormat.setCalendar(calendar);
-        year = calendar.get(calendar.YEAR);
-        month = calendar.get(calendar.MONTH);
-        day = calendar.get(calendar.DAY_OF_MONTH);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
 //////////    BeginDate   //////////
 
     @OnClick(R.id.select_begin_date)
     public void beginDate() {
-        initCalendar();
         initBeginDatePickerDialog();
     }
 
@@ -104,7 +92,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 beginDateSetListener,
                 year, month, day);
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(datePickerDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
     }
 
@@ -128,7 +116,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
 
     private void showAndSaveBeginDateInUrlFormat(String beginDateToShow) {
         selectBeginDate.setText(beginDateToShow);
-        urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
         mUrlSplit.setBeginDate(urlFormat.format(calendar.getTime()));
     }
@@ -137,7 +124,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
 
     @OnClick(R.id.select_end_date)
     public void endDate() {
-        initCalendar();
         initEndDatePickerDialog();
     }
 
@@ -147,7 +133,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 endDateSetListener,
                 year, month, day);
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(datePickerDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
     }
 
@@ -171,7 +157,6 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
 
     private void showAndSaveEndDateInUrlFormat(String endDateToShow) {
         selectEndDate.setText(endDateToShow);
-        urlFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         urlFormat.setCalendar(calendar);
         mUrlSplit.setEndDate(urlFormat.format(calendar.getTime()));
     }
@@ -184,7 +169,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
         compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
-            mUrlSplit.setSort(sort);
+            mUrlSplit.setSort("newest");
             Intent customActivity = new Intent(this, CustomActivity.class);
             customActivity.putExtra("SearchToCustom", mUrlSplit);
             this.startActivity(customActivity);

@@ -2,12 +2,8 @@ package com.lescour.ben.mynews.controller;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
-import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -40,25 +36,14 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         this.configureToolbar();
         this.setMyPersonalisedNotification();
 
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    return true;
-                }
-                return false;
-            }
-        });
+        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
-        notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    configureAlarmManager();
-                } else {
-                    stopAlarm();
-                    deleteNotificationsSave();
-                }
+        notificationsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                configureAlarmManager();
+            } else {
+                stopAlarm();
+                deleteNotificationsSave();
             }
         });
     }
@@ -68,8 +53,6 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         myPersonalisedNotification = mSharedPreferences.getString("KEY_SAVE_NOTIFICATION", "{'apiKey':'4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6'}");
         Gson gson = new Gson();
         mUrlSplit = gson.fromJson(myPersonalisedNotification, UrlSplit.class);
-        Log.e("checkSave", myPersonalisedNotification);
-
         if (mUrlSplit.getQuery() != null && mUrlSplit.getFilter_query() != null) {
             editText.setText(mUrlSplit.getQuery());
             if (mUrlSplit.getFilter_query().contains("arts")) {
@@ -98,10 +81,6 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
             }
             notificationsSwitch.setChecked(true);
         }
-
-        if (mUrlSplit.getFilter_query() != null) {
-
-        }
     }
 
     private void configureAlarmManager() {
@@ -128,7 +107,6 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
     private void saveMyPersonalisedNotification() {
         Gson gson = new Gson();
         myPersonalisedNotification = gson.toJson(mUrlSplit);
-        Log.e("gson", myPersonalisedNotification);
         mSharedPreferences = getSharedPreferences("myPersonalisedNotification", MODE_PRIVATE);
         mSharedPreferences.edit().putString("KEY_SAVE_NOTIFICATION", myPersonalisedNotification).apply();
     }
@@ -142,12 +120,10 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
                 .setInputData(source)
                 .build();
         WorkManager.getInstance().enqueue(firstNotificationsBuilder);
-        Toast.makeText(this, "Alarm set !", Toast.LENGTH_SHORT).show();
     }
 
     private void stopAlarm() {
         WorkManager.getInstance().cancelAllWork();
-        Toast.makeText(this, "Alarm Canceled !", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteNotificationsSave() {

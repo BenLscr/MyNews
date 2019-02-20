@@ -34,7 +34,9 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     protected void configureToolbar() {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
