@@ -33,4 +33,9 @@
     <string name="technology">Technology</string>
     <string name="weather">Weather</string>
     <string name="other_categories">Other categories</string>
+    <string name="about_text_1">The MyNews application is a study project.</string>
+    <string name="about_text_2">It corresponds to project 5 of the \"DA - Android\" course in the
+        OpenClassRooms school.</string>
+    <string name="about_text_3">The application allows you to view articles from the NewYorkTimes
+        and receive notifications on a category of articles sought.</string>
 </resources>
