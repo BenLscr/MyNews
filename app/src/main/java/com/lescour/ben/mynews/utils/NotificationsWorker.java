@@ -84,7 +84,7 @@ public class NotificationsWorker extends Worker {
     private void showNotification(Context context) {
         Notification notification = new Notification.Builder(context)
                 .setContentText("New articles of interest to you have been found.")
-                .setSmallIcon(R.drawable.icone_75x75)
+                .setSmallIcon(R.drawable.icon_75x75)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setAutoCancel(true)
                 .build();
