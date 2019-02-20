@@ -3,20 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <item android:title="@string/main_categories">
 
-        <item
-            android:id="@+id/activity_main_drawer_top_stories"
-            android:title="@string/top_stories" />
+        <menu>
 
-        <item
-            android:id="@+id/activity_main_drawer_most_popular"
-            android:title="@string/most_popular" />
+            <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/activity_main_drawer_science"
-            android:title="@string/science" />
-    </group>
+                <item
+                    android:id="@+id/activity_main_drawer_top_stories"
+                    android:title="@string/top_stories" />
+
+                <item
+                    android:id="@+id/activity_main_drawer_most_popular"
+                    android:title="@string/most_popular" />
+
+                <item
+                    android:id="@+id/activity_main_drawer_science"
+                    android:title="@string/science" />
+            </group>
+
+        </menu>
+
+    </item>
 
     <item android:title="@string/other_categories">
 

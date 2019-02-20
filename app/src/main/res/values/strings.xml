@@ -38,4 +38,5 @@
         OpenClassRooms school.</string>
     <string name="about_text_3">The application allows you to view articles from the NewYorkTimes
         and receive notifications on a category of articles sought.</string>
+    <string name="main_categories">Main Categories</string>
 </resources>
