@@ -15,20 +15,19 @@ import androidx.fragment.app.FragmentPagerAdapter;
  */
 public class PageAdapter extends FragmentPagerAdapter {
 
-    public PageAdapter(FragmentManager mgr) {
+    private PageAdapter(FragmentManager mgr) {
         super(mgr);
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        // 4 - Page to return
         switch (position){
             case 0: //Page number 1
                 return TopStoriesFragment.newInstance(1);
             case 1: //Page number 2
                 return MostPopularFragment.newInstance(1);
-            case 2: //Page number 2
+            case 2: //Page number 3
                 return ArticleSearchFragment.newInstance(1);
             default:
                 return null;
@@ -37,7 +36,7 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return(3); // 3 - Number of page to show
+        return(3); //Number of page to show
     }
 
     @Nullable
