@@ -41,7 +41,9 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
     private void configureToolbar() {
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void checkIfIntentAnIntentIsAvailable(){
@@ -90,10 +92,8 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         Bundle bundle = new Bundle();
         bundle.putParcelable("CustomToArticleSearchFragment", mUrlSplit);
         ArticleSearchFragment articleSearchFragment = ArticleSearchFragment.newInstance(1);
-        fragmentTransaction.add(R.id.custom_list_container, articleSearchFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.add(R.id.custom_list_container, articleSearchFragment).commit();
         articleSearchFragment.setArguments(bundle);
-
     }
 
     @Override
