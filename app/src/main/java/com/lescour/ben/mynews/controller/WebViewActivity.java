@@ -1,11 +1,8 @@
 package com.lescour.ben.mynews.controller;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.lescour.ben.mynews.R;
 
@@ -26,11 +23,9 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_webview);
-
         if (getIntent().hasExtra(BUNDLE_EXTRA_URL)) {
             articleUrl = getIntent().getStringExtra(BUNDLE_EXTRA_URL);
         }
-
         configureWebView();
     }
 
