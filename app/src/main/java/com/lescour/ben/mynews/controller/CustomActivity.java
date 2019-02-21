@@ -34,7 +34,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         ButterKnife.bind(this);
         this.configureToolbar();
         this.checkIfIntentAnIntentIsAvailable();
-        setTitle(getCorrectLabel());
+        setTitle(getCorrectLabel(mUrlSplit));
         this.addFragment();
     }
 
@@ -55,7 +55,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         }
     }
 
-    public String getCorrectLabel() {
+    public String getCorrectLabel(UrlSplit mUrlSplit) {
         if (mUrlSplit.getQuery() != null) {
             return mUrlSplit.getQuery();
         } else {
