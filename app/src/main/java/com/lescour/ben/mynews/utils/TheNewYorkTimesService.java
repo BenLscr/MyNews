@@ -26,7 +26,7 @@ public interface TheNewYorkTimesService {
                                                          @Query("fq") String filter_query, @Query("q") String query,
                                                          @Query("sort") String sort, @Query("api-key") String apiKey);
 
-    public static final Retrofit retrofit = new Retrofit.Builder()
+    Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/svc/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
