@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -29,28 +30,26 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
     protected abstract void updateWithArticle(Article article, RequestManager glide, ViewHolder holder);
     protected abstract String getRawDate(Article article);
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_article, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.article = articles.get(position);
         String rawDate = getRawDate(holder.article);
         holder.articleDate.setText(getDateWhitNewFormat(rawDate));
         this.updateWithArticle(holder.article, this.glide, holder);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected
-                    mListener.onListFragmentInteraction(holder.article);
-                }
+        holder.mView.setOnClickListener(v -> {
+            if (null != mListener) {
+                // Notify the active callbacks interface (the activity, if the
+                // fragment is attached to one) that an item has been selected
+                mListener.onListFragmentInteraction(holder.article);
             }
         });
     }
