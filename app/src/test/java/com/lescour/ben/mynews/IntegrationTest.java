@@ -4,6 +4,7 @@ import com.lescour.ben.mynews.controller.CustomActivity;
 import com.lescour.ben.mynews.model.UrlSplit;
 import com.lescour.ben.mynews.utils.NotificationsWorker;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -32,19 +33,6 @@ public class IntegrationTest {
     String beginDate = format.format(calendar2.getTime());
 
     assertEquals(beginDate, notificationsWorker.setYesterdayToBeginDate(calendar));
-    }*/
-
-    /**@Test
-    public void labelTest() {
-        CustomActivity customActivity = mock(CustomActivity.class);
-
-
-        UrlSplit mUrlSplit = new UrlSplit();
-        //when(mUrlSplit.getQuery()).thenReturn("Trump");
-        mUrlSplit.setQuery("Trump");
-        //mUrlSplit.setFilter_query("news_desk:(\"business\")");
-
-        assertEquals("Trump",customActivity.getCorrectLabel());
     }*/
 }
 
