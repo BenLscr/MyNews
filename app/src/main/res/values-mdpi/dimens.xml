@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_switch_notification">16sp</dimen>
-    <dimen name="categories_width">40dp</dimen>
+    <dimen name="categories_width">170dp</dimen>
     <dimen name="bigText_help_about">20sp</dimen>
     <dimen name="text_help_about">18sp</dimen>
 </resources>

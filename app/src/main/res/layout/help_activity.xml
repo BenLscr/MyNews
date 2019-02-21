@@ -18,14 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center"
             android:padding="30dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/menu"
-                android:textSize="20sp"
+                android:textSize="@dimen/bigText_help_about"
                 android:textStyle="bold"
                 android:textColor="@color/myColorPrimary"
                 android:layout_marginBottom="20dp"/>
@@ -34,22 +33,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/when_a_category_is_selected"
                 android:textColor="@color/myColorAccent"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/text_help_about"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/returns_to_the_corresponding_tab_of_the_home_screen_for_the_main_categories"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/text_help_about"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/it_opens_a_new_window_for_the_other_categories"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/text_help_about"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/toolbar"
-                android:textSize="20sp"
+                android:textSize="@dimen/bigText_help_about"
                 android:textStyle="bold"
                 android:textColor="@color/myColorPrimary"
                 android:layout_marginTop="40dp"
@@ -58,25 +57,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search_help_activity"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_help_about"
                 android:textColor="@color/myColorAccent"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/you_must_have_selected_one_term_and_at_least_one_category_the_search_result_is_displayed_in_a_new_window"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/text_help_about"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notification"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_help_about"
                 android:textColor="@color/myColorAccent"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notification_is_sent_daily_if_one_or_more_articles_have_been_published_in_the_last_24_hours_you_must_have_selected_one_term_and_at_least_one_category"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/text_help_about"/>
 
         </LinearLayout>
 
