@@ -43,7 +43,7 @@ public class ArticleSearchRecyclerViewAdapter extends BaseRecyclerViewAdapter {
         } while (!imgFound);
     }
 
-    private String getSectionAndSubsection(Article article) {
+    public String getSectionAndSubsection(Article article) {
         String str;
         if (article.getSubsectoinName() == null) {
             str = article.getSectionName();
