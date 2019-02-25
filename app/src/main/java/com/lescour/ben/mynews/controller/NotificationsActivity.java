@@ -27,6 +27,7 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
     @BindView(R.id.notifications_switch) Switch notificationsSwitch;
     private SharedPreferences mSharedPreferences;
     private String myPersonalisedNotification;
+    private String savedCompactCategoriesBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
                 travel = "\"travel\"";
             }
             notificationsSwitch.setChecked(true);
+            savedCompactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         }
     }
 
@@ -130,5 +132,14 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.remove("KEY_SAVE_NOTIFICATION");
         editor.apply();
+    }
+
+    @Override
+    protected void checkPreviousParam() {
+        String previousCompactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+        if (!previousCompactCategoriesBuilder.equals(savedCompactCategoriesBuilder)) {
+            notificationsSwitch.setChecked(false);
+            Toast.makeText(this, "Don’t forget to enable notifications with your new criteria.", Toast.LENGTH_LONG).show();
+        }
     }
 }

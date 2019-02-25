@@ -29,6 +29,8 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     protected String arts, business, entrepreneurs, politics, sports, travel;
     protected String compactCategoriesBuilder;
 
+    protected abstract void checkPreviousParam();
+
 //////////    Toolbar   //////////
 
     protected void configureToolbar() {
@@ -47,7 +49,7 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
 
 //////////    CheckBox   //////////
 
-    protected void checkCheckBox(View checkBox) {
+    public void checkCheckBox(View checkBox) {
         switch (checkBox.getId()){
             case R.id.checkbox_arts :
                 if (checkBoxArts.isChecked()) {
@@ -92,6 +94,7 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
                 }
                 break;
         }
+        checkPreviousParam();
     }
 
     public String  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {

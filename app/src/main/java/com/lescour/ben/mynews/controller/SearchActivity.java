@@ -183,4 +183,9 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
             Toast.makeText(this, "Please enter a query and choose at least one category.", Toast.LENGTH_LONG).show();
         }
     }
+
+    @Override
+    protected void checkPreviousParam() {
+
+    }
 }
