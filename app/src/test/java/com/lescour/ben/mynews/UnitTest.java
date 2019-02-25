@@ -1,23 +1,12 @@
 package com.lescour.ben.mynews;
 
-import android.test.mock.MockContext;
-
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.controller.BaseCustomSearchAndCategories;
-import com.lescour.ben.mynews.controller.CustomActivity;
 import com.lescour.ben.mynews.model.Article;
-import com.lescour.ben.mynews.model.UrlSplit;
-import com.lescour.ben.mynews.utils.NotificationsWorker;
 import com.lescour.ben.mynews.view.BaseRecyclerViewAdapter;
 import com.lescour.ben.mynews.view.ViewHolder;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -27,14 +16,6 @@ import static junit.framework.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class UnitTest {
-
-    private UrlSplit mUrlSplit;
-
-    @Before
-    public void setUp(){
-        mUrlSplit = new UrlSplit();
-        mUrlSplit.setQuery("Trump");
-    }
 
     /**
      * rawDate is different for every API
@@ -62,20 +43,6 @@ public class UnitTest {
     }
 
     @Test
-    public void beginDateNeedYesterday() {
-        //NotificationsWorker notificationsWorker = new NotificationsWorker();
-
-        Calendar calendar = Calendar.getInstance();
-
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, -1);
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-        String beginDate = format.format(calendar2.getTime());
-
-        //assertEquals(beginDate, notificationsWorker.setYesterdayToBeginDate(calendar));
-    }
-
-    @Test
     public void checkCategoriesBuilder() {
         BaseCustomSearchAndCategories baseCustomSearchAndCategories = new BaseCustomSearchAndCategories() {
         };
@@ -87,13 +54,6 @@ public class UnitTest {
         String travel = "\"travel\"";
 
         assertEquals("\"arts\"\"travel\"", baseCustomSearchAndCategories.buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel));
-    }
-
-    @Test
-    public void labelTest() {
-        CustomActivity customActivity = new CustomActivity();
-
-        Assert.assertEquals(mUrlSplit.getQuery(),customActivity.getCorrectLabel(mUrlSplit));
     }
 }
 
