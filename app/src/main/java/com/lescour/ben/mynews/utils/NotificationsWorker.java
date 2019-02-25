@@ -31,9 +31,8 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class NotificationsWorker extends Worker {
 
-    private Disposable disposable;
     private UrlSplit mUrlSplit;
-    private Notification notification;
+    private Disposable disposable;
 
     public NotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -62,7 +61,7 @@ public class NotificationsWorker extends Worker {
     }
 
     private void executeHttpRequestWithRetrofit() {
-        this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDate(),
+        disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDate(),
                 mUrlSplit.getEndDate(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
                 mUrlSplit.getSort(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
@@ -86,6 +85,16 @@ public class NotificationsWorker extends Worker {
                 Log.e("TAG", "On Complete !!");
             }
         });
+    }
+
+    @Override
+    public void onStopped() {
+        super.onStopped();
+        this.disposeWhenStopped();
+    }
+
+    private void disposeWhenStopped(){
+        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
     }
 
     private void showNotification(Context context) {
