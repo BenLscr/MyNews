@@ -9,7 +9,8 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:src="@drawable/ic_launcher_background"
-        android:id="@+id/img_article"/>
+        android:id="@+id/img_article"
+        android:contentDescription="@string/articleimage"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
 
             <TextView
                 android:id="@+id/article_sectionSubsection"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sectionSubsection"
                 android:textColor="@android:color/black"

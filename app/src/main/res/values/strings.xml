@@ -48,4 +48,5 @@
     <string name="you_must_have_selected_one_term_and_at_least_one_category_the_search_result_is_displayed_in_a_new_window">You must have selected one term and at least one category. The search result is displayed in a new window.</string>
     <string name="notification">Notification :</string>
     <string name="notification_is_sent_daily_if_one_or_more_articles_have_been_published_in_the_last_24_hours_you_must_have_selected_one_term_and_at_least_one_category">Notification is sent daily if one or more articles have been published in the last 24 hours. You must have selected one term and at least one category.</string>
+    <string name="articleimage">ArticleImage</string>
 </resources>
