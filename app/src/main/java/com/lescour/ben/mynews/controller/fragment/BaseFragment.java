@@ -26,13 +26,13 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class BaseFragment extends Fragment {
 
-    protected static final String ARG_COLUMN_COUNT = "column-count";
+    static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
-    protected OnListFragmentInteractionListener mListener;
+    OnListFragmentInteractionListener mListener;
     protected List<Article> articles;
-    protected RecyclerView recyclerView;
-    protected Disposable disposable;
-    protected RecyclerView.Adapter mRecyclerViewAdapter;
+    RecyclerView recyclerView;
+    Disposable disposable;
+    RecyclerView.Adapter mRecyclerViewAdapter;
     protected UrlSplit mUrlSplit;
 
     protected abstract void setUrlSplit();
