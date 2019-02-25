@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -161,11 +162,10 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
     }
 
     @Override
-    protected void checkPreviousParam() {
+    protected void checkPreviousCheckBox(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
         String previousCompactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
-        if (!previousCompactCategoriesBuilder.equals(savedCompactCategoriesBuilder)) {
+        if (notificationsSwitch.isChecked() && !previousCompactCategoriesBuilder.equals(savedCompactCategoriesBuilder)) {
             notificationsSwitch.setChecked(false);
-            Toast.makeText(this, "Don’t forget to enable notifications with your new criteria.", Toast.LENGTH_LONG).show();
         }
     }
 }

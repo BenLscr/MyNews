@@ -29,7 +29,7 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
     protected String arts, business, entrepreneurs, politics, sports, travel;
     protected String compactCategoriesBuilder;
 
-    protected abstract void checkPreviousParam();
+    protected abstract void checkPreviousCheckBox(String arts, String business, String entrepreneurs, String politics, String sports, String travel);
 
 //////////    Toolbar   //////////
 
@@ -94,7 +94,7 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
                 }
                 break;
         }
-        checkPreviousParam();
+        checkPreviousCheckBox(arts, business, entrepreneurs, politics, sports, travel);
     }
 
     public String  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {

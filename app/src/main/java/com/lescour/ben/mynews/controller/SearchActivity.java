@@ -185,7 +185,7 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
     }
 
     @Override
-    protected void checkPreviousParam() {
+    protected void checkPreviousCheckBox(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
 
     }
 }
