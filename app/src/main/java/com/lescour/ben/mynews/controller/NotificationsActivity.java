@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -107,7 +106,6 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
 
     private void configureAlarmManager() {
         mUrlSplit.setQuery(editText.getText().toString());
-        compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
             this.saveMyPersonalisedNotification();
@@ -163,8 +161,8 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
 
     @Override
     protected void checkPreviousCheckBox(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
-        String previousCompactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
-        if (notificationsSwitch.isChecked() && !previousCompactCategoriesBuilder.equals(savedCompactCategoriesBuilder)) {
+        compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+        if (notificationsSwitch.isChecked() && !compactCategoriesBuilder.equals(savedCompactCategoriesBuilder)) {
             notificationsSwitch.setChecked(false);
         }
     }
