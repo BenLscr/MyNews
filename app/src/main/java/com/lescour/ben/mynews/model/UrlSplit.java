@@ -68,10 +68,6 @@ public class UrlSplit implements Parcelable {
         this.sort = sort;
     }
 
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
     public String getPeriod() {
         return period;
     }
