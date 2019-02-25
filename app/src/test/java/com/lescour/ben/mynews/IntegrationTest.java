@@ -84,7 +84,7 @@ public class IntegrationTest {
     public void checkSectionAndSubSection_ArticleSearch() {
         ArticleSearchRecyclerViewAdapter articleSearchRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(articles, mock(BaseFragment.OnListFragmentInteractionListener.class), glide);
 
-        assertEquals("U.S.  Politics", articleSearchRecyclerViewAdapter.getSectionAndSubsection(mArticle));
+        assertEquals("U.S. > Politics", articleSearchRecyclerViewAdapter.getSectionAndSubsection(mArticle));
     }
 }
 
