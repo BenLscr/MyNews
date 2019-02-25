@@ -19,8 +19,6 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class MostPopularFragment extends BaseFragment {
 
-    private String period = "7";
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -39,7 +37,7 @@ public class MostPopularFragment extends BaseFragment {
     @Override
     protected void setUrlSplit() {
         mUrlSplit = new UrlSplit();
-        mUrlSplit.setPeriod(period);
+        mUrlSplit.setPeriod("7");
     }
 
     @Override
