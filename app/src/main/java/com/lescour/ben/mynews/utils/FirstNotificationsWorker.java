@@ -31,6 +31,6 @@ public class FirstNotificationsWorker extends Worker {
         notificationsBuilder.setInputData(source);
         PeriodicWorkRequest notificationsWork = notificationsBuilder.build();
         WorkManager.getInstance().enqueue(notificationsWork);
-        return null;
+        return Result.success();
     }
 }
