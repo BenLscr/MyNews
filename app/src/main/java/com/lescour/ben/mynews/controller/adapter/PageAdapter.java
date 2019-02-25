@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
  */
 public class PageAdapter extends FragmentPagerAdapter {
 
-    public PageAdapter(FragmentManager mgr) {
+    protected PageAdapter(FragmentManager mgr) {
         super(mgr);
     }
 
@@ -30,7 +30,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 2: //Page number 3
                 return ArticleSearchFragment.newInstance(1);
             default:
-                return null;
+                throw new IllegalArgumentException("unexpected position: " + position);
         }
     }
 
