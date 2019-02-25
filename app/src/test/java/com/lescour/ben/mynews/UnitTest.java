@@ -46,7 +46,7 @@ public class UnitTest {
     public void checkCategoriesBuilder() {
         BaseCustomSearchAndCategories baseCustomSearchAndCategories = new BaseCustomSearchAndCategories() {
             @Override
-            protected void checkPreviousParam() {
+            protected void checkPreviousCheckBox(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
 
             }
         };
