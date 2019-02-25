@@ -44,8 +44,20 @@ public class IntegrationTest {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
         String beginDate = format.format(calendar2.getTime());
 
-    assertEquals(beginDate, notificationsWorker.setYesterdayToBeginDate(calendar));
-    }*/
+        assertEquals(beginDate, notificationsWorker.setYesterdayToBeginDate(calendar));
+    }
+
+
+    @Test
+    public void labelTest() {
+        CustomActivity customActivity = new CustomActivity();
+
+        if (mUrlSplit.getQuery() != null) {
+            assertEquals(mUrlSplit.getQuery(),customActivity.getCorrectLabel(mUrlSplit));
+        } else {
+            assertEquals("Business",customActivity.getCorrectLabel(mUrlSplit));
+        }
+    }
 }
 
 
