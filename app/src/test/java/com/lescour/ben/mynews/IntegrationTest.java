@@ -8,6 +8,7 @@ import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.UrlSplit;
 import com.lescour.ben.mynews.utils.NotificationsWorker;
+import com.lescour.ben.mynews.view.ArticleSearchRecyclerViewAdapter;
 import com.lescour.ben.mynews.view.TopStoriesRecyclerViewAdapter;
 
 import org.junit.Before;
@@ -45,6 +46,8 @@ public class IntegrationTest {
         mArticle = new Article();
         mArticle.setSection("World");
         mArticle.setSubsection("Asia Pacific");
+        mArticle.setSectionName("U.S.");
+        mArticle.setSubsectoinName("Politics");
     }
 
     @Test
@@ -71,10 +74,17 @@ public class IntegrationTest {
     }
 
     @Test
-    public void checkSectionAndSubsection(){
+    public void checkSectionAndSubsection_TopStories() {
         TopStoriesRecyclerViewAdapter topStoriesRecyclerViewAdapter = new TopStoriesRecyclerViewAdapter(articles, mock(BaseFragment.OnListFragmentInteractionListener.class), glide);
 
         assertEquals("World > Asia Pacific", topStoriesRecyclerViewAdapter.getSectionAndSubsection(mArticle));
+    }
+
+    @Test
+    public void checkSectionAndSubSection_ArticleSearch() {
+        ArticleSearchRecyclerViewAdapter articleSearchRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(articles, mock(BaseFragment.OnListFragmentInteractionListener.class), glide);
+
+        assertEquals("U.S.  Politics", articleSearchRecyclerViewAdapter.getSectionAndSubsection(mArticle));
     }
 }
 
