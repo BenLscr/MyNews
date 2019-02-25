@@ -25,23 +25,11 @@ public class Multimedium {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getSubType() {
         return subType;
     }
 
-    public void setSubType(String subType) {
-        this.subType = subType;
-    }
-
     public String getFormat() {
         return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
     }
 }

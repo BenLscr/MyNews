@@ -76,63 +76,32 @@ public class Article {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
     public String getPublishedDate() {
         return publishedDate;
-    }
-
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
     }
 
     public List<Multimedium> getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(List<Multimedium> multimedia) {
-        this.multimedia = multimedia;
-    }
-
     public List<Medium> getMedia() {
         return media;
-    }
-
-    public void setMedia(List<Medium> media) {
-        this.media = media;
     }
 
     public String getWebUrl() {
         return webUrl;
     }
 
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
-    }
-
     public Headline getHeadline() {
         return headline;
     }
 
-    public void setHeadline(Headline headline) {
-        this.headline = headline;
-    }
-
     public String getPubDate() {
         return pubDate;
-    }
-
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
     }
 
     public String getSectionName() {

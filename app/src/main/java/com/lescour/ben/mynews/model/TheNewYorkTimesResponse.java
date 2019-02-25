@@ -32,8 +32,4 @@ public class TheNewYorkTimesResponse {
         return response;
     }
 
-    public void setResponse(Response response) {
-        this.response = response;
-    }
-
 }
