@@ -19,8 +19,6 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class TopStoriesFragment extends BaseFragment {
 
-    private String section = "home";
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -39,7 +37,7 @@ public class TopStoriesFragment extends BaseFragment {
     @Override
     protected void setUrlSplit() {
         mUrlSplit = new UrlSplit();
-        mUrlSplit.setSection(section);
+        mUrlSplit.setSection("home");
     }
 
     @Override
