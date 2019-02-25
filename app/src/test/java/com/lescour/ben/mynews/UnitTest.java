@@ -45,6 +45,10 @@ public class UnitTest {
     @Test
     public void checkCategoriesBuilder() {
         BaseCustomSearchAndCategories baseCustomSearchAndCategories = new BaseCustomSearchAndCategories() {
+            @Override
+            protected void checkPreviousParam() {
+
+            }
         };
         String arts = "\"arts\"";
         String business = null;
