@@ -20,9 +20,6 @@ import io.reactivex.observers.DisposableObserver;
  */
 public class ArticleSearchFragment extends BaseFragment {
 
-    private String query = "science";
-    private String sort = "newest";
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -46,8 +43,8 @@ public class ArticleSearchFragment extends BaseFragment {
                 mUrlSplit = bundle.getParcelable("CustomToArticleSearchFragment");
             } else {
                 mUrlSplit = new UrlSplit();
-                mUrlSplit.setQuery(query);
-                mUrlSplit.setSort(sort);
+                mUrlSplit.setQuery("science");
+                mUrlSplit.setSort("newest");
             }
         }
     }
