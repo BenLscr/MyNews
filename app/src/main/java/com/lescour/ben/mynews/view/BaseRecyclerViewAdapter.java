@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     protected List<Article> articles;
-    protected BaseFragment.OnListFragmentInteractionListener mListener;
+    BaseFragment.OnListFragmentInteractionListener mListener;
     protected RequestManager glide;
 
     protected abstract void updateWithArticle(Article article, RequestManager glide, ViewHolder holder);
