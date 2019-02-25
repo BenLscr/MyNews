@@ -45,7 +45,7 @@ public class TopStoriesRecyclerViewAdapter extends BaseRecyclerViewAdapter {
 
     public String getSectionAndSubsection(Article article) {
         String str;
-        if (article.getSubsection() == null) {
+        if (article.getSubsection().isEmpty()) {
             str = article.getSection();
         } else {
             str = article.getSection() + " > " + article.getSubsection();
