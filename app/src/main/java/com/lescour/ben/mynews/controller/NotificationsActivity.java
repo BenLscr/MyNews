@@ -2,6 +2,8 @@ package com.lescour.ben.mynews.controller;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -38,6 +40,23 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         this.setMyPersonalisedNotification();
 
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                checkPreviousEditText();
+            }
+        });
 
         notificationsSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -132,6 +151,13 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.remove("KEY_SAVE_NOTIFICATION");
         editor.apply();
+    }
+
+    private void checkPreviousEditText() {
+        String previousQuery = editText.getText().toString();
+        if (mUrlSplit.getQuery() != null && !mUrlSplit.getQuery().equals(previousQuery)) {
+            notificationsSwitch.setChecked(false);
+        }
     }
 
     @Override
