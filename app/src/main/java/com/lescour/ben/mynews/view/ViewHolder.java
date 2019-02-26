@@ -28,10 +28,4 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         mView = view;
         ButterKnife.bind(this, view);
     }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return super.toString() + " '" + articleDate.getText() + "'";
-    }
 }
