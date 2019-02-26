@@ -108,7 +108,6 @@ public class NotificationsWorker extends Worker {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
             notificationChannel.setDescription("Channel description");
             notificationChannel.enableLights(true);
-            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             notificationChannel.enableVibration(true);
             notificationManager.createNotificationChannel(notificationChannel);
         }
