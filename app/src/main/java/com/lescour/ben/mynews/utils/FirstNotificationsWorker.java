@@ -16,10 +16,17 @@ import androidx.work.WorkerParameters;
  */
 public class FirstNotificationsWorker extends Worker {
 
+    /**
+     * Default constructor.
+     */
     public FirstNotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
+    /**
+     * When is called, set a PeriodicWorkRequest. This PeriodicRequest send a request every day.
+     * This method is called on a background thread.
+     */
     @NonNull
     @Override
     public Result doWork() {
