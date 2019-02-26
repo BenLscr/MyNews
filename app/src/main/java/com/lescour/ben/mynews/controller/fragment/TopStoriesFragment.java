@@ -26,6 +26,11 @@ public class TopStoriesFragment extends BaseFragment {
     public TopStoriesFragment() {
     }
 
+    /**
+     * Initialise a new instance of this fragment.
+     * @param columnCount Column number
+     * @return This new fragment
+     */
     public static TopStoriesFragment newInstance(int columnCount) {
         TopStoriesFragment fragment = new TopStoriesFragment();
         Bundle args = new Bundle();
