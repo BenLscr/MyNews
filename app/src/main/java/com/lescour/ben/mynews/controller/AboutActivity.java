@@ -35,6 +35,11 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called whenever the user chooses to navigate Up within your application's
+     * activity hierarchy from the action bar.
+     * @return True if Up navigation completed successfully and this Activity was finished.
+     */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
