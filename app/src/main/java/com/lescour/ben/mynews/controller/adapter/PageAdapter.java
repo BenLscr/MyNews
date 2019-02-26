@@ -1,7 +1,7 @@
 package com.lescour.ben.mynews.controller.adapter;
 
-import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.ArticleSearchFragment;
+import com.lescour.ben.mynews.controller.fragment.MostPopularFragment;
 import com.lescour.ben.mynews.controller.fragment.TopStoriesFragment;
 
 import androidx.annotation.NonNull;
@@ -19,6 +19,11 @@ public class PageAdapter extends FragmentPagerAdapter {
         super(mgr);
     }
 
+    /**
+     * Show fragment
+     * @param position Corresponding number of page
+     * @return Fragment to show
+     */
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -34,11 +39,19 @@ public class PageAdapter extends FragmentPagerAdapter {
         }
     }
 
+    /**
+     * @return Number of pages to show
+     */
     @Override
     public int getCount() {
-        return(3); //Number of page to show
+        return(3);
     }
 
+    /**
+     * Set titles to pages
+     * @param position Corresponding number of page
+     * @return Title of page
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
