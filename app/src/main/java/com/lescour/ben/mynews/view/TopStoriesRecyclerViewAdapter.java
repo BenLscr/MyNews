@@ -12,6 +12,9 @@ public class TopStoriesRecyclerViewAdapter extends BaseRecyclerViewAdapter {
 
     private String imgUrl;
 
+    /**
+     * Default constructor.
+     */
     public TopStoriesRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
         mListener = listener;
@@ -43,6 +46,11 @@ public class TopStoriesRecyclerViewAdapter extends BaseRecyclerViewAdapter {
         } while (!imgFound);
     }
 
+    /**
+     * Set section name of article. Is add subsection name if isn't empty.
+     * @param article The current article.
+     * @return String with section (and subsection name if isn't empty)
+     */
     public String getSectionAndSubsection(Article article) {
         String str;
         if (article.getSubsection().isEmpty()) {
