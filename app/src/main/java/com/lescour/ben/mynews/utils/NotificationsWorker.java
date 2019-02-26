@@ -34,10 +34,16 @@ public class NotificationsWorker extends Worker {
     private UrlSplit mUrlSplit;
     private Disposable disposable;
 
+    /**
+     * Default constructor.
+     */
     public NotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
+    /**
+     * When is called, execute setParams() and executeHttpRequestWithRetrofit().
+     */
     @NonNull
     @Override
     public Result doWork() {
@@ -54,6 +60,11 @@ public class NotificationsWorker extends Worker {
         mUrlSplit.setBeginDate(setYesterdayToBeginDate(calendar));
     }
 
+    /**
+     * Subtract one day of the calendar and change his format.
+     * @param calendar The current calendar.
+     * @return New calendar in a new format.
+     */
     public String setYesterdayToBeginDate(Calendar calendar) {
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
@@ -87,6 +98,9 @@ public class NotificationsWorker extends Worker {
         });
     }
 
+    /**
+     * This method is invoked when this Worker has been told to stop.
+     */
     @Override
     public void onStopped() {
         super.onStopped();
