@@ -106,6 +106,9 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
 
     private void configureAlarmManager() {
         mUrlSplit.setQuery(editText.getText().toString());
+        if (compactCategoriesBuilder == null) {
+            compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+        }
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
             this.saveMyPersonalisedNotification();
