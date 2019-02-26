@@ -41,6 +41,11 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called whenever the user chooses to navigate Up within your application's
+     * activity hierarchy from the action bar.
+     * @return True if Up navigation completed successfully and this Activity was finished.
+     */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -49,6 +54,12 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
 
 //////////    CheckBox   //////////
 
+    /**
+     * When a checkbox is checked, set a string to a String variable.
+     * When a checkbox isn't checked, set null to a String variable.
+     * Call method checkPreviousCheckBox() when a change is operated.
+     * @param checkBox The specified checkbox.
+     */
     public void checkCheckBox(View checkBox) {
         switch (checkBox.getId()){
             case R.id.checkbox_arts :
@@ -97,6 +108,17 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
         checkPreviousCheckBox(arts, business, entrepreneurs, politics, sports, travel);
     }
 
+    /**
+     * A StringBuilder to create a part of the filter_query used in url of API.
+     * Add every String variable if their non-null.
+     * @param arts Correspond to the String variable arts.
+     * @param business Correspond to the String variable arts business.
+     * @param entrepreneurs Correspond to the String variable entrepreneurs.
+     * @param politics Correspond to the String variable politics.
+     * @param sports Correspond to the String variable sports.
+     * @param travel Correspond to the String variable travel.
+     * @return The new StringBuilder in String format.
+     */
     public String  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
         StringBuilder stringBuilder = new StringBuilder();
         if (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null) {
