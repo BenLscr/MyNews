@@ -55,6 +55,11 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         }
     }
 
+    /**
+     * Decide what label to set. In priority the query is set if he isn't null.
+     * @param mUrlSplit The current UrlSplit. It contains the filter_query and query.
+     * @return The label to set.
+     */
     public String getCorrectLabel(UrlSplit mUrlSplit) {
         if (mUrlSplit.getQuery() != null) {
             return mUrlSplit.getQuery();
