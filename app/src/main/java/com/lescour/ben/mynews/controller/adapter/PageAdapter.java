@@ -20,9 +20,9 @@ public class PageAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Show fragment
-     * @param position Corresponding number of page
-     * @return Fragment to show
+     * Return the Fragment associated with a specified position.
+     * @param position Correspond to a specified number.
+     * @return Fragment to show.
      */
     @NonNull
     @Override
@@ -48,9 +48,9 @@ public class PageAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Set titles to pages
-     * @param position Corresponding number of page
-     * @return Title of page
+     * Set titles to pages.
+     * @param position Correspond to a specified number.
+     * @return Title of page.
      */
     @Nullable
     @Override
