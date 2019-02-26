@@ -26,6 +26,11 @@ public class MostPopularFragment extends BaseFragment {
     public MostPopularFragment() {
     }
 
+    /**
+     * Initialise a new instance of this fragment.
+     * @param columnCount Column number
+     * @return This new fragment
+     */
     public static MostPopularFragment newInstance(int columnCount) {
         MostPopularFragment fragment = new MostPopularFragment();
         Bundle args = new Bundle();
