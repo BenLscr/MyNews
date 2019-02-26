@@ -12,6 +12,9 @@ public class ArticleSearchRecyclerViewAdapter extends BaseRecyclerViewAdapter {
 
     private String imgUrl;
 
+    /**
+     * Default constructor.
+     */
     public ArticleSearchRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
         mListener = listener;
@@ -43,6 +46,11 @@ public class ArticleSearchRecyclerViewAdapter extends BaseRecyclerViewAdapter {
         } while (!imgFound);
     }
 
+    /**
+     * Set section name of article. Is add subsection name if isn't null.
+     * @param article The current article.
+     * @return String with section (and subsection name if non-null)
+     */
     public String getSectionAndSubsection(Article article) {
         String str;
         if (article.getSubsectoinName() == null) {
