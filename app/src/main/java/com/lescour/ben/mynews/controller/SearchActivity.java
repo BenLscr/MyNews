@@ -81,6 +81,9 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
 
 //////////    BeginDate   //////////
 
+    /**
+     * Called when the user click on the button begin date.
+     */
     @OnClick(R.id.select_begin_date)
     public void beginDate() {
         initBeginDatePickerDialog();
@@ -122,6 +125,9 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
 
 //////////    EndDate   //////////
 
+    /**
+     * Called when the user click on the button end date.
+     */
     @OnClick(R.id.select_end_date)
     public void endDate() {
         initEndDatePickerDialog();
@@ -163,6 +169,11 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
 
 //////////    Search   //////////
 
+    /**
+     * Called when the user click on the button search. Need a query and a compactCategoriesBuilder
+     * to launch the search and start a new activity. If query or compactCategoriesBuilder isn't correct
+     * set a toast with the reason.
+     */
     @OnClick(R.id.launch_search_button)
     public void launchPersonaliseSearch() {
         mUrlSplit.setQuery(editText.getText().toString());
