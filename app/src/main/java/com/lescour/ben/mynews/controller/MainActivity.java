@@ -50,12 +50,19 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
     }
 
+    /**
+     * Inflate the menu and add it to the Toolbar.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;
     }
 
+    /**
+     * Handle actions on menu items.
+     * @param item Item selected.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -86,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements
         tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 
+    /**
+     * Called when the user select an article. Get the url article, send it to WebViewActivity
+     * and launch it.
+     * @param article Article selected.
+     */
     @Override
     public void onListFragmentInteraction(Article article) {
         Intent webViewActivity = new Intent(this, WebViewActivity.class);
