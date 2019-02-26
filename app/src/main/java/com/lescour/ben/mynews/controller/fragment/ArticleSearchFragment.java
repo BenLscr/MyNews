@@ -27,6 +27,11 @@ public class ArticleSearchFragment extends BaseFragment {
     public ArticleSearchFragment() {
     }
 
+    /**
+     * Initialise a new instance of this fragment.
+     * @param columnCount Column number
+     * @return This new fragment
+     */
     public static ArticleSearchFragment newInstance(int columnCount) {
         ArticleSearchFragment fragment = new ArticleSearchFragment();
         Bundle args = new Bundle();
