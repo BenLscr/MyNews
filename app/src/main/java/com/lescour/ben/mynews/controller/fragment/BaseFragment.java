@@ -39,6 +39,11 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void executeHttpRequestWithRetrofit();
     protected abstract void setAppropriateAdapter();
 
+    /**
+     * Called to do initial creation of a fragment.
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,16 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment.
+     * @param container This is the parent view that the fragment's
+     * UI should be attached to.
+     * @param savedInstanceState This fragment is being re-constructed from
+     * a previous saved state as given here.
+     * @return Return the View for the fragment's UI.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +88,9 @@ public abstract class BaseFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Called when a fragment is first attached to its context.
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -84,12 +102,18 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    /**
+     * Called when the fragment is no longer attached to its activity.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+    /**
+     * Called when the fragment is no longer in use.
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
