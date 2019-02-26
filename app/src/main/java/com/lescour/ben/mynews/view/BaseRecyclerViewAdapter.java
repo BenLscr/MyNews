@@ -30,6 +30,14 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
     protected abstract void updateWithArticle(Article article, RequestManager glide, ViewHolder holder);
     protected abstract String getRawDate(Article article);
 
+    /**
+     * Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent
+     * an item. This new ViewHolder will be used to display items of the adapter. Since it will be re-used
+     * to display different items in the data set.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     * @param viewType The view type of the new View.
+     * @return A new ViewHolder that holds a View of the given view type.
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +46,13 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
         return new ViewHolder(view);
     }
 
+    /**
+     * Called by RecyclerView to display the data at the specified position. This method
+     * update the contents of the ViewHolder to reflect the item at the given position.
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     * item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.article = articles.get(position);
@@ -54,6 +69,11 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
         });
     }
 
+    /**
+     * Transform the date from api to a better visual date.
+     * @param rawDate The date get by the API.
+     * @return The date in a new format
+     */
     public String getDateWhitNewFormat(String rawDate) {
         SimpleDateFormat rawFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat newFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -67,6 +87,10 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
         return dateWithNewFormat;
     }
 
+    /**
+     * Returns the total number of articles in the data set held by the adapter.
+     * @return The total number of articles in this adapter.
+     */
     @Override
     public int getItemCount() {
         return articles.size();
