@@ -16,6 +16,9 @@ public class UrlSplit implements Parcelable {
     private String sort;
     private String apiKey = "4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6";
 
+    /**
+     * Default constructor.
+     */
     public UrlSplit() {
     }
 
@@ -28,12 +31,23 @@ public class UrlSplit implements Parcelable {
         apiKey = in.readString();
     }
 
+    /**
+     * Generate instance of UrlSplit Parcelable.
+     */
     public static final Creator<UrlSplit> CREATOR = new Creator<UrlSplit>() {
+        /**
+         * Create a new instance of the UrlSplit Parcelable class, instantiating it from the given
+         * Parcel whose data had previously been written by writeToParcel().
+         */
         @Override
         public UrlSplit createFromParcel(Parcel in) {
             return new UrlSplit(in);
         }
 
+        /**
+         * Create a new array of the UrlSplit Parcelable class.
+         * @param size Size of array.
+         */
         @Override
         public UrlSplit[] newArray(int size) {
             return new UrlSplit[size];
@@ -100,11 +114,20 @@ public class UrlSplit implements Parcelable {
         return apiKey;
     }
 
+    /**
+     * Describe the kinds of special objects contained in this Parcelable instance's
+     * marshaled representation.
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * Flatten this object in to a Parcel.
+     * @param dest The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(query);
