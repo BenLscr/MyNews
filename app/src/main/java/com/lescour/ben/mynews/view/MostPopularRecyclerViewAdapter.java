@@ -12,6 +12,9 @@ public class MostPopularRecyclerViewAdapter extends BaseRecyclerViewAdapter{
 
     private String imgUrl;
 
+    /**
+     * Default constructor.
+     */
     public MostPopularRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
         this.articles = articles;
         mListener = listener;
