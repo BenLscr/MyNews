@@ -23,6 +23,8 @@ public class UrlSplit implements Parcelable {
     }
 
     protected UrlSplit(Parcel in) {
+        period = in.readString();
+        section = in.readString();
         query = in.readString();
         filter_query = in.readString();
         beginDate = in.readString();
@@ -130,6 +132,8 @@ public class UrlSplit implements Parcelable {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(period);
+        dest.writeString(section);
         dest.writeString(query);
         dest.writeString(filter_query);
         dest.writeString(beginDate);
