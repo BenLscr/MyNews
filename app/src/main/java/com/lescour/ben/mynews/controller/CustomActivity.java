@@ -50,8 +50,6 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         Intent intent = getIntent();
         if (intent != null) {
             mUrlSplit = intent.getParcelableExtra("SearchToCustom");
-        } else {
-            mUrlSplit = new UrlSplit();
         }
     }
 
