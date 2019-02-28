@@ -33,7 +33,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         setContentView(R.layout.custom_activity);
         ButterKnife.bind(this);
         this.configureToolbar();
-        this.checkIfIntentAnIntentIsAvailable();
+        this.checkIfAnIntentIsAvailable();
         setTitle(getCorrectLabel(mUrlSplit));
         this.addFragment();
     }
@@ -46,7 +46,7 @@ public class CustomActivity extends AppCompatActivity implements BaseFragment.On
         }
     }
 
-    private void checkIfIntentAnIntentIsAvailable(){
+    private void checkIfAnIntentIsAvailable(){
         Intent intent = getIntent();
         if (intent != null) {
             mUrlSplit = intent.getParcelableExtra("SearchToCustom");
