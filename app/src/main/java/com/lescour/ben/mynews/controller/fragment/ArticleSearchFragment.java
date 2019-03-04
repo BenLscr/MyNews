@@ -56,7 +56,8 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.mRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        this.mRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles,
+                mListener, Glide.with(this));
         recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 
@@ -74,7 +75,8 @@ public class ArticleSearchFragment extends BaseFragment {
     protected void executeHttpRequestWithRetrofit(){
         this.disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDate(),
                 mUrlSplit.getEndDate(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
-                mUrlSplit.getSort(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+                mUrlSplit.getSort(), mUrlSplit.getApiKey())
+                .subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");

@@ -95,7 +95,8 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 beginDateSetListener,
                 year, month, day);
-        Objects.requireNonNull(datePickerDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(datePickerDialog.getWindow())
+                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
     }
 
@@ -107,7 +108,8 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
                 if (beginDate.before(endDate) || beginDate.equals(endDate)) {
                     showAndSaveBeginDateInUrlFormat(beginDateToShow);
                 } else {
-                    Toast.makeText(this, "Begin date can't be after end date.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Begin date can't be after end date.",
+                            Toast.LENGTH_LONG).show();
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -139,7 +141,8 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 endDateSetListener,
                 year, month, day);
-        Objects.requireNonNull(datePickerDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(datePickerDialog.getWindow())
+                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
     }
 
@@ -151,7 +154,8 @@ public class SearchActivity extends BaseCustomSearchAndCategories {
                 if (beginDate.before(endDate) || beginDate.equals(endDate)) {
                     showAndSaveEndDateInUrlFormat(endDateToShow);
                 } else {
-                    Toast.makeText(this, "End date can't be before begin date.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "End date can't be before begin date.",
+                            Toast.LENGTH_LONG).show();
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

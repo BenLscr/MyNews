@@ -70,7 +70,8 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
 
     private void setMyPersonalisedNotification() {
         mSharedPreferences = getSharedPreferences("myPersonalisedNotification", MODE_PRIVATE);
-        myPersonalisedNotification = mSharedPreferences.getString("KEY_SAVE_NOTIFICATION", "{'apiKey':'4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6'}");
+        myPersonalisedNotification = mSharedPreferences.getString("KEY_SAVE_NOTIFICATION",
+                "{'apiKey':'4cKaGJtqJJDtrVx14QNFiGbfQI6tqEP6'}");
         Gson gson = new Gson();
         mUrlSplit = gson.fromJson(myPersonalisedNotification, UrlSplit.class);
         if (mUrlSplit.getQuery() != null && mUrlSplit.getFilter_query() != null) {
@@ -100,14 +101,16 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
                 travel = "\"travel\"";
             }
             notificationsSwitch.setChecked(true);
-            savedCompactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+            savedCompactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business,
+                    entrepreneurs, politics, sports, travel);
         }
     }
 
     private void configureAlarmManager() {
         mUrlSplit.setQuery(editText.getText().toString());
         if (compactCategoriesBuilder == null) {
-            compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
+            compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business,
+                    entrepreneurs, politics, sports, travel);
         }
         if (!mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
             mUrlSplit.setFilter_query("news_desk:(" + compactCategoriesBuilder + ")");
@@ -119,10 +122,12 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
             notificationsSwitch.setChecked(false);
         }
         else if (!mUrlSplit.getQuery().equals("") && compactCategoriesBuilder.equals("")) {
-            Toast.makeText(this, "Please choose at least one category.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please choose at least one category.",
+                    Toast.LENGTH_LONG).show();
             notificationsSwitch.setChecked(false);
         } else {
-            Toast.makeText(this, "Please enter a query and choose at least one category.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter a query and choose at least one category.",
+                    Toast.LENGTH_LONG).show();
             notificationsSwitch.setChecked(false);
         }
     }
@@ -130,15 +135,18 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
     private void saveMyPersonalisedNotification() {
         Gson gson = new Gson();
         myPersonalisedNotification = gson.toJson(mUrlSplit);
-        mSharedPreferences = getSharedPreferences("myPersonalisedNotification", MODE_PRIVATE);
-        mSharedPreferences.edit().putString("KEY_SAVE_NOTIFICATION", myPersonalisedNotification).apply();
+        mSharedPreferences = getSharedPreferences("myPersonalisedNotification",
+                MODE_PRIVATE);
+        mSharedPreferences.edit().putString("KEY_SAVE_NOTIFICATION",
+                myPersonalisedNotification).apply();
     }
 
     private void startAlarm() {
         Data source = new Data.Builder()
                 .putString("workUrlSplit", myPersonalisedNotification)
                 .build();
-        OneTimeWorkRequest firstNotificationsBuilder = new OneTimeWorkRequest.Builder(FirstNotificationsWorker.class)
+        OneTimeWorkRequest firstNotificationsBuilder = new OneTimeWorkRequest
+                .Builder(FirstNotificationsWorker.class)
                 .setInitialDelay(1, TimeUnit.DAYS)
                 .setInputData(source)
                 .build();
@@ -163,9 +171,12 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
     }
 
     @Override
-    protected void checkPreviousCheckBox(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
-        compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs, politics, sports, travel);
-        if (notificationsSwitch.isChecked() && !compactCategoriesBuilder.equals(savedCompactCategoriesBuilder)) {
+    protected void checkPreviousCheckBox(String arts, String business, String entrepreneurs,
+                                         String politics, String sports, String travel) {
+        compactCategoriesBuilder = buildCompactCategoriesBuilder(arts, business, entrepreneurs,
+                politics, sports, travel);
+        if (notificationsSwitch.isChecked() && !compactCategoriesBuilder
+                .equals(savedCompactCategoriesBuilder)) {
             notificationsSwitch.setChecked(false);
         }
     }

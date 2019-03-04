@@ -37,7 +37,8 @@ public class NotificationsWorker extends Worker {
     /**
      * Default constructor.
      */
-    public NotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public NotificationsWorker(@NonNull Context context,
+                               @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
@@ -74,7 +75,8 @@ public class NotificationsWorker extends Worker {
     private void executeHttpRequestWithRetrofit() {
         disposable = TheNewYorkTimesStreams.streamFetchArticleSearch(mUrlSplit.getBeginDate(),
                 mUrlSplit.getEndDate(), mUrlSplit.getFilter_query(), mUrlSplit.getQuery(),
-                mUrlSplit.getSort(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
+                mUrlSplit.getSort(), mUrlSplit.getApiKey()).
+                subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
                 Log.e("TAG", "On Next");
@@ -119,7 +121,8 @@ public class NotificationsWorker extends Worker {
         String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                    "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
             notificationChannel.setDescription("Channel description");
             notificationChannel.enableLights(true);
             notificationChannel.enableVibration(true);

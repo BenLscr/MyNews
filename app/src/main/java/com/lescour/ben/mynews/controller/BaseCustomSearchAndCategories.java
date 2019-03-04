@@ -119,9 +119,12 @@ public abstract class BaseCustomSearchAndCategories extends AppCompatActivity {
      * @param travel Correspond to the String variable travel.
      * @return The new StringBuilder in String format.
      */
-    public String  buildCompactCategoriesBuilder(String arts, String business, String entrepreneurs, String politics, String sports, String travel) {
+    public String  buildCompactCategoriesBuilder(String arts, String business,
+                                                 String entrepreneurs, String politics,
+                                                 String sports, String travel) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (arts != null || business != null || entrepreneurs != null || politics != null || sports != null || travel != null) {
+        if (arts != null || business != null || entrepreneurs != null ||
+                politics != null || sports != null || travel != null) {
             if (arts != null) {
                 stringBuilder.append(arts);
             }

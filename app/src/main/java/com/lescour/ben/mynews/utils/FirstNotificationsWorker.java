@@ -19,7 +19,8 @@ public class FirstNotificationsWorker extends Worker {
     /**
      * Default constructor.
      */
-    public FirstNotificationsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public FirstNotificationsWorker(@NonNull Context context,
+                                    @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
@@ -34,7 +35,8 @@ public class FirstNotificationsWorker extends Worker {
         Data source = new Data.Builder()
                 .putString("workUrlSplit", myPersonalisedNotification)
                 .build();
-        PeriodicWorkRequest.Builder notificationsBuilder = new PeriodicWorkRequest.Builder(NotificationsWorker.class, 1, TimeUnit.DAYS);
+        PeriodicWorkRequest.Builder notificationsBuilder = new PeriodicWorkRequest
+                .Builder(NotificationsWorker.class, 1, TimeUnit.DAYS);
         notificationsBuilder.setInputData(source);
         PeriodicWorkRequest notificationsWork = notificationsBuilder.build();
         WorkManager.getInstance().enqueue(notificationsWork);

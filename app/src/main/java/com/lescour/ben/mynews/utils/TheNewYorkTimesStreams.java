@@ -21,8 +21,10 @@ public class TheNewYorkTimesStreams {
      * timeout() : If no data is emitted before the set time (here 10 seconds), the data emission will
      * be cut and a timeout error will be sent to Subscriber(s).
      */
-    public static Observable<TheNewYorkTimesResponse> streamFetchTopStories(String section, String apiKey){
-        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
+    public static Observable<TheNewYorkTimesResponse> streamFetchTopStories(String section,
+                                                                            String apiKey){
+        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.
+                create(TheNewYorkTimesService.class);
         return theNewYorkTimesService.getTopStories(section, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -37,8 +39,10 @@ public class TheNewYorkTimesStreams {
      * timeout() : If no data is emitted before the set time (here 10 seconds), the data emission will
      * be cut and a timeout error will be sent to Subscriber(s).
      */
-    public static Observable<TheNewYorkTimesResponse> streamFetchMostPopular(String period, String apiKey){
-        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
+    public static Observable<TheNewYorkTimesResponse> streamFetchMostPopular(String period,
+                                                                             String apiKey){
+        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit
+                .create(TheNewYorkTimesService.class);
         return theNewYorkTimesService.getMostPopular(period, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -53,9 +57,16 @@ public class TheNewYorkTimesStreams {
      * timeout() : If no data is emitted before the set time (here 10 seconds), the data emission will
      * be cut and a timeout error will be sent to Subscriber(s).
      */
-    public static Observable<TheNewYorkTimesResponse> streamFetchArticleSearch(String begin_date, String end_date, String filter_query, String query, String sort, String apiKey){
-        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit.create(TheNewYorkTimesService.class);
-        return theNewYorkTimesService.getArticleSearch(begin_date, end_date, filter_query, query, sort, apiKey)
+    public static Observable<TheNewYorkTimesResponse> streamFetchArticleSearch(String begin_date,
+                                                                               String end_date,
+                                                                               String filter_query,
+                                                                               String query,
+                                                                               String sort,
+                                                                               String apiKey){
+        TheNewYorkTimesService theNewYorkTimesService = TheNewYorkTimesService.retrofit
+                .create(TheNewYorkTimesService.class);
+        return theNewYorkTimesService.getArticleSearch(begin_date, end_date, filter_query, query,
+                sort, apiKey)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);

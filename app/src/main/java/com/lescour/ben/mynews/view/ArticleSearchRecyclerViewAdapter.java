@@ -15,7 +15,9 @@ public class ArticleSearchRecyclerViewAdapter extends BaseRecyclerViewAdapter {
     /**
      * Default constructor.
      */
-    public ArticleSearchRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
+    public ArticleSearchRecyclerViewAdapter(List<Article> articles,
+                                            BaseFragment.OnListFragmentInteractionListener listener,
+                                            RequestManager glide) {
         this.articles = articles;
         mListener = listener;
         this.glide = glide;
