@@ -28,9 +28,11 @@ jobs:
           command: android list target
           environment:
           TERM: dumb
+      - run: yes | sdkmanager --licenses || exit 0
+      - run: yes | sdkmanager --update || exit 0
       - run:
           name: Setup Emulator
-          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a" | sdkmanager --update && yes | sdkmanager --licenses
+          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
       - run:
           name: Launch Emulator
           command: |
