@@ -49,7 +49,7 @@ public class InstrumentedTest {
     @Test
     public void checkSearchActivity(){
         onView(withId(R.id.menu_activity_main_search)).perform(click());
-        onView(withId(R.id.checkbox_politics)).perform(click());
+        onView(withId(R.id.checkbox_business)).perform(click());
         onView(withId(R.id.launch_search_button)).perform(click());
         onView(withId(R.id.search_activity)).check(matches(isDisplayed()));
     }
