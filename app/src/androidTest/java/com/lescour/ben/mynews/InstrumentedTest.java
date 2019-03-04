@@ -11,7 +11,7 @@ import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.pressBack;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -34,7 +34,7 @@ public class InstrumentedTest {
     onView(withId(R.id.menu_activity_main_search)).perform(click());
 
     onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
-    onView(withId(R.id.search_query_term)).perform(pressBack());
+    onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
     onView(withId(R.id.checkbox_politics)).perform(click());
 
     onView(withId(R.id.launch_search_button)).perform(click());
