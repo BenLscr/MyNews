@@ -4,6 +4,8 @@ import com.lescour.ben.mynews.controller.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import androidx.test.rule.ActivityTestRule;
 
@@ -21,6 +23,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 
+@RunWith(JUnit4.class)
 public class InstrumentedTest {
 
     @Rule
