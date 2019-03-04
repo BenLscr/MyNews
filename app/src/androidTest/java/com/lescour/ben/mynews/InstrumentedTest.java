@@ -29,7 +29,7 @@ public class InstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    @Test
+    /**@Test
     public void searchTool_ValidForm(){
     onView(withId(R.id.menu_activity_main_search)).perform(click());
 
@@ -44,5 +44,13 @@ public class InstrumentedTest {
 
     onView(withId(R.id.launch_search_button)).perform(click());
     onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
+    }*/
+
+    @Test
+    public void checkSearchActivity(){
+        onView(withId(R.id.menu_activity_main_search)).perform(click());
+        onView(withId(R.id.checkbox_politics)).perform(click());
+        onView(withId(R.id.launch_search_button)).perform(click());
+        onView(withId(R.id.search_activity)).check(matches(isDisplayed()));
     }
 }
