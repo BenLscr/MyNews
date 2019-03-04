@@ -30,11 +30,12 @@ public class InstrumentedTest {
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void searchTool_ValidForm(){
+    public void searchTool_ValidForm() throws InterruptedException {
     onView(withId(R.id.menu_activity_main_search)).perform(click());
 
     onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
     onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
+    Thread.sleep(1000);
     onView(withId(R.id.checkbox_politics)).perform(click());
 
     onView(withId(R.id.launch_search_button)).perform(click());
