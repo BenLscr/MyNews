@@ -18,6 +18,8 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.swipeLeft;
+import static androidx.test.espresso.action.ViewActions.swipeRight;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -48,6 +50,31 @@ public class InstrumentedTest {
                                 1),
                         isDisplayed()));
         horizontalScrollView.check(matches(isDisplayed()));
+    }
+
+    /**
+     * Try many swipes on the ViewPager.
+     */
+    @Test
+    public void checkViewPager() {
+        wait(700);
+        onView(withId(R.id.activity_main_viewpager)).perform(swipeLeft());
+        wait(700);
+        onView(withId(R.id.activity_main_viewpager)).perform(swipeLeft());
+        wait(700);
+        onView(withId(R.id.activity_main_viewpager)).perform(swipeRight());
+        wait(700);
+        onView(withId(R.id.activity_main_viewpager)).perform(swipeRight());
+    }
+
+
+
+    private void wait(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Matcher<View> childAtPosition(
