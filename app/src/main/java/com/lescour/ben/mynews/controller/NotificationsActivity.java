@@ -118,15 +118,15 @@ public class NotificationsActivity extends BaseCustomSearchAndCategories {
             startAlarm();
         }
         else if (mUrlSplit.getQuery().equals("") && !compactCategoriesBuilder.equals("")) {
-            Toast.makeText(this, "Please enter a query.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_query, Toast.LENGTH_LONG).show();
             notificationsSwitch.setChecked(false);
         }
         else if (!mUrlSplit.getQuery().equals("") && compactCategoriesBuilder.equals("")) {
-            Toast.makeText(this, "Please choose at least one category.",
+            Toast.makeText(this, R.string.no_category,
                     Toast.LENGTH_LONG).show();
             notificationsSwitch.setChecked(false);
         } else {
-            Toast.makeText(this, "Please enter a query and choose at least one category.",
+            Toast.makeText(this, R.string.no_query_and_category,
                     Toast.LENGTH_LONG).show();
             notificationsSwitch.setChecked(false);
         }
