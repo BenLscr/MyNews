@@ -75,33 +75,35 @@ public class InstrumentedTest {
     }
 
     @Test
-    public void searchTool_ValidForm(){
+    public void searchTool_ValidForm() {
         onView(withId(R.id.menu_activity_main_search)).perform(click());
 
         onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
         onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
-        onView(withId(R.id.checkbox_politics)).check(matches(allOf( isEnabled(), isClickable()))).perform(
-                new ViewAction() {
-                    @Override
-                    public Matcher<View> getConstraints() {
-                        return isEnabled(); // no constraints, they are checked above
-                    }
+        onView(withId(R.id.checkbox_politics)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
 
-                    @Override
-                    public String getDescription() {
-                        return "click plus button";
-                    }
-
-                    @Override
-                    public void perform(UiController uiController, View view) {
-                        view.performClick();
-                    }
-                }
-        );
-
-        onView(withId(R.id.launch_search_button)).perform(click());
+        onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
         onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
-     }
+    }
+
+    private ViewAction doAClick() {
+       return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isEnabled(); // no constraints, they are checked above
+            }
+
+            @Override
+            public String getDescription() {
+                return "click plus button";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                view.performClick();
+            }
+        };
+    }
 
     private void wait(int time) {
         try {
