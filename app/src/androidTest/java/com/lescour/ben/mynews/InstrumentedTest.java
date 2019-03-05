@@ -89,18 +89,33 @@ public class InstrumentedTest {
     }
 
     /**
-     * Fail to complete the form of the search tool with no query.
+     * Fail to complete the form of the search tool with no query selected.
      * Check the toast.
      */
     @Test
     public void searchTool_InvalidForm_NoQuery() {
         onView(withId(R.id.menu_activity_main_search)).perform(click());
 
-        onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
         onView(withId(R.id.checkbox_politics)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
 
         onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
         onView(withText(R.string.no_query)).inRoot(withDecorView(not(mainActivityTestRule.getActivity()
+                .getWindow().getDecorView()))).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Fail to complete the form of the search tool with no category selected.
+     * Check the toast.
+     */
+    @Test
+    public void searchTool_InvalidForm_NoCategory() {
+        onView(withId(R.id.menu_activity_main_search)).perform(click());
+
+        onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
+        onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
+        onView(withText(R.string.no_category)).inRoot(withDecorView(not(mainActivityTestRule.getActivity()
                 .getWindow().getDecorView()))).check(matches(isDisplayed()));
     }
 
