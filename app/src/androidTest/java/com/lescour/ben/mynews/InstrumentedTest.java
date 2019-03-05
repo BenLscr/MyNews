@@ -18,14 +18,10 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -39,34 +35,19 @@ public class InstrumentedTest {
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     /**
-     * Start from the home screen, open the menu drawer and click on Business(from Other categories)
-     * and open a new view (custom_view) and check if a list of article is displayed.
+     * Check if PagerAdapter work.
      */
     @Test
-    public void tryAOtherCategory_InMenuDrawer() {
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
+    public void TabsIsDisplayed() {
+        ViewInteraction horizontalScrollView = onView(
+                allOf(withId(R.id.activity_main_tabs),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main_toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                0)),
+                                childAtPosition(
+                                        withId(R.id.activity_main_drawer_layout),
+                                        0),
                                 1),
                         isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.activity_main_nav_view),
-                                        0)),
-                        8),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-
-        onView(withId(R.id.list)).check(matches(isDisplayed()));
-
+        horizontalScrollView.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
