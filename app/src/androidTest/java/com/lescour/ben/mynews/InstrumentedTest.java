@@ -26,11 +26,14 @@ import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.action.ViewActions.swipeRight;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -70,6 +73,9 @@ public class InstrumentedTest {
         onView(withId(R.id.activity_main_viewpager)).perform(swipeRight());
     }
 
+    /**
+     * Complete the form of search tool with query and category
+     */
     @Test
     public void searchTool_ValidForm() {
         onView(withId(R.id.menu_activity_main_search)).perform(click());
@@ -80,6 +86,22 @@ public class InstrumentedTest {
 
         onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
         onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Fail to complete the form of the search tool with no query.
+     * Check the toast.
+     */
+    @Test
+    public void searchTool_InvalidForm_NoQuery() {
+        onView(withId(R.id.menu_activity_main_search)).perform(click());
+
+        onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
+        onView(withId(R.id.checkbox_politics)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
+
+        onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
+        onView(withText(R.string.no_query)).inRoot(withDecorView(not(mainActivityTestRule.getActivity()
+                .getWindow().getDecorView()))).check(matches(isDisplayed()));
     }
 
     private ViewAction doAClick() {
