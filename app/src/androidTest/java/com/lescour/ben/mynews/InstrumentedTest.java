@@ -64,13 +64,9 @@ public class InstrumentedTest {
      */
     @Test
     public void checkViewPager() {
-        wait(700);
         onView(withId(R.id.activity_main_viewpager)).perform(swipeLeft());
-        wait(700);
         onView(withId(R.id.activity_main_viewpager)).perform(swipeLeft());
-        wait(700);
         onView(withId(R.id.activity_main_viewpager)).perform(swipeRight());
-        wait(700);
         onView(withId(R.id.activity_main_viewpager)).perform(swipeRight());
     }
 
@@ -103,14 +99,6 @@ public class InstrumentedTest {
                 view.performClick();
             }
         };
-    }
-
-    private void wait(int time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     private static Matcher<View> childAtPosition(
