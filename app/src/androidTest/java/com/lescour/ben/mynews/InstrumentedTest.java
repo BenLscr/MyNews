@@ -14,18 +14,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.action.ViewActions.swipeRight;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
 
@@ -77,7 +80,24 @@ public class InstrumentedTest {
 
         onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
         onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
-        onView(withId(R.id.checkbox_politics)).perform(scrollTo(), click());
+        onView(withId(R.id.checkbox_politics)).check(matches(allOf( isEnabled(), isClickable()))).perform(
+                new ViewAction() {
+                    @Override
+                    public Matcher<View> getConstraints() {
+                        return isEnabled(); // no constraints, they are checked above
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return "click plus button";
+                    }
+
+                    @Override
+                    public void perform(UiController uiController, View view) {
+                        view.performClick();
+                    }
+                }
+        );
 
         onView(withId(R.id.launch_search_button)).perform(click());
         onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
