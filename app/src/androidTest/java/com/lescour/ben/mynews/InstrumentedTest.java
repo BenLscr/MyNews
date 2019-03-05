@@ -138,6 +138,19 @@ public class InstrumentedTest {
         };
     }
 
+    /**
+     * Fail to complete the form of the search tool with no query and no category selected.
+     * Check the toast.
+     */
+    @Test
+    public void searchTool_InvalidForm_NoQuery_and_NoCategory() {
+        onView(withId(R.id.menu_activity_main_search)).perform(click());
+
+        onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
+        onView(withText(R.string.no_query_and_category)).inRoot(withDecorView(not(mainActivityTestRule.getActivity()
+                .getWindow().getDecorView()))).check(matches(isDisplayed()));
+    }
+
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
 
