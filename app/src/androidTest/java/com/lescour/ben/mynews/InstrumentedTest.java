@@ -30,12 +30,9 @@ import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 /**
@@ -122,6 +119,19 @@ public class InstrumentedTest {
                 .getWindow().getDecorView()))).check(matches(isDisplayed()));
     }
 
+    /**
+     * Fail to complete the form of the search tool with no query and no category selected.
+     * Check the toast.
+     */
+    @Test
+    public void searchTool_InvalidForm_NoQuery_and_NoCategory() {
+        onView(withId(R.id.menu_activity_main_search)).perform(click());
+
+        onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
+        onView(withText(R.string.no_query_and_category)).inRoot(withDecorView(not(mainActivityTestRule.getActivity()
+                .getWindow().getDecorView()))).check(matches(isDisplayed()));
+    }
+
     private ViewAction doAClick() {
        return new ViewAction() {
             @Override
@@ -139,49 +149,6 @@ public class InstrumentedTest {
                 view.performClick();
             }
         };
-    }
-
-    /**
-     * Fail to complete the form of the search tool with no query and no category selected.
-     * Check the toast.
-     */
-    @Test
-    public void searchTool_InvalidForm_NoQuery_and_NoCategory() {
-        onView(withId(R.id.menu_activity_main_search)).perform(click());
-
-        onView(withId(R.id.launch_search_button)).check(matches(allOf( isEnabled(), isClickable()))).perform(doAClick());
-        onView(withText(R.string.no_query_and_category)).inRoot(withDecorView(not(mainActivityTestRule.getActivity()
-                .getWindow().getDecorView()))).check(matches(isDisplayed()));
-    }
-
-    /**
-     * Start from the home screen, open the menu drawer and click on Business(from Other categories)
-     * and open a new view (custom_view) and check if a list of article is displayed.
-     */
-    @Test
-    public void tryAOtherCategory_InMenuDrawer() {
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Open navigation drawer"),
-                        childAtPosition(
-                                allOf(withId(R.id.activity_main_toolbar),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction navigationMenuItemView = onView(
-                allOf(childAtPosition(
-                        allOf(withId(R.id.design_navigation_view),
-                                childAtPosition(
-                                        withId(R.id.activity_main_nav_view),
-                                        0)),
-                        8),
-                        isDisplayed()));
-        navigationMenuItemView.perform(click());
-
-        onView(withId(R.id.list)).check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
