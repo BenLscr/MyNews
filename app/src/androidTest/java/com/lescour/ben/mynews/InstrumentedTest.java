@@ -20,6 +20,7 @@ import androidx.test.rule.ActivityTestRule;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.action.ViewActions.swipeRight;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -76,11 +77,8 @@ public class InstrumentedTest {
 
         onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
         onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
-        onView(withId(R.id.checkbox_politics)).perform(click());
-        wait(2000);
-        onView(withId(R.id.checkbox_politics)).perform(click());
+        onView(withId(R.id.checkbox_politics)).perform(scrollTo(), click());
 
-        wait(2000);
         onView(withId(R.id.launch_search_button)).perform(click());
         onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
      }
