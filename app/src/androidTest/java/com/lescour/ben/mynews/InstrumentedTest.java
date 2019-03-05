@@ -29,28 +29,22 @@ public class InstrumentedTest {
     @Rule
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    /**@Test
-    public void searchTool_ValidForm(){
+    /*@Test
+    public void searchTool_ValidForm() {
     onView(withId(R.id.menu_activity_main_search)).perform(click());
 
     onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
     onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        onView(withId(R.id.checkbox_politics)).perform(click());
+    onView(withId(R.id.checkbox_politics)).perform(click());
 
     onView(withId(R.id.launch_search_button)).perform(click());
     onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
     }*/
 
     @Test
-    public void checkSearchActivity(){
+    public void search_button() {
         onView(withId(R.id.menu_activity_main_search)).perform(click());
-        onView(withId(R.id.checkbox_business)).perform(click());
-        onView(withId(R.id.launch_search_button)).perform(click());
         onView(withId(R.id.search_activity)).check(matches(isDisplayed()));
     }
+
 }
