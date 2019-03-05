@@ -18,8 +18,11 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.rule.ActivityTestRule;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.action.ViewActions.swipeRight;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -67,7 +70,20 @@ public class InstrumentedTest {
         onView(withId(R.id.activity_main_viewpager)).perform(swipeRight());
     }
 
+    @Test
+    public void searchTool_ValidForm(){
+        onView(withId(R.id.menu_activity_main_search)).perform(click());
 
+        onView(withId(R.id.search_query_term)).perform(typeText("Trump"));
+        onView(withId(R.id.search_query_term)).perform(closeSoftKeyboard());
+        onView(withId(R.id.checkbox_politics)).perform(click());
+        wait(2000);
+        onView(withId(R.id.checkbox_politics)).perform(click());
+
+        wait(2000);
+        onView(withId(R.id.launch_search_button)).perform(click());
+        onView(withId(R.id.custom_activity)).check(matches(isDisplayed()));
+     }
 
     private void wait(int time) {
         try {
