@@ -2,7 +2,6 @@ package com.lescour.ben.mynews.view;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.Multimedium;
 
@@ -15,22 +14,21 @@ public class TopStoriesRecyclerViewAdapter extends BaseRecyclerViewAdapter {
     /**
      * Default constructor.
      */
-    public TopStoriesRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
+    public TopStoriesRecyclerViewAdapter(List<Article> articles, RequestManager glide) {
         this.articles = articles;
-        mListener = listener;
         this.glide = glide;
     }
 
     @Override
     protected void updateWithArticle(Article article, RequestManager glide, ViewHolder holder) {
-        if (holder.article.getMultimedia() == null) {
+        if (article.getMultimedia() == null) {
             holder.articleImg.setImageResource(R.drawable.icon_75x75);
         } else {
-            findUrlOfImgArticle(holder.article);
+            findUrlOfImgArticle(article);
             glide.load(imgUrl).into(holder.articleImg);
         }
-        holder.articleSectionSubsection.setText(getSectionAndSubsection(holder.article));
-        holder.articleTitle.setText(holder.article.getTitle());
+        holder.articleSectionSubsection.setText(getSectionAndSubsection(article));
+        holder.articleTitle.setText(article.getTitle());
     }
 
     private void findUrlOfImgArticle(Article article) {

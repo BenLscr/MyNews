@@ -9,7 +9,7 @@ import com.lescour.ben.mynews.R;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.lescour.ben.mynews.controller.MainActivity.BUNDLE_EXTRA_URL;
+import static com.lescour.ben.mynews.view.ViewHolder.BUNDLE_EXTRA_URL;
 
 
 /**

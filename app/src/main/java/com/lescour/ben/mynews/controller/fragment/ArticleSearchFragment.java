@@ -14,9 +14,6 @@ import io.reactivex.observers.DisposableObserver;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
  */
 public class ArticleSearchFragment extends BaseFragment {
 
@@ -29,13 +26,11 @@ public class ArticleSearchFragment extends BaseFragment {
 
     /**
      * Initialise a new instance of this fragment.
-     * @param columnCount Column number
      * @return This new fragment
      */
-    public static ArticleSearchFragment newInstance(int columnCount) {
+    public static ArticleSearchFragment newInstance() {
         ArticleSearchFragment fragment = new ArticleSearchFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,8 +51,8 @@ public class ArticleSearchFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.mRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(this.articles,
-                mListener, Glide.with(this));
+        this.mRecyclerViewAdapter = new ArticleSearchRecyclerViewAdapter(
+                this.articles, Glide.with(this));
         recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 

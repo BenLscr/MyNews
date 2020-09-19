@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 
 import java.text.ParseException;
@@ -24,7 +23,6 @@ import java.util.Locale;
 public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     protected List<Article> articles;
-    BaseFragment.OnListFragmentInteractionListener mListener;
     protected RequestManager glide;
 
     protected abstract void updateWithArticle(Article article, RequestManager glide, ViewHolder holder);
@@ -55,18 +53,11 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<ViewH
      */
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        holder.article = articles.get(position);
-        String rawDate = getRawDate(holder.article);
+        Article article = articles.get(position);
+        holder.article = article;
+        String rawDate = getRawDate(article);
         holder.articleDate.setText(getDateWhitNewFormat(rawDate));
-        this.updateWithArticle(holder.article, this.glide, holder);
-
-        holder.mView.setOnClickListener(v -> {
-            if (null != mListener) {
-                // Notify the active callbacks interface (the activity, if the
-                // fragment is attached to one) that an item has been selected
-                mListener.onListFragmentInteraction(holder.article);
-            }
-        });
+        this.updateWithArticle(article, this.glide, holder);
     }
 
     /**

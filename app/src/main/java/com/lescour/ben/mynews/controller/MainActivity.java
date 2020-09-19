@@ -5,14 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
-import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.adapter.PageAdapter;
-import com.lescour.ben.mynews.controller.fragment.BaseFragment.OnListFragmentInteractionListener;
-import com.lescour.ben.mynews.model.Article;
-import com.lescour.ben.mynews.model.UrlSplit;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,20 +12,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.lescour.ben.mynews.R;
+import com.lescour.ben.mynews.controller.adapter.PageAdapter;
+import com.lescour.ben.mynews.model.UrlSplit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements
-        OnListFragmentInteractionListener,
-        NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.activity_main_drawer_layout) DrawerLayout drawerLayout;
     @BindView(R.id.activity_main_toolbar) Toolbar toolbar;
     @BindView(R.id.activity_main_nav_view) NavigationView navigationView;
     @BindView(R.id.activity_main_viewpager) ViewPager viewPager;
     @BindView(R.id.activity_main_tabs) TabLayout tabs;
-
-    public static final String BUNDLE_EXTRA_URL = "BUNDLE_EXTRA_URL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,23 +87,6 @@ public class MainActivity extends AppCompatActivity implements
         viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()) {});
         tabs.setupWithViewPager(viewPager);
         tabs.setTabMode(TabLayout.MODE_FIXED);
-    }
-
-    /**
-     * Called when the user select an article. Get the url article, send it to WebViewActivity
-     * and launch it.
-     * @param article Article selected.
-     */
-    @Override
-    public void onListFragmentInteraction(Article article) {
-        Intent webViewActivity = new Intent(this, WebViewActivity.class);
-        if (article.getUrl() != null) {
-            webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getUrl());
-        }
-        else {
-            webViewActivity.putExtra(BUNDLE_EXTRA_URL, article.getWebUrl());
-        }
-        this.startActivity(webViewActivity);
     }
 
 //////////    MENU    //////////

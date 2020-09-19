@@ -1,6 +1,5 @@
 package com.lescour.ben.mynews.controller.fragment;
 
-import android.os.Bundle;
 import android.util.Log;
 
 import com.bumptech.glide.Glide;
@@ -13,9 +12,6 @@ import io.reactivex.observers.DisposableObserver;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
  */
 public class MostPopularFragment extends BaseFragment {
 
@@ -28,15 +24,10 @@ public class MostPopularFragment extends BaseFragment {
 
     /**
      * Initialise a new instance of this fragment.
-     * @param columnCount Column number
      * @return This new fragment
      */
-    public static MostPopularFragment newInstance(int columnCount) {
-        MostPopularFragment fragment = new MostPopularFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    public static MostPopularFragment newInstance() {
+        return new MostPopularFragment();
     }
 
     @Override
@@ -68,7 +59,8 @@ public class MostPopularFragment extends BaseFragment {
 
     @Override
     protected void setAppropriateAdapter() {
-        this.mRecyclerViewAdapter = new MostPopularRecyclerViewAdapter(this.articles, mListener, Glide.with(this));
+        this.mRecyclerViewAdapter = new MostPopularRecyclerViewAdapter(
+                this.articles, Glide.with(this));
         recyclerView.setAdapter(this.mRecyclerViewAdapter);
     }
 }

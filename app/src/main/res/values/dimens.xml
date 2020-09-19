@@ -4,4 +4,5 @@
     <dimen name="categories_width">40dp</dimen>
     <dimen name="bigText_help_about">20sp</dimen>
     <dimen name="text_help_about">18sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

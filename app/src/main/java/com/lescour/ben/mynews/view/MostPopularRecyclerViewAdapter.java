@@ -2,7 +2,6 @@ package com.lescour.ben.mynews.view;
 
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
-import com.lescour.ben.mynews.controller.fragment.BaseFragment;
 import com.lescour.ben.mynews.model.Article;
 import com.lescour.ben.mynews.model.MediaMetadatum;
 
@@ -10,31 +9,29 @@ import java.util.List;
 
 public class MostPopularRecyclerViewAdapter extends BaseRecyclerViewAdapter{
 
-    private String imgUrl;
-
     /**
      * Default constructor.
      */
-    public MostPopularRecyclerViewAdapter(List<Article> articles, BaseFragment.OnListFragmentInteractionListener listener, RequestManager glide) {
+    public MostPopularRecyclerViewAdapter(List<Article> articles, RequestManager glide) {
         this.articles = articles;
-        mListener = listener;
         this.glide = glide;
     }
 
     @Override
     protected void updateWithArticle(Article article, RequestManager glide, ViewHolder holder) {
-        if (holder.article.getMedia().isEmpty()) {
+        if (article.getMedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.icon_75x75);
         } else {
-            findUrlOfImgArticle(holder.article);
+            String imgUrl = findUrlOfImgArticle(article);
             glide.load(imgUrl).into(holder.articleImg);
         }
-        holder.articleSectionSubsection.setText(holder.article.getSection());
-        holder.articleTitle.setText(holder.article.getTitle());
+        holder.articleSectionSubsection.setText(article.getSection());
+        holder.articleTitle.setText(article.getTitle());
     }
 
-    private void findUrlOfImgArticle(Article article) {
+    private String findUrlOfImgArticle(Article article) {
         boolean imgFound = false;
+        String imgUrl = "";
         int i = 0;
         do {
             MediaMetadatum temporaryMediaMetadatum = article.getMedia().get(0).getMediaMetadata().get(i);
@@ -44,7 +41,7 @@ public class MostPopularRecyclerViewAdapter extends BaseRecyclerViewAdapter{
             }
             i++;
         } while (!imgFound);
-        //TODO : autant retourner l'url avec la méthode
+        return imgUrl;
     }
 
     @Override
