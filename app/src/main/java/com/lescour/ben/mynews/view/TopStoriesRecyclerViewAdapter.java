@@ -23,7 +23,7 @@ public class TopStoriesRecyclerViewAdapter extends BaseRecyclerViewAdapter {
 
     @Override
     protected void updateWithArticle(Article article, RequestManager glide, ViewHolder holder) {
-        if (holder.article.getMultimedia().isEmpty()) {
+        if (holder.article.getMultimedia() == null) {
             holder.articleImg.setImageResource(R.drawable.icon_75x75);
         } else {
             findUrlOfImgArticle(holder.article);

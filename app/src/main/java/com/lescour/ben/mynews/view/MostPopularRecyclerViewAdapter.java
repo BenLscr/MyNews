@@ -23,7 +23,7 @@ public class MostPopularRecyclerViewAdapter extends BaseRecyclerViewAdapter{
 
     @Override
     protected void updateWithArticle(Article article, RequestManager glide, ViewHolder holder) {
-        if (holder.article.getMedia().get(0).getMediaMetadata().isEmpty()) {
+        if (holder.article.getMedia().isEmpty()) {
             holder.articleImg.setImageResource(R.drawable.icon_75x75);
         } else {
             findUrlOfImgArticle(holder.article);
@@ -44,6 +44,7 @@ public class MostPopularRecyclerViewAdapter extends BaseRecyclerViewAdapter{
             }
             i++;
         } while (!imgFound);
+        //TODO : autant retourner l'url avec la méthode
     }
 
     @Override

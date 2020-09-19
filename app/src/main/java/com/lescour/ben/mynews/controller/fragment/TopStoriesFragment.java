@@ -50,18 +50,18 @@ public class TopStoriesFragment extends BaseFragment {
         this.disposable = TheNewYorkTimesStreams.streamFetchTopStories(mUrlSplit.getSection(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
-                Log.e("TAG", "On Next");
+                Log.e("TopStories", "On Next");
                 updateUI(theNewYorkTimesResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("TAG", "On Error" + Log.getStackTraceString(e));
+                Log.e("TopStories", "On Error" + Log.getStackTraceString(e));
             }
 
             @Override
             public void onComplete() {
-                Log.e("TAG", "On Complete !!");
+                Log.e("TopStories", "On Complete !!");
             }
         });
     }

@@ -79,18 +79,18 @@ public class ArticleSearchFragment extends BaseFragment {
                 .subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
-                Log.e("TAG", "On Next");
+                Log.e("ArticleSearch", "On Next");
                 updateUI(theNewYorkTimesResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("TAG", "On Error" + Log.getStackTraceString(e));
+                Log.e("ArticleSearch", "On Error" + Log.getStackTraceString(e));
             }
 
             @Override
             public void onComplete() {
-                Log.e("TAG", "On Complete !!");
+                Log.e("ArticleSearch", "On Complete !!");
             }
         });
     }

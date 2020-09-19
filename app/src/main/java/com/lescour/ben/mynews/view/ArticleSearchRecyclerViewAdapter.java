@@ -40,7 +40,7 @@ public class ArticleSearchRecyclerViewAdapter extends BaseRecyclerViewAdapter {
         int i = 0;
         do {
             Multimedium temporaryMultimedium = article.getMultimedia().get(i);
-            if (temporaryMultimedium.getSubType().equals("thumbnail")) {
+            if (temporaryMultimedium.getSubType().equals("thumbnail") || temporaryMultimedium.getSubType().equals("articleInline")) {
                 imgUrl = "https://static01.nyt.com/" + article.getMultimedia().get(i).getUrl();
                 imgFound = true;
             }

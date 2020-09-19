@@ -22,6 +22,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public @BindView(R.id.article_date) TextView articleDate;
     public @BindView(R.id.article_title) TextView articleTitle;
     public Article article;
+    //TODO : Inutile de donner l'article ?
 
     ViewHolder(View view) {
         super(view);

@@ -4,6 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.RequestManager;
 import com.lescour.ben.mynews.R;
 import com.lescour.ben.mynews.controller.fragment.BaseFragment;
@@ -14,9 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by benja on 11/02/2019.

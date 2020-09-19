@@ -50,18 +50,18 @@ public class MostPopularFragment extends BaseFragment {
         this.disposable = TheNewYorkTimesStreams.streamFetchMostPopular(mUrlSplit.getPeriod(), mUrlSplit.getApiKey()).subscribeWith(new DisposableObserver<TheNewYorkTimesResponse>() {
             @Override
             public void onNext(TheNewYorkTimesResponse theNewYorkTimesResponse) {
-                Log.e("TAG","On Next");
+                Log.e("MostPopular","On Next");
                 updateUI(theNewYorkTimesResponse);
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e("TAG","On Error"+Log.getStackTraceString(e));
+                Log.e("MostPopular","On Error"+Log.getStackTraceString(e));
             }
 
             @Override
             public void onComplete() {
-                Log.e("TAG","On Complete !!");
+                Log.e("MostPopular","On Complete !!");
             }
         });
     }
