@@ -12,3 +12,10 @@ This project use :
   - Butterknife
   - Espresso
   - Mockito
+
+## Screenshot
+![screenshot_drawer_menu](https://github.com/BenLscr/MyNews/blob/master/images/screenshot_drawer_menu.png?raw_true) 
+![screenshot_home](https://github.com/BenLscr/MyNews/blob/master/images/screenshot_home.png?raw_true) 
+![screenshot_search](https://github.com/BenLscr/MyNews/blob/master/images/screenshot_search.png?raw_true)
+![screenshot_notification](https://github.com/BenLscr/MyNews/blob/master/images/screenshot_notification.png?raw_true)
+![screenshot_webview](https://github.com/BenLscr/MyNews/blob/master/images/screenshot_webview.png?raw_true)
